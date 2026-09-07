@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>검색어 분석 - AI 스킬 포털 관리 시스템</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            DEFAULT: '#1E3A5F',
+                            deep: '#16324F'
+                        },
+                        teal: {
+                            DEFAULT: '#17876D',
+                            light: '#E6F4F1'
+                        },
+                        surface: '#FFFFFF',
+                        background: '#F5F7FA',
+                        border: '#E2E8F0',
+                        muted: '#64748B',
+                        warning: {
+                            text: '#B45309',
+                            bg: '#FEF3C7'
+                        }
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Public Sans", "sans-serif"],
+                        display: ["Public Sans", "sans-serif"],
+                        body: ["Public Sans", "sans-serif"],
+                        label: ["Public Sans", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; background-color: #F5F7FA; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .filled-icon { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="text-slate-800 antialiased overflow-hidden flex h-screen">
+<!-- Sidebar -->
+<aside class="fixed left-0 top-0 h-screen w-[240px] bg-[#16324F] flex flex-col h-full py-6 z-50 text-white font-body text-[15px] font-medium border-r border-white/10">
+<div class="px-6 mb-8">
+<h1 class="text-xl font-headline font-bold text-white mb-1">관리자 센터</h1>
+<p class="text-white/70 text-sm">부산광역시교육청</p>
+</div>
+<div class="px-4 mb-6">
+<button class="w-full bg-[#17876D] hover:bg-[#13705a] text-white rounded-lg py-3 px-4 flex items-center justify-center gap-2 transition-colors font-bold shadow-sm">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                새 스킬 등록
+            </button>
+</div>
+<nav class="flex-1 flex flex-col gap-1 px-2">
+<a class="text-white/70 hover:text-white hover:bg-white/5 rounded-lg mx-2 px-4 py-3 flex items-center gap-3 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">extension</span>
+                스킬 관리
+            </a>
+<a class="text-white/70 hover:text-white hover:bg-white/5 rounded-lg mx-2 px-4 py-3 flex items-center gap-3 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+                회원 관리
+            </a>
+<a class="text-white/70 hover:text-white hover:bg-white/5 rounded-lg mx-2 px-4 py-3 flex items-center gap-3 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">bar_chart</span>
+                통계 리포트
+            </a>
+<a class="bg-[#17876D] text-white rounded-lg mx-2 px-4 py-3 flex items-center gap-3 shadow-md opacity-90 transition-opacity" href="#">
+<span class="material-symbols-outlined text-[20px]">search</span>
+                검색어 분석
+            </a>
+<a class="text-white/70 hover:text-white hover:bg-white/5 rounded-lg mx-2 px-4 py-3 flex items-center gap-3 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">campaign</span>
+                공지·배너 관리
+            </a>
+</nav>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="flex-1 ml-[240px] flex flex-col h-screen overflow-hidden relative">
+<!-- Top App Bar -->
+<header class="sticky top-0 left-0 right-0 w-full h-16 flex-shrink-0 bg-surface flex justify-between items-center px-8 z-40 border-b border-border shadow-sm">
+<div class="flex items-center gap-4">
+<h2 class="text-lg font-headline font-bold text-[#1E3A5F]">AI 스킬 포털 관리 시스템</h2>
+</div>
+<div class="flex-1 min-w-[360px] max-w-xl mx-8">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-muted text-[20px]">search</span>
+<input class="w-full pl-11 pr-5 py-2 bg-background border border-border rounded-full text-[15px] focus:outline-none focus:ring-2 focus:ring-[#17876D] focus:border-transparent transition-shadow" placeholder="메뉴 및 기능 검색" size="30" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<button class="text-muted hover:text-[#1E3A5F] transition-colors relative focus:outline-none focus:ring-2 focus:ring-[#17876D] rounded-full p-1">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-[#17876D] rounded-full"></span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-border">
+<div class="text-right hidden md:block">
+<p class="text-[14px] font-bold text-[#1E3A5F]">관리자</p>
+<p class="text-[12px] text-muted">부산광역시교육청 디지털미래교육과</p>
+</div>
+<div class="w-9 h-9 rounded-full bg-navy/10 flex items-center justify-center text-navy overflow-hidden">
+<span class="material-symbols-outlined filled-icon">account_circle</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Scrollable Canvas -->
+<main class="flex-1 overflow-y-auto px-8 pt-8 pb-20">
+<div class="max-w-[1280px] mx-auto">
+<!-- Page Header & Filters -->
+<div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-2xl font-headline font-bold text-navy mb-2">검색어 분석</h2>
+<p class="text-muted text-[15px]">교육 현장의 수요를 파악하기 위한 실시간 검색 트렌드 데이터입니다</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-white border border-border rounded-lg text-[15px] font-medium text-slate-700 hover:bg-slate-50 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-[#17876D]">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                            2026.05.01 ~ 2026.05.31
+                            <span class="material-symbols-outlined text-[18px]">arrow_drop_down</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-[#17876D] text-white rounded-lg text-[15px] font-bold hover:bg-[#13705a] transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                            엑셀 내려받기
+                        </button>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Left Column (62%) -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<!-- Popular Searches Card -->
+<div class="bg-white rounded-xl border border-border shadow-[0_1px_2px_rgba(0,0,0,0.04)] p-6 flex-1 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-[18px] font-bold text-navy flex items-center gap-2">
+<span class="material-symbols-outlined text-[#17876D]">trending_up</span>
+                                    인기 검색어 순위
+                                </h3>
+</div>
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left text-[14px]">
+<thead>
+<tr class="border-b border-border text-muted font-medium bg-slate-50/50">
+<th class="py-3 px-2 w-12 text-center">순위</th>
+<th class="py-3 px-2 whitespace-nowrap">검색어</th>
+<th class="py-3 px-2 text-right whitespace-nowrap">검색 횟수</th>
+<th class="py-3 px-2 w-32 whitespace-nowrap">결과 클릭률</th>
+<th class="py-3 px-2 w-12 text-center">추이</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border/50">
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="py-3 px-2 text-center">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#17876D] text-white font-bold text-[13px]">1</span>
+</td>
+<td class="py-3 px-2 font-bold text-navy whitespace-nowrap">수행평가 문항 생성</td>
+<td class="py-3 px-2 text-right font-medium whitespace-nowrap">1,240회</td>
+<td class="py-3 px-2">
+<div class="flex items-center gap-2">
+<div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-[#17876D] rounded-full" style="width: 88%"></div>
+</div>
+<span class="text-[13px] font-medium text-slate-600">88%</span>
+</div>
+</td>
+<td class="py-3 px-2 text-center text-[#17876D]">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="py-3 px-2 text-center">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-teal-light text-[#17876D] font-bold text-[13px]">2</span>
+</td>
+<td class="py-3 px-2 font-bold text-navy whitespace-nowrap">가정통신문 자동 작성</td>
+<td class="py-3 px-2 text-right font-medium whitespace-nowrap">980회</td>
+<td class="py-3 px-2">
+<div class="flex items-center gap-2">
+<div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-[#17876D] rounded-full" style="width: 82%"></div>
+</div>
+<span class="text-[13px] font-medium text-slate-600">82%</span>
+</div>
+</td>
+<td class="py-3 px-2 text-center text-[#17876D]">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="py-3 px-2 text-center">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-teal-light text-[#17876D] font-bold text-[13px]">3</span>
+</td>
+<td class="py-3 px-2 font-bold text-navy whitespace-nowrap">생활기록부 세특 초안</td>
+<td class="py-3 px-2 text-right font-medium whitespace-nowrap">850회</td>
+<td class="py-3 px-2">
+<div class="flex items-center gap-2">
+<div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-[#17876D]/80 rounded-full" style="width: 75%"></div>
+</div>
+<span class="text-[13px] font-medium text-slate-600">75%</span>
+</div>
+</td>
+<td class="py-3 px-2 text-center text-muted">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="py-3 px-2 text-center">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-100 text-slate-500 font-bold text-[13px]">4</span>
+</td>
+<td class="py-3 px-2 font-medium text-slate-700 whitespace-nowrap">학부모 상담 시나리오</td>
+<td class="py-3 px-2 text-right whitespace-nowrap">720회</td>
+<td class="py-3 px-2">
+<div class="flex items-center gap-2">
+<div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-[#17876D]/60 rounded-full" style="width: 70%"></div>
+</div>
+<span class="text-[13px] font-medium text-slate-600">70%</span>
+</div>
+</td>
+<td class="py-3 px-2 text-center text-red-500">
+<span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="py-3 px-2 text-center">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-100 text-slate-500 font-bold text-[13px]">5</span>
+</td>
+<td class="py-3 px-2 font-medium text-slate-700 whitespace-nowrap">과학 실험 안전 가이드</td>
+<td class="py-3 px-2 text-right whitespace-nowrap">650회</td>
+<td class="py-3 px-2">
+<div class="flex items-center gap-2">
+<div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-[#17876D]/60 rounded-full" style="width: 68%"></div>
+</div>
+<span class="text-[13px] font-medium text-slate-600">68%</span>
+</div>
+</td>
+<td class="py-3 px-2 text-center text-[#17876D]">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="py-3 px-2 text-center">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-100 text-slate-500 font-bold text-[13px]">6</span>
+</td>
+<td class="py-3 px-2 font-medium text-slate-700 whitespace-nowrap">학급 회의록 요약 도구</td>
+<td class="py-3 px-2 text-right whitespace-nowrap">540회</td>
+<td class="py-3 px-2">
+<div class="flex items-center gap-2">
+<div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-[#17876D]/60 rounded-full" style="width: 65%"></div>
+</div>
+<span class="text-[13px] font-medium text-slate-600">65%</span>
+</div>
+</td>
+<td class="py-3 px-2 text-center text-muted">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="py-3 px-2 text-center">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-100 text-slate-500 font-bold text-[13px]">7</span>
+</td>
+<td class="py-3 px-2 font-medium text-slate-700 whitespace-nowrap">기초학력 진단 문항</td>
+<td class="py-3 px-2 text-right whitespace-nowrap">480회</td>
+<td class="py-3 px-2">
+<div class="flex items-center gap-2">
+<div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-[#17876D]/60 rounded-full" style="width: 60%"></div>
+</div>
+<span class="text-[13px] font-medium text-slate-600">60%</span>
+</div>
+</td>
+<td class="py-3 px-2 text-center text-[#17876D]">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="py-3 px-2 text-center">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-100 text-slate-500 font-bold text-[13px]">8</span>
+</td>
+<td class="py-3 px-2 font-medium text-slate-700 whitespace-nowrap">영어 독해 지문 변형</td>
+<td class="py-3 px-2 text-right whitespace-nowrap">420회</td>
+<td class="py-3 px-2">
+<div class="flex items-center gap-2">
+<div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-[#17876D]/60 rounded-full" style="width: 58%"></div>
+</div>
+<span class="text-[13px] font-medium text-slate-600">58%</span>
+</div>
+</td>
+<td class="py-3 px-2 text-center text-red-500">
+<span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-4 pt-4 border-t border-border text-center">
+<a class="text-[14px] font-bold text-navy hover:text-[#17876D] flex items-center justify-center gap-1 transition-colors" href="#">
+                                    전체 순위 보기 (1-100)
+                                    <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Right Column (38%) -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Search Type Ratio Card -->
+<div class="bg-white rounded-xl border border-border shadow-[0_1px_2px_rgba(0,0,0,0.04)] p-6">
+<h3 class="text-[18px] font-bold text-navy mb-6">검색 유형 비율</h3>
+<div class="flex items-center justify-between mb-4">
+<div class="relative w-32 h-32 flex-shrink-0">
+<!-- Simple CSS Donut Chart approximation -->
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-slate-200" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="6"></path>
+<path class="text-[#17876D]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="62, 100" stroke-width="6"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-[12px] text-muted font-medium">자연어</span>
+<span class="text-[18px] font-bold text-navy">62%</span>
+</div>
+</div>
+<div class="flex-1 ml-8 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#17876D]"></span>
+<span class="text-[14px] font-medium text-slate-700">자연어 검색</span>
+</div>
+<span class="text-[14px] font-bold text-navy">62%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-slate-200"></span>
+<span class="text-[14px] font-medium text-slate-700">키워드 검색</span>
+</div>
+<span class="text-[14px] font-bold text-navy">38%</span>
+</div>
+</div>
+</div>
+<div class="mt-4 bg-teal-light/50 border-l-4 border-[#17876D] p-3 rounded-r-lg">
+<p class="text-[13px] font-medium text-[#1E3A5F]" style="word-break: keep-all;">
+<span class="material-symbols-outlined text-[16px] align-text-bottom mr-1 text-[#17876D]">lightbulb</span>
+                                    문장형(자연어) 검색이 지난달 대비 <strong class="text-[#17876D]">12% 증가</strong>하였습니다.
+                                </p>
+</div>
+</div>
+<!-- No Results Card -->
+<div class="bg-white rounded-xl border border-border shadow-[0_1px_2px_rgba(0,0,0,0.04)] p-6 flex-1">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-[18px] font-bold text-navy flex items-center gap-2">
+<span class="material-symbols-outlined text-warning-text">search_off</span>
+                                    결과 없음 검색어
+                                </h3>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Item 1 -->
+<div class="border border-border rounded-lg p-4 hover:border-[#17876D]/30 hover:bg-slate-50 transition-colors flex items-center justify-between group">
+<div>
+<h4 class="text-[15px] font-bold text-navy mb-1 group-hover:text-[#17876D] transition-colors">특수학급 IEP 초안</h4>
+<p class="text-[13px] text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">find_in_page</span>
+                                            검색 실패 15건
+                                        </p>
+</div>
+<button class="px-3 py-1.5 border border-[#17876D] text-[#17876D] rounded text-[13px] font-bold hover:bg-[#17876D] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#17876D] focus:ring-offset-1">
+                                        스킬 제작 후보 등록
+                                    </button>
+</div>
+<!-- Item 2 -->
+<div class="border border-border rounded-lg p-4 hover:border-[#17876D]/30 hover:bg-slate-50 transition-colors flex items-center justify-between group">
+<div>
+<h4 class="text-[15px] font-bold text-navy mb-1 group-hover:text-[#17876D] transition-colors">방과후 수강 신청 안내문</h4>
+<p class="text-[13px] text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">find_in_page</span>
+                                            검색 실패 12건
+                                        </p>
+</div>
+<button class="px-3 py-1.5 border border-[#17876D] text-[#17876D] rounded text-[13px] font-bold hover:bg-[#17876D] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#17876D] focus:ring-offset-1">
+                                        스킬 제작 후보 등록
+                                    </button>
+</div>
+<!-- Item 3 -->
+<div class="border border-border rounded-lg p-4 hover:border-[#17876D]/30 hover:bg-slate-50 transition-colors flex items-center justify-between group">
+<div>
+<h4 class="text-[15px] font-bold text-navy mb-1 group-hover:text-[#17876D] transition-colors">학교폭력 사안 보고 양식</h4>
+<p class="text-[13px] text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">find_in_page</span>
+                                            검색 실패 8건
+                                        </p>
+</div>
+<button class="px-3 py-1.5 border border-[#17876D] text-[#17876D] rounded text-[13px] font-bold hover:bg-[#17876D] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#17876D] focus:ring-offset-1">
+                                        스킬 제작 후보 등록
+                                    </button>
+</div>
+</div>
+<p class="text-[13px] text-muted text-center mt-4">검색 결과가 없는 상위 3개 항목입니다.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

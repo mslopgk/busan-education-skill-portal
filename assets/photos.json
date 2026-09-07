@@ -1,0 +1,332 @@
+[
+ {
+  "file": "busan-city-3.jpg",
+  "category": "busan-city",
+  "desc": "광안대교와 마린시티 고층 건물이 어우러진 부산 해안 전경"
+ },
+ {
+  "file": "busan-city-2.jpg",
+  "category": "busan-city",
+  "desc": "해운대 해변과 고층 건물이 어우러진 부산 전경"
+ },
+ {
+  "file": "busan-city-4.jpg",
+  "category": "busan-city",
+  "desc": "맑은 날 해운대 해변과 초고층 빌딩이 보이는 부산 전경"
+ },
+ {
+  "file": "busan-city-1.jpg",
+  "category": "busan-city",
+  "desc": "부산 도심의 야경과 스카이라인"
+ },
+ {
+  "file": "teacher-laptop-4.jpg",
+  "category": "teacher-laptop",
+  "desc": "밝은 사무 공간에서 노트북으로 업무를 처리하는 교원"
+ },
+ {
+  "file": "teacher-laptop-6.jpg",
+  "category": "teacher-laptop",
+  "desc": "노트북 화면의 표와 자료를 확인하며 작업하는 모습"
+ },
+ {
+  "file": "teacher-laptop-5.jpg",
+  "category": "teacher-laptop",
+  "desc": "책상에 앉아 노트북으로 자료를 정리하는 담당자"
+ },
+ {
+  "file": "teacher-laptop-1.jpg",
+  "category": "teacher-laptop",
+  "desc": "교실 책상에서 노트북으로 수업을 준비하는 교사"
+ },
+ {
+  "file": "training-workshop-3.jpg",
+  "category": "training-workshop",
+  "desc": "필기하며 집중해 연수를 듣는 참여 교원들"
+ },
+ {
+  "file": "training-workshop-4.jpg",
+  "category": "training-workshop",
+  "desc": "노트에 기록하며 참여하는 연수 수강 장면"
+ },
+ {
+  "file": "training-workshop-5.jpg",
+  "category": "training-workshop",
+  "desc": "소규모 세미나실에서 발표를 들으며 진행되는 연수"
+ },
+ {
+  "file": "training-hands-on-3.jpg",
+  "category": "training-hands-on",
+  "desc": "연수실에서 1인 1노트북으로 진행하는 성인 실습 교육"
+ },
+ {
+  "file": "classroom-2.jpg",
+  "category": "classroom",
+  "desc": "대형 강의실에서 다수 인원을 대상으로 진행되는 수업"
+ },
+ {
+  "file": "classroom-4.jpg",
+  "category": "classroom",
+  "desc": "1인 1PC가 배치된 현대적 전산 강의실"
+ },
+ {
+  "file": "classroom-5.jpg",
+  "category": "classroom",
+  "desc": "계단식 책상이 배치된 강의실 내부"
+ },
+ {
+  "file": "tablet-3.jpg",
+  "category": "tablet",
+  "desc": "스타일러스로 태블릿에 자료를 작성하는 모습"
+ },
+ {
+  "file": "tablet-4.jpg",
+  "category": "tablet",
+  "desc": "태블릿을 양손으로 들고 화면을 확인하는 장면"
+ },
+ {
+  "file": "infra-server-3.jpg",
+  "category": "server-cloud",
+  "desc": "표시등이 점등된 네트워크 장비와 정리된 배선"
+ },
+ {
+  "file": "infra-server-4.jpg",
+  "category": "server-cloud",
+  "desc": "번호가 부여된 패치 패널과 네트워크 결선"
+ },
+ {
+  "file": "infra-server-5.jpg",
+  "category": "server-cloud",
+  "desc": "광케이블이 연결된 고속 네트워크 스위치 근접 촬영"
+ },
+ {
+  "file": "infra-server-2.jpg",
+  "category": "server-cloud",
+  "desc": "안정적으로 가동 중인 서버 장비 근접 촬영"
+ },
+ {
+  "file": "security-3.jpg",
+  "category": "security",
+  "desc": "키보드 위 자물쇠로 표현한 정보보안 체계"
+ },
+ {
+  "file": "security-4.jpg",
+  "category": "security",
+  "desc": "키보드 위 잠금장치와 열쇠로 표현한 접근 통제"
+ },
+ {
+  "file": "security-5.jpg",
+  "category": "security",
+  "desc": "번호 자물쇠로 표현한 계정·권한 관리"
+ },
+ {
+  "file": "meeting-2.jpg",
+  "category": "meeting",
+  "desc": "태블릿·노트북 자료를 함께 보며 협의하는 담당자들"
+ },
+ {
+  "file": "collaboration-3.jpg",
+  "category": "collaboration",
+  "desc": "빈 메모지를 벽면에 배열하며 아이디어를 구조화하는 장면"
+ },
+ {
+  "file": "collaboration-1.jpg",
+  "category": "collaboration",
+  "desc": "포스트잇을 붙여가며 아이디어를 구조화하는 협업 워크숍"
+ },
+ {
+  "file": "collaboration-4.jpg",
+  "category": "collaboration",
+  "desc": "보드에 메모를 붙이며 함께 과제를 정리하는 협업 장면"
+ },
+ {
+  "file": "presentation-1.jpg",
+  "category": "presentation",
+  "desc": "소규모 인원을 대상으로 진행하는 발표·보고"
+ },
+ {
+  "file": "school-building-2.jpg",
+  "category": "school-building",
+  "desc": "맑은 하늘 아래 학교 건물 외관"
+ },
+ {
+  "file": "school-corridor-1.jpg",
+  "category": "school-building",
+  "desc": "사물함이 늘어선 학교 복도"
+ },
+ {
+  "file": "school-building-3.jpg",
+  "category": "school-building",
+  "desc": "녹지와 어우러진 현대적 교육시설 외관"
+ },
+ {
+  "file": "video-recording-3.jpg",
+  "category": "video-recording",
+  "desc": "카메라와 모니터를 갖춘 안내 영상 촬영 스튜디오"
+ },
+ {
+  "file": "teacher-laptop-3.jpg",
+  "category": "teacher-laptop",
+  "desc": "[사용 보류] 상자에 타사 상표(MOROCCANOIL)와 외국어 문구가 노출됨"
+ },
+ {
+  "file": "teacher-laptop-2.jpg",
+  "category": "teacher-laptop",
+  "desc": "[사용 보류] 노트북 베젤에 제조사 상표(SAMSUNG)가 판독됨"
+ },
+ {
+  "file": "training-workshop-1.jpg",
+  "category": "training-workshop",
+  "desc": "[사용 보류] 의류의 타사 상표(Google)와 노트북 로고 노출, 국내 연수 장면과 불일치"
+ },
+ {
+  "file": "training-workshop-2.jpg",
+  "category": "training-workshop",
+  "desc": "[사용 보류] 노트북·화면에 타사 상표(DELL, Windows) 노출"
+ },
+ {
+  "file": "training-hands-on-4.jpg",
+  "category": "training-hands-on",
+  "desc": "[사용 보류] 코디네이터 원본 확인 미통과 · 노트북과 모니터를 함께 보며 실습을 진행하는 담당자들"
+ },
+ {
+  "file": "training-hands-on-2.jpg",
+  "category": "training-hands-on",
+  "desc": "[사용 보류] 코디네이터 원본 확인 미통과 · 노트북을 펼치고 함께 실습을 진행하는 소규모 그룹"
+ },
+ {
+  "file": "training-hands-on-1.jpg",
+  "category": "training-hands-on",
+  "desc": "[사용 보류] 모니터 상표(Lenovo) 노출, 해외 학교 미성년 학생 촬영"
+ },
+ {
+  "file": "collaboration-2.jpg",
+  "category": "collaboration",
+  "desc": "[사용 보류] 필기구 상표(Sharpie)와 노트북 로고(Apple) 노출"
+ },
+ {
+  "file": "meeting-6.jpg",
+  "category": "meeting",
+  "desc": "[사용 보류] 코디네이터 원본 확인 미통과 · 채광이 좋은 현대적 회의실 전경"
+ },
+ {
+  "file": "meeting-4.jpg",
+  "category": "meeting",
+  "desc": "[사용 보류] 코디네이터 원본 확인 미통과 · 포스트잇으로 과제를 정리한 기획 보드와 검토 장면"
+ },
+ {
+  "file": "meeting-3.jpg",
+  "category": "meeting",
+  "desc": "[사용 보류] 마커 상표(EXPO)가 근접 판독됨"
+ },
+ {
+  "file": "meeting-1.jpg",
+  "category": "meeting",
+  "desc": "[사용 보류] 노트북 로고(Apple) 노출, 6인 규모로 캡션과 불일치"
+ },
+ {
+  "file": "documents-1.jpg",
+  "category": "documents",
+  "desc": "[사용 보류] 코디네이터 원본 확인 미통과 · 체계적으로 정리·보관된 사업 문서 파일"
+ },
+ {
+  "file": "documents-3.jpg",
+  "category": "documents",
+  "desc": "[사용 보류] 코디네이터 원본 확인 미통과 · 점검표 양식에 항목을 기입하는 문서 업무 장면"
+ },
+ {
+  "file": "documents-4.jpg",
+  "category": "documents",
+  "desc": "[사용 보류] 코디네이터 원본 확인 미통과 · 필기구와 함께 놓인 빈 서식·점검표 용지"
+ },
+ {
+  "file": "documents-2.jpg",
+  "category": "documents",
+  "desc": "[사용 보류] 학습지에 타사 상표(sprintpoint)와 영문 본문이 노출됨"
+ },
+ {
+  "file": "infra-server-1.jpg",
+  "category": "server-cloud",
+  "desc": "[사용 보류] 서버 캐비닛 전면에 특정 기업 로고(imgIX)가 대형으로 노출됨"
+ },
+ {
+  "file": "security-1.jpg",
+  "category": "security",
+  "desc": "[사용 보류] 일본어(가나) 각인 키보드로 국외 환경이 드러남"
+ },
+ {
+  "file": "security-2.jpg",
+  "category": "security",
+  "desc": "[사용 보류] 신용카드가 함께 촬영되어 금융 거래를 연상시킴"
+ },
+ {
+  "file": "data-dashboard-1.jpg",
+  "category": "analytics-screen",
+  "desc": "[사용 보류] 코디네이터 원본 확인 미통과 · 노트북 화면에 표시된 이용 현황 분석 지표"
+ },
+ {
+  "file": "data-dashboard-3.jpg",
+  "category": "analytics-screen",
+  "desc": "[사용 보류] 코디네이터 원본 확인 미통과 · 이용자 재방문율을 기간별로 보여주는 분석 화면"
+ },
+ {
+  "file": "data-dashboard-2.jpg",
+  "category": "analytics-screen",
+  "desc": "[사용 보류] 코디네이터 원본 확인 미통과 · 모니터에 표출되는 운영 모니터링 대시보드"
+ },
+ {
+  "file": "tablet-1.jpg",
+  "category": "tablet",
+  "desc": "[사용 보류] 코디네이터 원본 확인 미통과 · 태블릿으로 자료를 확인하며 함께 검토하는 모습"
+ },
+ {
+  "file": "tablet-2.jpg",
+  "category": "tablet",
+  "desc": "[사용 보류] 식별 가능한 미성년자가 촬영됨"
+ },
+ {
+  "file": "presentation-3.jpg",
+  "category": "presentation",
+  "desc": "[사용 보류] 코디네이터 원본 확인 미통과 · 화이트보드 앞에서 진행 상황을 공유하는 보고 장면"
+ },
+ {
+  "file": "presentation-4.jpg",
+  "category": "presentation",
+  "desc": "[사용 보류] 코디네이터 원본 확인 미통과 · 화이트보드 구성도를 설명하며 소규모 인원에게 보고하는 장면"
+ },
+ {
+  "file": "presentation-2.jpg",
+  "category": "presentation",
+  "desc": "[사용 보류] 실사가 아닌 종이 오려붙임 연출물이며 아동 형상이 포함됨"
+ },
+ {
+  "file": "video-recording-1.jpg",
+  "category": "video-recording",
+  "desc": "[사용 보류] 코디네이터 원본 확인 미통과 · 카메라·조명·삼각대를 갖춘 안내 영상 촬영 현장"
+ },
+ {
+  "file": "video-recording-4.jpg",
+  "category": "video-recording",
+  "desc": "[사용 보류] 코디네이터 원본 확인 미통과 · 조명 아래 삼각대에 거치된 촬영용 카메라"
+ },
+ {
+  "file": "video-recording-2.jpg",
+  "category": "video-recording",
+  "desc": "[사용 보류] 모니터 상표(HP)와 포르투갈어 편집 프로그램 화면이 노출됨"
+ },
+ {
+  "file": "classroom-1.jpg",
+  "category": "classroom",
+  "desc": "[사용 보류] 해외(인도) 학교로 특정되는 복장·환경"
+ },
+ {
+  "file": "classroom-3.jpg",
+  "category": "classroom",
+  "desc": "[사용 보류] 태국어 게시물과 식별 가능한 미성년 학생이 촬영됨"
+ },
+ {
+  "file": "school-building-1.jpg",
+  "category": "school-building",
+  "desc": "[사용 보류] 외국 대학 건물명(NICANOR REYES HALL)이 각인되어 노출됨"
+ }
+]

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>부산교육청 교육용 AI 스킬 아카이브 — 스킬 목록</title>
+<link rel="stylesheet" href="site/_base.css">
+<style>
+/* ── 이 화면 전용 배치만. 토큰·색·컴포넌트 재정의 없음 ── */
+
+/* 머리 영역 */
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:56px;
+  padding-block:30px 24px}
+.hero h1{margin-top:9px}
+.hero .sub{margin-top:13px}
+.hero .stat{flex:none;display:flex;gap:36px;border-top:1px solid var(--rule);padding-top:13px}
+.hero .stat .k{font-size:10.5px;font-weight:700;letter-spacing:.14em;color:var(--muted);
+  text-align:right}
+.hero .stat .v{margin-top:5px;line-height:1.1;text-align:right}
+.hero .stat s{text-decoration:none;font-size:13px;font-weight:700;color:var(--muted);
+  margin-left:4px}
+
+/* 검색 줄 */
+.findbar{gap:18px}
+.findbar .search{max-width:520px}
+.findbar .hint{font-size:12px;color:var(--muted);margin-left:auto}
+
+/* 레일 + 목록 2단 */
+.shell{column-gap:38px;padding-top:2px}
+.rail{padding:24px 0 26px}
+.rail section:last-of-type{margin-bottom:20px}
+.list{min-width:0;padding-top:24px;padding-bottom:8px}
+.list .toolbar .count{margin-left:16px}
+
+/* 섹션 리듬 */
+.blk-sec{margin-top:26px}
+.blk-sec:first-child{margin-top:0}
+.tbl .cls{white-space:nowrap}
+.tbl tbody td.mid{vertical-align:middle}
+.tfoot{display:flex;align-items:center;justify-content:space-between;padding-top:11px}
+.tfoot .pg{display:flex;gap:12px;font-size:12.5px;color:var(--muted)}
+.tfoot .pg .on{color:var(--ink);font-weight:700}
+
+/* 공지 3건 */
+.news{list-style:none;margin-top:2px}
+.news li{display:flex;align-items:baseline;gap:18px;padding:11px 2px;
+  border-bottom:1px solid var(--rule-soft)}
+.news li:last-child{border-bottom:1.5px solid var(--ink)}
+.news .d{font-size:11.5px;color:var(--muted);flex:none;width:88px;text-align:left}
+.news .t{font-size:13.5px;letter-spacing:-.01em}
+.news .new{margin-left:auto;flex:none}
+.newsfine{margin-top:12px;font-size:11.5px;color:var(--muted);line-height:1.7}
+</style>
+</head>
+<body>
+
+<div class="gov-band"></div>
+
+<div class="parent">
+  <div class="wrap wrap--wide in">
+    <a class="skip" href="#main">본문 바로가기</a>
+    <span></span>
+    <span>부산광역시교육청 디지털미래교육과 · 교육용 AI 스킬 아카이브</span>
+  </div>
+</div>
+
+<header class="mast">
+  <div class="wrap wrap--wide in">
+    <div class="mark">
+      <b>부산교육청 교육용 AI 스킬 아카이브</b>
+      <span class="code">BOE-AIS</span>
+    </div>
+    <nav class="gnb">
+      <a class="on" href="#main">스킬 목록</a>
+      <a href="#">이용 안내</a>
+      <a href="#">공지사항</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap wrap--wide">
+
+  <section class="hero">
+    <div>
+      <div class="lab">AI SKILL ARCHIVE</div>
+      <h1>수업 준비, 검증된<br>AI 스킬로 시작하세요</h1>
+      <p class="sub">수업·평가·학급경영·행정에 바로 쓰는 교육용 AI 스킬 아카이브 — 로그인 없이 즉시 이용</p>
+    </div>
+    <dl class="stat">
+      <div>
+        <dt class="k">게시 스킬</dt>
+        <dd class="v"><span class="num big">10</span><s>종</s></dd>
+      </div>
+      <div>
+        <dt class="k">누적 다운로드</dt>
+        <dd class="v"><span class="num big num--dl">1,847</span><s>회</s></dd>
+      </div>
+    </dl>
+  </section>
+
+  <div class="toolbar findbar">
+    <div class="search">
+      <span class="lab" style="letter-spacing:.12em">검색</span>
+      <input type="text" placeholder="예) 수행평가 문항, 가정통신문, 회의록 요약" aria-label="스킬 검색">
+      <span class="kbd">⌘ K</span>
+    </div>
+    <span class="hint">스킬명 · 설명 · 태그를 함께 찾습니다. 로그인 없이 열람 · 내려받기</span>
+  </div>
+
+  <div class="shell">
+
+    <!-- ══ 좌측 레일 : 2개 축만 ══ -->
+    <aside class="rail">
+      <section>
+        <div class="lab-kr">학교급</div>
+        <ul class="facet">
+          <li class="on"><span>전체</span><span class="c">10</span></li>
+          <li><span>유치원</span><span class="c">1</span></li>
+          <li><span>초등</span><span class="c">2</span></li>
+          <li><span>중등</span><span class="c">3</span></li>
+          <li><span>고등</span><span class="c">1</span></li>
+          <li><span>특수</span><span class="c">1</span></li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="lab-kr">업무유형</div>
+        <ul class="facet">
+          <li><span>수업</span><span class="c">3</span></li>
+          <li><span>평가</span><span class="c">2</span></li>
+          <li><span>학급경영</span><span class="c">3</span></li>
+          <li><span>행정</span><span class="c">2</span></li>
+        </ul>
+      </section>
+
+      <div class="note">
+        본 아카이브는 학교급 · 업무유형 2개 축으로만 분류합니다.
+        학교급 구분이 없는 공통 스킬 2종은 모든 학교급 목록에 함께 표시됩니다.
+        <div class="num" style="text-align:left;font-size:10px;margin-top:8px">게시 10종 / 전체 등록 10종</div>
+      </div>
+    </aside>
+
+    <!-- ══ 목록 ══ -->
+    <main class="list" id="main">
+
+      <section class="blk-sec">
+        <div class="sec"><span class="idx">01</span><h2>스킬 목록</h2></div>
+
+        <div class="toolbar">
+          <span class="lab-kr">전체 학교급 · 전체 업무유형</span>
+          <span class="count">전체 10건 중 6건 표시</span>
+          <div class="sorts">
+            <span class="on">최신순</span>
+            <span>다운로드순</span>
+          </div>
+        </div>
+
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th style="width:112px">#</th>
+              <th style="width:130px">분류</th>
+              <th>스킬</th>
+              <th style="width:96px">게시 상태</th>
+              <th class="r" style="width:84px">조회</th>
+              <th class="r" style="width:96px">다운로드</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="id lead">AIS-2026-001</td>
+              <td class="cls"><span class="bdg">중등</span><span class="bdg">평가</span></td>
+              <td><div class="t">수행평가 문항 초안 생성</div>
+                  <div class="d">성취기준에 맞는 서술형 수행평가 문항 초안을 생성합니다</div></td>
+              <td class="mid"><span class="st"><i></i>게시중</span></td>
+              <td class="num">1,240</td>
+              <td class="num num--dl">312</td>
+            </tr>
+            <tr>
+              <td class="id">AIS-2026-002</td>
+              <td class="cls"><span class="bdg">초등</span><span class="bdg">학급경영</span></td>
+              <td><div class="t">가정통신문 작성 도우미</div>
+                  <div class="d">행사 · 안내 목적에 맞는 가정통신문 초안을 작성합니다</div></td>
+              <td class="mid"><span class="st"><i></i>게시중</span></td>
+              <td class="num">980</td>
+              <td class="num num--dl">320</td>
+            </tr>
+            <tr>
+              <td class="id">AIS-2026-003</td>
+              <td class="cls"><span class="bdg">공통</span><span class="bdg">행정</span></td>
+              <td><div class="t">학급 회의록 요약</div>
+                  <div class="d">회의 기록을 항목별 결정 사항 중심으로 요약합니다</div></td>
+              <td class="mid"><span class="st"><i></i>게시중</span></td>
+              <td class="num">850</td>
+              <td class="num num--dl">150</td>
+            </tr>
+            <tr>
+              <td class="id">AIS-2026-004</td>
+              <td class="cls"><span class="bdg">중등</span><span class="bdg">수업</span></td>
+              <td><div class="t">과학 실험 안전 지도안</div>
+                  <div class="d">실험 주제별 안전 수칙과 지도 시나리오를 생성합니다</div></td>
+              <td class="mid"><span class="st"><i></i>게시중</span></td>
+              <td class="num">1,100</td>
+              <td class="num num--dl">560</td>
+            </tr>
+            <tr>
+              <td class="id">AIS-2026-005</td>
+              <td class="cls"><span class="bdg">고등</span><span class="bdg">수업</span></td>
+              <td><div class="t">영어 독해 지문 변형</div>
+                  <div class="d">수준별 어휘 · 길이로 독해 지문을 재구성합니다</div></td>
+              <td class="mid"><span class="st"><i></i>게시중</span></td>
+              <td class="num">2,100</td>
+              <td class="num num--dl">890</td>
+            </tr>
+            <tr>
+              <td class="id">AIS-2026-006</td>
+              <td class="cls"><span class="bdg">공통</span><span class="bdg">학급경영</span></td>
+              <td><div class="t">학부모 상담 준비 질문지</div>
+                  <div class="d">상담 목적별 질문지와 안내 문구를 준비합니다</div></td>
+              <td class="mid"><span class="st"><i></i>게시중</span></td>
+              <td class="num">1,500</td>
+              <td class="num num--dl">410</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="tfoot">
+          <span class="count">전체 10건 중 6건 표시</span>
+          <div class="pg"><span class="on">1</span><span>2</span><span>다음</span></div>
+        </div>
+      </section>
+
+      <section class="blk-sec">
+        <div class="sec"><span class="idx">02</span><h2>공지사항</h2></div>
+        <ul class="news">
+          <li>
+            <span class="num d">2026.10.02</span>
+            <span class="t">생성형 AI 활용 시 개인정보 보호 유의사항 안내</span>
+          </li>
+          <li>
+            <span class="num d">2026.10.05</span>
+            <span class="t">교육용 AI 스킬 아카이브 정식 개통 안내</span>
+          </li>
+          <li>
+            <span class="num d">2026.10.12</span>
+            <span class="t">10월 신규 스킬 2종 등록 — 평가 · 행정 영역</span>
+            <span class="bdg new">신규</span>
+          </li>
+        </ul>
+        <p class="newsfine">스킬 열람과 파일 내려받기에는 로그인이 필요하지 않습니다.
+          기관 내부 자료를 입력하기 전 개인정보 보호 유의사항을 먼저 확인하십시오.</p>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<footer class="foot">
+  <div class="wrap wrap--wide in">
+    <div>
+      <b>부산광역시교육청 교육용 AI 스킬 아카이브</b><br>
+      부산광역시교육청 디지털미래교육과 · 부산광역시 부산진구 화지로 12
+    </div>
+    <div class="num">AIS-2026-MAIN / REV.02</div>
+  </div>
+</footer>
+
+</body>
+</html>

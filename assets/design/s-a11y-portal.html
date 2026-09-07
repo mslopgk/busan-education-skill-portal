@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>부산교육청 AI 스킬 포털 — 웹 접근성 대응</title>
+<link rel="stylesheet" href="site/_base.css">
+<style>
+/* ══════════════════════════════════════════════════════════
+   이 화면 전용: ① 배치 ② 고대비 모드(body.hc) 상태 오버라이드
+   기반 토큰은 전역에서 손대지 않는다. 고대비 값은 모두 body.hc 아래.
+   s-a11y-archive.html 과 동일한 배치 규칙 — 분류축만 4개.
+   ══════════════════════════════════════════════════════════ */
+
+/* ── ① 건너뛰기 링크 : 페이지 최상단 · 키보드 초점 표시 상태 ── */
+.skip{position:static;display:inline-block;vertical-align:middle;
+  margin:9px 0 9px 64px;font-size:12.5px;padding:7px 14px}
+.skipnote{display:inline-block;vertical-align:middle;margin-left:18px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--muted)}
+
+/* ── 머리 ── */
+.phead{display:flex;align-items:flex-end;justify-content:space-between;gap:56px;
+  padding-block:14px 11px}
+.phead h1{margin-top:6px;font-size:38px}
+.phead .sub{margin-top:9px;max-width:72ch}
+.phead .rt{flex:none;text-align:right;border-top:1px solid var(--rule);padding-top:11px}
+.phead .rt .k{font-size:10.5px;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+.phead .rt .v{font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums;
+  margin-top:4px;line-height:1.6}
+
+/* ── ② 접근성 도구모음 ── */
+.a11ybar{gap:0;flex-wrap:wrap;padding-block:9px}
+.a11ybar .grp{display:flex;align-items:center;gap:8px;margin-left:26px}
+.a11ybar .glab{font-size:12px;font-weight:700;letter-spacing:.02em}
+.btn--sm{font-size:12.5px;padding:5px 11px;font-weight:700}
+.tgl{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;
+  color:#fff;background:var(--blue);border:1px solid var(--blue);border-radius:2px;
+  padding:4px 10px 4px 6px}
+.tgl i{width:20px;height:11px;border-radius:2px;background:rgba(255,255,255,.32);
+  border:1px solid #fff;position:relative;flex:none}
+.tgl i::after{content:"";position:absolute;top:1px;right:1px;width:7px;height:7px;
+  border-radius:1px;background:#fff}
+.a11ybar .fine{margin-left:auto;font-size:11.5px;color:var(--muted);letter-spacing:-.01em}
+
+/* ── ③ 필터 : 학교급 · 교과 · 업무유형 · 활용 도구 네 축 + 검색어 ── */
+.filters{display:grid;grid-template-columns:repeat(4,146px) 1fr 98px;
+  column-gap:16px;align-items:end;padding:12px 0 15px}
+.f label{display:block;font-size:11.5px;font-weight:700;letter-spacing:.02em;
+  margin-bottom:6px}
+.sel{position:relative;display:block}
+.sel::after{content:"▾";position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  font-size:10px;color:var(--ink);pointer-events:none}
+.sel select{appearance:none;-webkit-appearance:none;width:100%;font:inherit;font-size:13.5px;
+  color:var(--ink);background:var(--white);border:1px solid var(--rule);border-radius:2px;
+  padding:9px 26px 9px 10px;line-height:1.35}
+.sel select:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.filters .search{max-width:none;flex:none;padding:8px 11px}
+.filters .btn{width:100%}
+.axisnote{font-size:11.5px;color:var(--muted);padding-bottom:2px;line-height:1.6}
+
+/* ── ④ 표 ── */
+.listbar{padding-block:7px}
+.listbar .sorts{margin-left:auto}
+.tbl .cls{white-space:nowrap}
+.tbl tbody td{padding:8px 12px}
+.tbl tbody td.mid{vertical-align:middle}
+.tbl .t{font-size:14.5px}
+/* 초점 이동 시각화 시연 — 2px 파란 초점 링 */
+.tbl tr.kbfocus{background:var(--blue-soft)}
+.tbl tr.kbfocus td{box-shadow:inset 0 2px 0 var(--blue),inset 0 -2px 0 var(--blue)}
+.tbl tr.kbfocus td:first-child{box-shadow:inset 0 2px 0 var(--blue),
+  inset 0 -2px 0 var(--blue),inset 2px 0 0 var(--blue)}
+.tbl tr.kbfocus td:last-child{box-shadow:inset 0 2px 0 var(--blue),
+  inset 0 -2px 0 var(--blue),inset -2px 0 0 var(--blue)}
+.tbl .fcue{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;
+  color:var(--blue);display:block;margin-top:3px}
+.tnote{padding-top:11px;font-size:11.5px;color:var(--muted);line-height:1.7}
+
+/* ── ⑤ KWCAG 자가진단 ── */
+.kw{margin-top:18px}
+.kwlist{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);
+  column-gap:26px;margin-top:13px}
+.kwlist li{border-top:1px solid var(--rule);padding-top:11px}
+.kwlist .n{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.16em;
+  color:var(--muted)}
+.kwlist b{display:block;font-size:14px;font-weight:700;letter-spacing:-.01em;margin-top:5px}
+.kwlist .dd{display:block;font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.65}
+.kwlist .ok{display:inline-flex;align-items:center;gap:5px;margin-top:9px;
+  font-size:11px;font-weight:700;border:1px solid var(--rule);border-radius:2px;
+  padding:1px 7px}
+.kwfine{margin-top:12px;padding-top:10px;border-top:1px solid var(--rule-soft);
+  font-size:11.5px;color:var(--muted);line-height:1.7}
+.foot{margin-top:22px}
+
+/* ══ 고대비 모드 ON — 도구모음의 "켜짐" 과 실제 렌더가 일치하도록 ══ */
+body.hc{
+  --ink:#0B0F14;          /* 본문 · 제목 */
+  --muted:#243441;        /* 보조 텍스트 = 다크 슬레이트(흐린 회색 금지) */
+  --rule:#39434D;         /* 구조 경계 · 입력 테두리 1px */
+  --rule-soft:#6C7883;    /* 표 행 헤어라인 */
+  --zebra:#EDF1F6;
+  --blue-soft:#DCE7F7;
+}
+body.hc .search input{color:var(--ink)}
+body.hc .search input::placeholder{color:#374350}
+body.hc .bdg{color:#101A24;border-color:#39434D}
+body.hc .st.off{color:#101A24}
+body.hc .st.off i{border:2px solid #101A24}
+body.hc .tbl thead th{color:#101A24}
+body.hc .tbl .id,body.hc .tbl .d{color:#243441}
+body.hc .kbd{color:#243441;border-color:#39434D}
+body.hc .parent .in,body.hc .foot{color:#243441}
+</style>
+</head>
+<body class="hc">
+
+<a class="skip" href="#main">본문 바로가기</a>
+<p class="skipnote">TAB 1회 · 초점 표시 상태 (2px 초점 링 · 오프셋 2px)</p>
+
+<div class="gov-band"></div>
+
+<div class="parent">
+  <div class="wrap wrap--wide in">
+    <span>부산광역시교육청 디지털미래교육과</span>
+    <span>AI 스킬 포털 · 열람과 내려받기는 로그인 없이 이용</span>
+  </div>
+</div>
+
+<header class="mast">
+  <div class="wrap wrap--wide in">
+    <div class="mark">
+      <b>부산교육청 AI 스킬 포털</b>
+      <span class="code">BOE-AIP</span>
+    </div>
+    <nav class="gnb">
+      <a href="#main">스킬 목록</a>
+      <a href="#main">이용 안내</a>
+      <a class="on" href="#main">접근성 안내</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap wrap--wide" id="main">
+
+  <section class="phead">
+    <div>
+      <div class="lab">WEB ACCESSIBILITY</div>
+      <h1>웹 접근성 대응</h1>
+      <p class="sub">글자 크기 조절 · 고대비 모드 · 키보드 전용 조작을 화면 전체에 적용했습니다.</p>
+    </div>
+    <div class="rt">
+      <div class="k">자가진단 기준</div>
+      <div class="v">KWCAG 2.2<br>33개 검사항목</div>
+    </div>
+  </section>
+
+  <!-- ══ 접근성 도구모음 ══ -->
+  <div class="toolbar a11ybar">
+    <span class="lab-kr">접근성 설정</span>
+    <div class="grp">
+      <span class="glab">글자 크기</span>
+      <button type="button" class="btn btn--line btn--sm" aria-label="글자 크기 축소">가-</button>
+      <button type="button" class="btn btn--line btn--sm" aria-label="글자 크기 확대">가+</button>
+    </div>
+    <div class="grp">
+      <span class="glab">고대비 모드</span>
+      <span class="tgl" role="switch" aria-checked="true"><i></i>켜짐</span>
+    </div>
+    <span class="fine">본문 #0B0F14 · 보조 텍스트 #243441 · 경계 #39434D — 명도 대비 4.5:1 이상</span>
+  </div>
+
+  <!-- ══ 필터 : 4개 분류축 + 검색어 ══ -->
+  <section>
+    <div class="sec"><span class="idx">01</span><h2>스킬 찾기</h2>
+      <span class="axisnote">본 포털은 학교급 · 교과 · 업무유형 · 활용 도구 4개 축으로 분류합니다</span></div>
+
+    <div class="filters">
+      <p class="f">
+        <label for="f-level">학교급</label>
+        <span class="sel"><select id="f-level">
+          <option>전체</option><option>유치원</option><option>초등</option>
+          <option>중등</option><option>고등</option><option>특수</option>
+        </select></span>
+      </p>
+      <p class="f">
+        <label for="f-subj">교과</label>
+        <span class="sel"><select id="f-subj">
+          <option>전체</option><option>국어</option><option>영어</option>
+          <option>수학</option><option>과학</option><option>사회</option><option>비교과</option>
+        </select></span>
+      </p>
+      <p class="f">
+        <label for="f-task">업무유형</label>
+        <span class="sel"><select id="f-task">
+          <option>수업</option><option>평가</option><option>학급경영</option><option>행정</option>
+        </select></span>
+      </p>
+      <p class="f">
+        <label for="f-tool">활용 도구</label>
+        <span class="sel"><select id="f-tool">
+          <option>전체</option><option>문서 작성</option><option>표 · 데이터</option>
+          <option>이미지 · 자료</option><option>대화형 보조</option>
+        </select></span>
+      </p>
+      <p class="f">
+        <label for="f-q">검색어</label>
+        <span class="search"><input id="f-q" type="text" placeholder="스킬명 · 설명 · 태그를 입력하십시오"><span class="kbd">⌘ K</span></span>
+      </p>
+      <p class="f">
+        <label for="f-go" aria-hidden="true">&nbsp;</label>
+        <button id="f-go" type="submit" class="btn btn--fill">검색</button>
+      </p>
+    </div>
+  </section>
+
+  <!-- ══ 스킬 목록 ══ -->
+  <section>
+    <div class="sec"><span class="idx">02</span><h2>스킬 목록</h2></div>
+
+    <div class="toolbar listbar">
+      <span class="lab-kr">전체 학교급 · 전체 교과 · 전체 업무유형</span>
+      <div class="sorts"><span class="on">최신순</span><span>다운로드순</span></div>
+    </div>
+
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th style="width:112px">관리번호</th>
+          <th>스킬</th>
+          <th style="width:218px">분류</th>
+          <th style="width:98px">게시 상태</th>
+          <th class="r" style="width:84px">조회</th>
+          <th class="r" style="width:98px">다운로드</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="id lead mid">AIP-2026-001</td>
+          <td><div class="t">수행평가 문항 초안 생성</div>
+              <div class="d">성취기준에 맞춘 서술형 문항 초안</div></td>
+          <td class="cls mid"><span class="bdg">중등</span><span class="bdg">국어</span><span class="bdg">평가</span></td>
+          <td class="mid"><span class="st"><i></i>게시중</span></td>
+          <td class="num mid">1,240</td>
+          <td class="num num--dl mid">312</td>
+        </tr>
+        <tr>
+          <td class="id mid">AIP-2026-002</td>
+          <td><div class="t">가정통신문 작성 도우미</div>
+              <div class="d">행사 · 안내 목적별 통신문 초안</div></td>
+          <td class="cls mid"><span class="bdg">초등</span><span class="bdg">비교과</span><span class="bdg">학급경영</span></td>
+          <td class="mid"><span class="st"><i></i>게시중</span></td>
+          <td class="num mid">980</td>
+          <td class="num num--dl mid">320</td>
+        </tr>
+        <tr>
+          <td class="id mid">AIP-2026-003</td>
+          <td><div class="t">학급 회의록 요약</div>
+              <div class="d">결정 사항 중심 항목별 요약</div></td>
+          <td class="cls mid"><span class="bdg">공통</span><span class="bdg">비교과</span><span class="bdg">행정</span></td>
+          <td class="mid"><span class="st"><i></i>게시중</span></td>
+          <td class="num mid">850</td>
+          <td class="num num--dl mid">150</td>
+        </tr>
+        <tr class="kbfocus">
+          <td class="id mid">AIP-2026-004</td>
+          <td><div class="t">과학 실험 안전 지도안</div>
+              <div class="d">실험 주제별 안전 수칙 · 지도 시나리오</div>
+              <span class="fcue">KEYBOARD FOCUS</span></td>
+          <td class="cls mid"><span class="bdg">중등</span><span class="bdg">과학</span><span class="bdg">수업</span></td>
+          <td class="mid"><span class="st"><i></i>게시중</span></td>
+          <td class="num mid">1,100</td>
+          <td class="num num--dl mid">560</td>
+        </tr>
+        <tr>
+          <td class="id mid">AIP-2026-005</td>
+          <td><div class="t">영어 독해 지문 변형</div>
+              <div class="d">수준별 어휘 · 길이로 지문 재구성</div></td>
+          <td class="cls mid"><span class="bdg">고등</span><span class="bdg">영어</span><span class="bdg">수업</span></td>
+          <td class="mid"><span class="st"><i></i>게시중</span></td>
+          <td class="num mid">2,100</td>
+          <td class="num num--dl mid">890</td>
+        </tr>
+        <tr>
+          <td class="id mid">AIP-2026-006</td>
+          <td><div class="t">창의적 체험활동 계획 생성</div>
+              <div class="d">영역별 활동 계획 · 시간 배분 초안</div></td>
+          <td class="cls mid"><span class="bdg">초등</span><span class="bdg">비교과</span><span class="bdg">수업</span></td>
+          <td class="mid"><span class="st off"><i></i>비게시</span></td>
+          <td class="num mid">720</td>
+          <td class="num num--dl mid">180</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="tnote">네 번째 행은 키보드 초점 상태(2px 파란 초점 링)입니다. 게시 상태는 색만으로 구분하지 않고 기호(● 게시중 / ○ 비게시)와 글자를 함께 표기합니다.</p>
+  </section>
+
+  <!-- ══ KWCAG 자가진단 ══ -->
+  <section class="kw">
+    <div class="sec"><span class="idx">03</span><h2>KWCAG 2.2 · 33개 검사항목 자가진단 준수</h2></div>
+    <ul class="kwlist">
+      <li>
+        <span class="n">CHECK 01</span>
+        <b>대체 텍스트 제공</b>
+        <span class="dd">아이콘 · 상태 도트에 대체 텍스트 제공</span>
+        <span class="ok">✓ 준수</span>
+      </li>
+      <li>
+        <span class="n">CHECK 02</span>
+        <b>명도 대비 4.5:1</b>
+        <span class="dd">본문 #0B0F14 · 보조 #243441 로 확보</span>
+        <span class="ok">✓ 준수</span>
+      </li>
+      <li>
+        <span class="n">CHECK 03</span>
+        <b>키보드 접근 보장</b>
+        <span class="dd">필터 · 정렬 · 표 행을 키보드만으로 조작</span>
+        <span class="ok">✓ 준수</span>
+      </li>
+      <li>
+        <span class="n">CHECK 04</span>
+        <b>초점 이동 시각화</b>
+        <span class="dd">모든 초점에 2px 파란 초점 링 표시</span>
+        <span class="ok">✓ 준수</span>
+      </li>
+    </ul>
+    <p class="kwfine">자가진단은 디지털미래교육과가 실시하며 화면 개정 시마다 33개 검사항목 전체를 다시 점검합니다. 개선 요청은 접근성 담당자에게 접수합니다.</p>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap wrap--wide in">
+    <div>
+      <b>부산교육청 AI 스킬 포털</b><br>
+      부산광역시교육청 디지털미래교육과 · 부산광역시 부산진구 화지로 12
+    </div>
+    <div class="num">AIP-2026-A11Y / REV.01</div>
+  </div>
+</footer>
+
+</body>
+</html>

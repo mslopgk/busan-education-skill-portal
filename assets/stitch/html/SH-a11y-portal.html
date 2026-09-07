@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>부산광역시교육청 AI 스킬 포털 - 스킬 목록</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#1E3A5F",
+            deepNav: "#16324F",
+            accent: "#17876D",
+            surface: "#FFFFFF",
+            pageBg: "#F5F7FA",
+            borderCol: "#E2E8F0",
+            muted: "#64748B",
+            warningText: "#B45309",
+            warningBg: "#FEF3C7"
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px",
+            card: "8px"
+          },
+          fontFamily: {
+            headline: ["Noto Sans KR", "sans-serif"],
+            display: ["Noto Sans KR", "sans-serif"],
+            body: ["Noto Sans KR", "sans-serif"],
+            label: ["Noto Sans KR", "sans-serif"]
+          },
+          fontSize: {
+            base: "15px",
+            sm: "14px"
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body { font-family: 'Noto Sans KR', sans-serif; color: #111827; }
+
+    /* 1. 본문 바로가기 — 페이지 최상단에 항상 보이게 두고,
+          키보드 포커스를 받은 상태(2px Teal 포커스 링)로 시연한다. */
+    .skip-link-bar {
+      background: #F5F7FA;
+      padding: 16px 24px 8px 24px;
+    }
+    .skip-link {
+      display: inline-block;
+      background: #1E3A5F;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 1.2;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      outline: 2px solid #17876D;
+      outline-offset: 2px;
+    }
+    .focus-ring:focus {
+      outline: 2px solid #17876D;
+      outline-offset: 2px;
+    }
+
+    /* 2. 고대비 모드 "켜짐" 상태를 실제 화면에 반영한다.
+          본문 텍스트는 #111827, 보조 텍스트는 진한 회색, 테두리는 뚜렷하게. */
+    .text-\[\#64748B\]        { color: #334155 !important; }
+    .hover\:text-\[\#1E3A5F\]:hover { color: #0F172A !important; }
+    .text-\[\#17876D\]        { color: #0F6B55 !important; }
+    .text-\[\#B45309\]        { color: #7C3A06 !important; }
+    .text-\[\#1E3A5F\]        { color: #16324F !important; }
+    .border-\[\#E2E8F0\]      { border-color: #64748B !important; }
+    .border-b.border-\[\#E2E8F0\] { border-bottom-width: 1px; }
+    input, select, textarea   { color: #111827 !important; }
+    input::placeholder        { color: #475569 !important; opacity: 1 !important; }
+    /* 배지·칩 텍스트도 진하게 */
+    .bg-\[\#F5F7FA\].text-\[\#64748B\] { color: #1F2937 !important; border: 1px solid #64748B; }
+    .bg-\[\#E6F4F1\]          { border: 1px solid #0F6B55; }
+  </style>
+</head>
+<body class="bg-[#F5F7FA] text-slate-900 min-h-screen flex flex-col">
+<!-- 1. 본문 바로가기 (항상 노출, 키보드 포커스 상태로 시연) -->
+<div class="skip-link-bar max-w-[1280px] mx-auto w-full">
+<a class="skip-link" href="#main-content">본문 바로가기</a>
+</div>
+<!-- 2. TopNavBar (Shared Component) -->
+<header class="bg-surface border-b border-[#E2E8F0] shadow-sm flex justify-between items-center h-16 px-6 max-w-[1280px] mx-auto w-full docked top-0">
+<!-- 로고 -->
+<a aria-label="부산광역시교육청 AI 스킬 포털 홈" class="text-xl font-bold text-[#1E3A5F] focus-ring focus:outline-none" href="/">
+      부산광역시교육청 AI 스킬 포털
+    </a>
+<!-- 네비게이션 및 도구 -->
+<div class="flex items-center gap-8">
+<nav class="hidden md:flex gap-6">
+<a aria-current="page" class="text-[#17876D] font-bold border-b-2 border-[#17876D] pb-1 focus-ring" href="#">스킬 목록</a>
+<a class="text-[#64748B] hover:text-[#1E3A5F] transition-colors focus-ring" href="#">이용 안내</a>
+<a class="text-[#64748B] hover:text-[#1E3A5F] transition-colors focus-ring" href="#">공지사항</a>
+</nav>
+<!-- 접근성 도구 모음 -->
+<div class="flex items-center gap-4 border-l border-[#E2E8F0] pl-4">
+<div class="flex items-center gap-2">
+<span class="text-sm font-medium text-[#1E3A5F]" id="textSizeLabel">글자 크기</span>
+<button aria-label="글자 크기 축소" aria-labelledby="textSizeLabel" class="px-2 py-1 border border-[#E2E8F0] rounded text-sm hover:bg-[#F5F7FA] focus-ring">[가-]</button>
+<button aria-label="글자 크기 확대" aria-labelledby="textSizeLabel" class="px-2 py-1 border border-[#E2E8F0] rounded text-sm hover:bg-[#F5F7FA] focus-ring">[가+]</button>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-sm font-medium text-[#1E3A5F]" id="highContrastLabel">고대비 모드</span>
+<button aria-checked="true" aria-labelledby="highContrastLabel" class="w-10 h-5 bg-[#17876D] rounded-full relative focus-ring" role="switch">
+<span class="absolute right-1 top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform"></span>
+</button>
+<span aria-hidden="true" class="text-sm text-[#1E3A5F] font-bold">켜짐</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow max-w-[1280px] mx-auto w-full px-6 py-12 flex flex-col gap-12" id="main-content" tabindex="-1">
+<!-- 3. 검색 영역 -->
+<section aria-label="스킬 검색 필터" class="bg-surface p-6 rounded-card border border-[#E2E8F0] shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
+<form class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-[15px] font-medium text-[#1E3A5F]" for="search-keyword">검색어</label>
+<div class="relative">
+<span aria-hidden="true" class="material-symbols-outlined absolute left-3 top-2.5 text-[#64748B]">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-[#E2E8F0] rounded-card focus:outline-none focus:ring-2 focus:ring-[#17876D] text-[15px]" id="search-keyword" placeholder="스킬명 또는 관련 키워드 입력" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[15px] font-medium text-[#1E3A5F]" for="school-level">학교급</label>
+<select class="w-full px-4 py-2 border border-[#E2E8F0] rounded-card focus:outline-none focus:ring-2 focus:ring-[#17876D] text-[15px] bg-white appearance-none" id="school-level">
+<option value="all">전체</option>
+<option value="elem">초등학교</option>
+<option value="mid">중학교</option>
+<option value="high">고등학교</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[15px] font-medium text-[#1E3A5F]" for="work-type">업무 유형</label>
+<select class="w-full px-4 py-2 border border-[#E2E8F0] rounded-card focus:outline-none focus:ring-2 focus:ring-[#17876D] text-[15px] bg-white appearance-none" id="work-type">
+<option value="all">전체</option>
+<option value="admin">교무행정</option>
+<option value="teach">수업연구</option>
+<option value="counsel">학생상담</option>
+</select>
+</div>
+</form>
+<div class="mt-6 flex justify-end">
+<button class="bg-[#1E3A5F] text-white px-6 py-2 rounded-card font-bold hover:bg-[#16324F] transition-colors focus-ring" type="submit">검색</button>
+</div>
+</section>
+<!-- 4. 스킬 카드 그리드 -->
+<section aria-label="검색 결과 목록">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-xl font-bold text-[#1E3A5F]">스킬 목록</h2>
+<!-- 정렬 등 추가 도구 공간 -->
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- 카드 1 (포커스 링 시각화 요청 반영) -->
+<article aria-label="학생 상담 일지 자동 요약 스킬, 게시중" class="bg-surface rounded-card border border-[#E2E8F0] p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-2 ring-[#17876D] ring-offset-2 flex flex-col gap-4 focus-ring" tabindex="0">
+<div class="flex justify-between items-start">
+<span aria-label="상태: 게시중" class="inline-flex items-center gap-1.5 text-sm font-bold text-[#17876D] bg-[#E6F4F1] px-2.5 py-1 rounded-full">
+<span aria-hidden="true">●</span> 게시중
+             </span>
+<div class="flex gap-2">
+<span class="text-[14px] px-2 py-0.5 bg-[#F5F7FA] text-[#64748B] rounded">초/중/고</span>
+<span class="text-[14px] px-2 py-0.5 bg-[#F5F7FA] text-[#64748B] rounded">학생상담</span>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-bold text-[#1E3A5F] mb-2 leading-tight">학생 상담 일지 핵심 요약 생성기</h3>
+<p class="text-[15px] text-[#64748B] line-clamp-2">긴 상담 녹취록이나 메모를 입력하면 학부모용/교사용 요약본을 자동 생성합니다.</p>
+</div>
+<div class="mt-auto pt-4 border-t border-[#E2E8F0] flex justify-between text-[14px] text-[#64748B]">
+<span aria-label="조회수 1,240회" class="flex items-center gap-1"><span aria-hidden="true" class="material-symbols-outlined text-[18px]">visibility</span> 1,240</span>
+<span aria-label="내려받기 312회" class="flex items-center gap-1"><span aria-hidden="true" class="material-symbols-outlined text-[18px]">download</span> 312</span>
+</div>
+</article>
+<!-- 카드 2 -->
+<article aria-label="가정통신문 초안 작성 스킬, 비게시" class="bg-surface rounded-card border border-[#E2E8F0] p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04)] flex flex-col gap-4 focus-ring" tabindex="0">
+<div class="flex justify-between items-start">
+<span aria-label="상태: 비게시" class="inline-flex items-center gap-1.5 text-sm font-medium text-[#64748B] bg-[#F5F7FA] px-2.5 py-1 rounded-full">
+<span aria-hidden="true">○</span> 비게시
+             </span>
+<div class="flex gap-2">
+<span class="text-[14px] px-2 py-0.5 bg-[#F5F7FA] text-[#64748B] rounded">초/중</span>
+<span class="text-[14px] px-2 py-0.5 bg-[#F5F7FA] text-[#64748B] rounded">교무행정</span>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-bold text-[#1E3A5F] mb-2 leading-tight">다국어 가정통신문 초안 작성</h3>
+<p class="text-[15px] text-[#64748B] line-clamp-2">행사 일정과 목적을 입력하면 다문화 가정을 위한 베트남어/중국어 등 번역본을 포함한 통신문을 생성합니다.</p>
+</div>
+<div class="mt-auto pt-4 border-t border-[#E2E8F0] flex justify-between text-[14px] text-[#64748B]">
+<span aria-label="조회수 850회" class="flex items-center gap-1"><span aria-hidden="true" class="material-symbols-outlined text-[18px]">visibility</span> 850</span>
+<span aria-label="내려받기 120회" class="flex items-center gap-1"><span aria-hidden="true" class="material-symbols-outlined text-[18px]">download</span> 120</span>
+</div>
+</article>
+<!-- 카드 3 -->
+<article aria-label="수업 지도안 기초 구성 스킬, 게시중" class="bg-surface rounded-card border border-[#E2E8F0] p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04)] flex flex-col gap-4 focus-ring" tabindex="0">
+<div class="flex justify-between items-start">
+<span aria-label="상태: 게시중" class="inline-flex items-center gap-1.5 text-sm font-bold text-[#17876D] bg-[#E6F4F1] px-2.5 py-1 rounded-full">
+<span aria-hidden="true">●</span> 게시중
+             </span>
+<div class="flex gap-2">
+<span class="text-[14px] px-2 py-0.5 bg-[#F5F7FA] text-[#64748B] rounded">중/고</span>
+<span class="text-[14px] px-2 py-0.5 bg-[#F5F7FA] text-[#64748B] rounded">수업연구</span>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-bold text-[#1E3A5F] mb-2 leading-tight">성취기준 기반 수업 지도안 기초안</h3>
+<p class="text-[15px] text-[#64748B] line-clamp-2">2022 개정 교육과정 성취기준 코드를 입력하면 차시별 도입-전개-정리 뼈대를 제시합니다.</p>
+</div>
+<div class="mt-auto pt-4 border-t border-[#E2E8F0] flex justify-between text-[14px] text-[#64748B]">
+<span aria-label="조회수 2,105회" class="flex items-center gap-1"><span aria-hidden="true" class="material-symbols-outlined text-[18px]">visibility</span> 2,105</span>
+<span aria-label="내려받기 600회" class="flex items-center gap-1"><span aria-hidden="true" class="material-symbols-outlined text-[18px]">download</span> 600</span>
+</div>
+</article>
+</div>
+</section>
+<!-- 5. 준수 패널 (접근성 자가진단표) -->
+<section aria-labelledby="accessibility-panel-title" class="bg-surface p-8 rounded-card border border-[#E2E8F0] shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
+<h2 class="text-lg font-bold text-[#1E3A5F] border-b border-[#E2E8F0] pb-4 mb-6" id="accessibility-panel-title">
+        KWCAG 2.2 · 33개 검사항목 자가진단 준수
+      </h2>
+<ul class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
+<li class="flex items-center gap-3">
+<span aria-hidden="true" class="material-symbols-outlined text-[#17876D]">check_circle</span>
+<span class="text-[15px] text-[#1E3A5F] font-medium">적절한 대체 텍스트 제공 (이미지 및 배경)</span>
+</li>
+<li class="flex items-center gap-3">
+<span aria-hidden="true" class="material-symbols-outlined text-[#17876D]">check_circle</span>
+<span class="text-[15px] text-[#1E3A5F] font-medium">명도 대비 4.5:1 이상 준수 (텍스트 가독성)</span>
+</li>
+<li class="flex items-center gap-3">
+<span aria-hidden="true" class="material-symbols-outlined text-[#17876D]">check_circle</span>
+<span class="text-[15px] text-[#1E3A5F] font-medium">논리적인 키보드 접근성 확보</span>
+</li>
+<li class="flex items-center gap-3">
+<span aria-hidden="true" class="material-symbols-outlined text-[#17876D]">check_circle</span>
+<span class="text-[15px] text-[#1E3A5F] font-medium">초점 이동의 명확성 (2px Teal 포커스 링)</span>
+</li>
+</ul>
+<!-- 개인정보 경고 박스 예시 (디자인 시스템 반영) -->
+<div class="mt-8 bg-[#FEF3C7] border border-[#B45309] rounded p-4 flex gap-3">
+<span aria-hidden="true" class="material-symbols-outlined text-[#B45309]">warning</span>
+<p class="text-[14px] text-[#B45309] font-medium leading-relaxed">
+            유의사항: 실제 운영 시스템 등록 시, 스킬 상세 설명이나 첨부 파일 내에 교직원 또는 학생의 고유 식별 정보가 포함되지 않도록 주의 바랍니다.
+         </p>
+</div>
+</section>
+<!-- 6. 푸터 위 캡션 -->
+<div class="text-center pb-4">
+<p class="text-[14px] text-[#64748B] font-medium">한국형 웹 콘텐츠 접근성 지침 2.2 — 33개 검사항목 자가진단 결과표로 검수 시 제출한다.</p>
+</div>
+</main>
+<!-- 7. Footer (Shared Component) -->
+<footer class="bg-[#F5F7FA] border-t border-[#E2E8F0] full-width mt-auto">
+<div class="py-10 px-6 max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between gap-6">
+<div class="flex flex-col gap-4">
+<span class="text-lg font-bold text-[#1E3A5F]">부산광역시교육청</span>
+<div class="flex flex-wrap gap-4 text-[#64748B] font-body text-sm leading-relaxed">
+<a class="hover:underline hover:text-[#1E3A5F] focus-ring" href="#">개인정보처리방침</a>
+<a class="hover:underline hover:text-[#1E3A5F] focus-ring" href="#">이용약관</a>
+<a class="hover:underline hover:text-[#1E3A5F] focus-ring" href="#">이메일무단수집거부</a>
+<a class="hover:underline hover:text-[#1E3A5F] focus-ring" href="#">찾아오시는길</a>
+</div>
+</div>
+<div class="text-[#64748B] font-body text-sm leading-relaxed md:text-right flex items-end">
+        © 2026 부산광역시교육청. 모든 권리 보유.
+      </div>
+</div>
+</footer>
+</body></html>

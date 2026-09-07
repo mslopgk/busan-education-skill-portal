@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>부산광역시교육청 교육용 AI 스킬 아카이브/포털 — 3안 비교</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { DEFAULT: '#1E3A5F' },
+                        navy: { DEFAULT: '#16324F' },
+                        teal: { DEFAULT: '#17876D' },
+                        surface: { DEFAULT: '#FFFFFF' },
+                        page: { DEFAULT: '#F5F7FA' },
+                        border: { DEFAULT: '#E2E8F0' },
+                        muted: { DEFAULT: '#64748B' },
+                        amber: { DEFAULT: '#B45309', bg: '#FEF3C7' }
+                    },
+                    fontFamily: {
+                        headline: ["Noto Sans KR", "sans-serif"],
+                        display: ["Noto Sans KR", "sans-serif"],
+                        body: ["Noto Sans KR", "sans-serif"],
+                        label: ["Noto Sans KR", "sans-serif"]
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    boxShadow: {
+                        card: "0 1px 2px rgba(0,0,0,.04)",
+                        elevated: "0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #F5F7FA; color: #1E3A5F; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .text-truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        /* 세 카드의 상단 영역 높이를 고정해 체크리스트 첫 행(목록·상세)이
+           동일한 y 좌표에서 시작하도록 한다. 기준: 요약줄이 2줄로 접히는 완성안(C안). */
+        .plan-head { height: 168px; }
+        .plan-summary { height: 140px; }
+    </style>
+</head>
+<body class="bg-page text-primary antialiased flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-surface text-[#1E3A5F] font-body text-[15px] font-medium docked full-width top-0 border-b border-[#E2E8F0] shadow-sm flex justify-between items-center w-full px-6 max-w-[1280px] mx-auto h-16 sticky z-50">
+<div class="text-xl font-bold text-[#1E3A5F]">부산광역시교육청 AI 스킬 포털</div>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-[#64748B] hover:text-[#1E3A5F] hover:bg-[#F5F7FA] transition-colors py-2 px-3 rounded-lg" href="#">포털 소개</a>
+<a class="text-[#17876D] font-bold border-b-2 border-[#17876D] pb-1 hover:bg-[#F5F7FA] transition-colors py-2 px-3" href="#">AI 스킬 탐색</a>
+<a class="text-[#64748B] hover:text-[#1E3A5F] hover:bg-[#F5F7FA] transition-colors py-2 px-3 rounded-lg" href="#">이용 안내</a>
+<a class="text-[#64748B] hover:text-[#1E3A5F] hover:bg-[#F5F7FA] transition-colors py-2 px-3 rounded-lg" href="#">고객 지원</a>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-[1280px] mx-auto px-6 py-12 flex flex-col gap-12">
+<!-- Header Section -->
+<header class="text-center space-y-4">
+<h1 class="text-3xl md:text-4xl font-bold text-primary tracking-tight">부산광역시교육청 교육용 AI 스킬 아카이브/포털 — 3안 비교</h1>
+<p class="text-lg text-muted font-medium">사업 범위와 예산에 따라 세 가지 안을 제시합니다</p>
+</header>
+<!-- Pricing Cards Section -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Plan A (Card 1) -->
+<div class="bg-surface rounded-[8px] border border-border shadow-card p-6 flex flex-col h-full relative">
+<div class="plan-head mb-6 border-b border-border pb-6">
+<h2 class="text-2xl font-bold text-primary mb-2">기본안 (A안)</h2>
+<p class="text-muted font-medium mb-4">스킬 아카이브 구축</p>
+<div class="text-3xl font-bold text-primary mb-2">21,450,000원</div>
+<p class="text-sm text-muted">(부가세 포함)</p>
+</div>
+<div class="plan-summary mb-8 space-y-3">
+<p class="text-[15px] font-medium flex items-center gap-2"><span class="material-symbols-outlined text-teal text-xl" style="font-variation-settings: 'FILL' 1;">schedule</span> 사업 기간 8주</p>
+<p class="text-[15px] font-medium flex items-center gap-2"><span class="material-symbols-outlined text-teal text-xl" style="font-variation-settings: 'FILL' 1;">widgets</span> 스킬 10종</p>
+<p class="text-[15px] font-medium flex items-center gap-2"><span class="material-symbols-outlined text-teal text-xl" style="font-variation-settings: 'FILL' 1;">public</span> 로그인 없는 공개 아카이브</p>
+</div>
+<div class="space-y-4 mb-8">
+<!-- Included Items (1-5) -->
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">목록·상세</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">분류·검색</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">스킬 내려받기</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">관리자 콘텐츠 관리</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">이용 통계</span></div></div>
+<!-- Not Included Items (6-15) -->
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-border text-xl">remove</span><span class="text-muted text-[15px]">4축 분류·컬렉션</span></div><span class="text-xs text-muted">미포함</span></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-border text-xl">remove</span><span class="text-muted text-[15px]">회원·로그인</span></div><span class="text-xs text-muted">미포함</span></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-border text-xl">remove</span><span class="text-muted text-[15px]">평점·후기·즐겨찾기</span></div><span class="text-xs text-muted">미포함</span></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-border text-xl">remove</span><span class="text-muted text-[15px]">버전 관리</span></div><span class="text-xs text-muted">미포함</span></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-border text-xl">remove</span><span class="text-muted text-[15px]">교원 연수</span></div><span class="text-xs text-muted">미포함</span></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-border text-xl">remove</span><span class="text-muted text-[15px]">AI 자연어 검색</span></div><span class="text-xs text-muted">미포함</span></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-border text-xl">remove</span><span class="text-muted text-[15px]">맞춤 추천</span></div><span class="text-xs text-muted">미포함</span></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-border text-xl">remove</span><span class="text-muted text-[15px]">브라우저 내 체험</span></div><span class="text-xs text-muted">미포함</span></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-border text-xl">remove</span><span class="text-muted text-[15px]">안내 영상</span></div><span class="text-xs text-muted">미포함</span></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-border text-xl">remove</span><span class="text-muted text-[15px]">12개월 유지관리</span></div><span class="text-xs text-muted">미포함</span></div>
+</div>
+<button class="w-full mt-auto py-3 border-2 border-primary text-primary rounded-[8px] font-bold hover:bg-page transition-colors text-[15px]">상세 보기</button>
+</div>
+<!-- Plan B (Card 2 - Highlighted) -->
+<div class="bg-surface rounded-[8px] border-2 border-teal shadow-elevated p-6 pt-[23px] flex flex-col h-full relative transform transition-transform z-10">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-teal text-surface text-xs font-bold py-1 px-4 rounded-full uppercase tracking-wider">균형</div>
+<div class="plan-head mb-6 border-b border-border pb-6">
+<h2 class="text-2xl font-bold text-primary mb-2">확장안 (B안)</h2>
+<p class="text-muted font-medium mb-4">참여형 스킬 포털</p>
+<div class="text-3xl font-bold text-primary mb-2">36,300,000원</div>
+<p class="text-sm text-muted">(부가세 포함)</p>
+</div>
+<div class="plan-summary mb-8 space-y-3">
+<p class="text-[15px] font-medium flex items-center gap-2"><span class="material-symbols-outlined text-teal text-xl" style="font-variation-settings: 'FILL' 1;">schedule</span> 사업 기간 12주</p>
+<p class="text-[15px] font-medium flex items-center gap-2"><span class="material-symbols-outlined text-teal text-xl" style="font-variation-settings: 'FILL' 1;">widgets</span> 스킬 25종</p>
+<p class="text-[15px] font-medium flex items-center gap-2"><span class="material-symbols-outlined text-teal text-xl" style="font-variation-settings: 'FILL' 1;">group</span> 회원·평점·후기·버전 관리</p>
+</div>
+<div class="space-y-4 mb-8">
+<!-- Included Items (1-10) -->
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">목록·상세</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">분류·검색</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">스킬 내려받기</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">관리자 콘텐츠 관리</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">이용 통계</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">4축 분류·컬렉션</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">회원·로그인</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">평점·후기·즐겨찾기</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">버전 관리</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">교원 연수</span></div></div>
+<!-- Not Included Items (11-15) -->
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-border text-xl">remove</span><span class="text-muted text-[15px]">AI 자연어 검색</span></div><span class="text-xs text-muted">미포함</span></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-border text-xl">remove</span><span class="text-muted text-[15px]">맞춤 추천</span></div><span class="text-xs text-muted">미포함</span></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-border text-xl">remove</span><span class="text-muted text-[15px]">브라우저 내 체험</span></div><span class="text-xs text-muted">미포함</span></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-border text-xl">remove</span><span class="text-muted text-[15px]">안내 영상</span></div><span class="text-xs text-muted">미포함</span></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-border text-xl">remove</span><span class="text-muted text-[15px]">12개월 유지관리</span></div><span class="text-xs text-muted">미포함</span></div>
+</div>
+<button class="w-full mt-auto py-3 bg-primary text-surface rounded-[8px] font-bold hover:bg-navy transition-colors text-[15px] shadow-sm">상세 보기</button>
+</div>
+<!-- Plan C (Card 3) -->
+<div class="bg-surface rounded-[8px] border border-border shadow-card p-6 flex flex-col h-full relative">
+<div class="plan-head mb-6 border-b border-border pb-6">
+<h2 class="text-2xl font-bold text-primary mb-2">완성안 (C안)</h2>
+<p class="text-muted font-medium mb-4">지능형 포털 + 직무연수</p>
+<div class="text-3xl font-bold text-primary mb-2">49,500,000원</div>
+<p class="text-sm text-muted">(부가세 포함)</p>
+</div>
+<div class="plan-summary mb-8 space-y-3">
+<p class="text-[15px] font-medium flex items-center gap-2"><span class="material-symbols-outlined text-teal text-xl" style="font-variation-settings: 'FILL' 1;">schedule</span> 사업 기간 16주</p>
+<p class="text-[15px] font-medium flex items-center gap-2"><span class="material-symbols-outlined text-teal text-xl" style="font-variation-settings: 'FILL' 1;">widgets</span> 스킬 40종</p>
+<p class="text-[15px] font-medium flex items-center gap-2"><span class="material-symbols-outlined text-teal text-xl" style="font-variation-settings: 'FILL' 1;">workspace_premium</span> AI 자연어 검색·체험 + 15시간 연수 + 12개월 유지관리</p>
+</div>
+<div class="space-y-4 mb-8">
+<!-- Included Items (1-15) -->
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">목록·상세</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">분류·검색</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">스킬 내려받기</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">관리자 콘텐츠 관리</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">이용 통계</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">4축 분류·컬렉션</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">회원·로그인</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">평점·후기·즐겨찾기</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">버전 관리</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">교원 연수</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">AI 자연어 검색</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">맞춤 추천</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">브라우저 내 체험</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">안내 영상</span></div></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-teal text-xl font-bold">check</span><span class="font-bold text-[15px]">12개월 유지관리</span></div></div>
+</div>
+<button class="w-full mt-auto py-3 border-2 border-primary text-primary rounded-[8px] font-bold hover:bg-page transition-colors text-[15px]">상세 보기</button>
+</div>
+</section>
+<!-- Bottom Banner Section -->
+<section class="bg-primary text-surface rounded-xl p-8 text-center shadow-md">
+<p class="text-lg font-bold flex items-center justify-center gap-3">
+<span class="material-symbols-outlined text-teal text-2xl" style="font-variation-settings: 'FILL' 1;">info</span>
+                세 안은 대체 관계가 아니라 누적 관계 — 확장안은 기본안을, 완성안은 확장안을 포함합니다.
+            </p>
+</section>
+<!-- Footer Note -->
+<div class="text-center text-sm text-muted">
+<p>공급가액 기준 추정가격 5천만원 이하 · 여성기업 1인 견적 수의계약 대상</p>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="bg-[#F5F7FA] text-[#64748B] font-body text-sm font-normal full-width bottom-0 border-t border-[#E2E8F0] mt-auto">
+<div class="w-full py-8 px-6 max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="text-lg font-bold text-[#1E3A5F]">부산광역시교육청 AI 스킬 포털</div>
+<div class="flex gap-6">
+<a class="text-[#64748B] hover:text-[#1E3A5F]" href="#">이용약관</a>
+<a class="text-[#64748B] hover:text-[#1E3A5F]" href="#">개인정보처리방침</a>
+<a class="text-[#64748B] hover:text-[#1E3A5F]" href="#">찾아오시는 길</a>
+</div>
+<div>© 2026 부산광역시교육청. 모든 권리 보유.</div>
+</div>
+</footer>
+</body></html>

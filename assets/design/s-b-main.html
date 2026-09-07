@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>부산교육청 AI 스킬 포털 — 스킬 목록</title>
+<link rel="stylesheet" href="site/_base.css">
+<style>
+/* ── 이 화면 전용 배치만. 토큰·색·컴포넌트 재정의 없음 ── */
+
+/* 머리: 전역 메뉴 + 로그인 사용자 */
+.mast .rt{display:flex;align-items:flex-end;gap:22px}
+.mast .who{font-size:12.5px;color:var(--muted);letter-spacing:-.01em;white-space:nowrap}
+.mast .who b{color:var(--ink);font-weight:700}
+.mast .who .bar{display:inline-block;width:1px;height:10px;background:var(--rule);
+  margin-inline:9px;vertical-align:-1px}
+
+/* 레일 + 캔버스 — 좌측 여백은 wrap 이 담당 */
+.shell{align-items:start;grid-template-columns:220px 1fr;column-gap:40px}
+.rail{padding-inline:0 28px}
+.canvas{min-width:0;padding-top:24px}
+
+/* 머리 줄 */
+.phead{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;
+  padding-bottom:16px}
+.phead h2{margin-top:7px}
+.phead .rt{text-align:right;flex:none}
+.phead .rt .k{font-size:10.5px;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+.phead .rt .v{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;
+  letter-spacing:-.01em;margin-top:2px}
+
+/* 표 부속 — 평점 · 즐겨찾기 칼럼 */
+.tbl .rate{display:flex;flex-direction:column;align-items:flex-end;gap:1px}
+.tbl .rate .v{font-family:var(--mono);font-size:14.5px;font-weight:600;
+  font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.tbl .rate .n{font-size:11px;color:var(--muted);white-space:nowrap}
+.tbl .fav{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;
+  text-align:right;white-space:nowrap}
+.tbl .fav.on{font-weight:600}
+.tbl tbody td.mid{vertical-align:middle}
+.tfoot{display:flex;align-items:center;justify-content:space-between;padding-top:11px}
+.tfoot .pg{display:flex;gap:12px;font-size:12.5px;color:var(--muted)}
+.tfoot .pg .on{color:var(--ink);font-weight:700}
+.basis{margin-top:13px;padding-top:11px;border-top:1px solid var(--rule-soft);
+  font-size:11.5px;color:var(--muted);line-height:1.7}
+
+/* 아래단 — 컬렉션 · 공지 두 열(레일 아래 전폭) */
+.pair{display:grid;grid-template-columns:1fr 1fr;column-gap:56px;align-items:start;
+  margin-top:34px}
+.coll{list-style:none;margin-top:2px}
+.coll li{display:flex;align-items:baseline;justify-content:space-between;gap:14px;
+  padding-block:11px;border-bottom:1px solid var(--rule-soft)}
+.coll li:last-child{border-bottom:1px solid var(--rule)}
+.coll .t{font-size:14px;font-weight:700;letter-spacing:-.01em}
+.coll .d{font-size:12px;color:var(--muted);margin-top:2px}
+.coll .c{font-family:var(--mono);font-size:11.5px;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.notice{list-style:none;margin-top:2px}
+.notice li{display:flex;align-items:baseline;gap:14px;padding-block:11px;
+  border-bottom:1px solid var(--rule-soft)}
+.notice li:last-child{border-bottom:1px solid var(--rule)}
+.notice .dt{font-family:var(--mono);font-size:11.5px;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap;flex:none}
+.notice .t{font-size:13.5px;letter-spacing:-.01em}
+.pair .cap{font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.6}
+</style>
+</head>
+<body>
+
+<div class="gov-band"></div>
+
+<div class="parent">
+  <div class="wrap wrap--wide in">
+    <a class="skip" href="#main">본문 바로가기</a>
+    <span></span>
+    <span>부산광역시교육청 디지털미래교육과 · AI 스킬 포털</span>
+  </div>
+</div>
+
+<header class="mast">
+  <div class="wrap wrap--wide in">
+    <div class="mark">
+      <b>부산교육청 AI 스킬 포털</b>
+      <span class="code">BOE-AIP</span>
+    </div>
+    <div class="rt">
+      <nav class="gnb">
+        <a href="#coll">컬렉션</a>
+        <a href="#notice">공지</a>
+        <a href="#notice">알림</a>
+      </nav>
+      <span class="who"><b>박선생님</b><span class="bar"></span>로그아웃</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap wrap--wide" id="main">
+ <div class="shell">
+
+  <!-- ══ 좌측 레일 — 4개 분류축 ══ -->
+  <aside class="rail">
+    <section>
+      <div class="lab-kr">학교급</div>
+      <ul class="facet">
+        <li><span>초등</span><span class="c">9</span></li>
+        <li><span>중등</span><span class="c">8</span></li>
+        <li><span>고등</span><span class="c">6</span></li>
+        <li><span>공통</span><span class="c">2</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="lab-kr">교과</div>
+      <ul class="facet">
+        <li><span>국어</span><span class="c">4</span></li>
+        <li><span>영어</span><span class="c">5</span></li>
+        <li><span>수학</span><span class="c">3</span></li>
+        <li><span>과학</span><span class="c">4</span></li>
+        <li><span>사회</span><span class="c">3</span></li>
+        <li><span>공통 · 비교과</span><span class="c">6</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="lab-kr">업무유형</div>
+      <ul class="facet">
+        <li><span>수업</span><span class="c">8</span></li>
+        <li><span>평가</span><span class="c">6</span></li>
+        <li class="on"><span>학급경영</span><span class="c">6</span></li>
+        <li><span>행정</span><span class="c">5</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="lab-kr">활용 도구</div>
+      <ul class="facet">
+        <li><span>문서 작성</span><span class="c">10</span></li>
+        <li><span>표 · 데이터</span><span class="c">5</span></li>
+        <li><span>이미지 · 자료</span><span class="c">4</span></li>
+        <li><span>대화형 보조</span><span class="c">6</span></li>
+      </ul>
+    </section>
+
+    <div class="note">
+      4개 축은 서로 겹쳐 적용됩니다. 축별 건수의 합은
+      게시 스킬 총 25종과 같습니다.
+      <div class="num" style="text-align:left;font-size:10px;margin-top:8px">최종 갱신 2026.11.10</div>
+    </div>
+  </aside>
+
+  <!-- ══ 캔버스 ══ -->
+  <div class="canvas">
+
+    <div class="phead">
+      <div>
+        <div class="lab">SKILL LIST</div>
+        <h2>스킬 목록</h2>
+      </div>
+      <div class="rt">
+        <div class="k">게시 스킬</div>
+        <div class="v">25종 · 학급경영 6종 선택</div>
+      </div>
+    </div>
+
+    <!-- 툴바 -->
+    <div class="toolbar">
+      <div class="search">
+        <span class="lab" style="letter-spacing:.12em">검색</span>
+        <input type="text" placeholder="스킬명 · 태그로 찾기" aria-label="스킬명 검색">
+        <span class="kbd">⌘ K</span>
+      </div>
+      <div class="sorts">
+        <span>최신순</span>
+        <span class="on">평점순</span>
+        <span>다운로드순</span>
+      </div>
+      <span class="count">전체 25종 중 8종 표시</span>
+    </div>
+
+    <!-- 표 — 기본 .tbl 에 평점 · 즐겨찾기 칼럼을 더한다 -->
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th style="width:104px">관리번호</th>
+          <th>스킬명</th>
+          <th class="r" style="width:92px">평점</th>
+          <th class="r" style="width:88px">다운로드</th>
+          <th class="r" style="width:84px">즐겨찾기</th>
+          <th class="r" style="width:92px">최근 개정</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="id lead mid">AIP-2026-002</td>
+          <td><div class="t">가정통신문 작성 도우미</div>
+              <div class="d"><span class="bdg">초등</span><span class="bdg">학급경영</span><span class="bdg">문서 작성</span></div></td>
+          <td class="mid"><div class="rate"><span class="v">4.8</span><span class="n">리뷰 21</span></div></td>
+          <td class="num num--dl mid">320</td>
+          <td class="fav on mid">184</td>
+          <td class="num mid">2026.05.10</td>
+        </tr>
+        <tr>
+          <td class="id mid">AIP-2026-005</td>
+          <td><div class="t">영어 독해 지문 변형</div>
+              <div class="d"><span class="bdg">고등</span><span class="bdg">수업</span><span class="bdg">문서 작성</span></div></td>
+          <td class="mid"><div class="rate"><span class="v">4.7</span><span class="n">리뷰 17</span></div></td>
+          <td class="num num--dl mid">890</td>
+          <td class="fav mid">203</td>
+          <td class="num mid">2026.06.02</td>
+        </tr>
+        <tr>
+          <td class="id mid">AIP-2026-001</td>
+          <td><div class="t">수행평가 문항 초안 생성</div>
+              <div class="d"><span class="bdg">중등</span><span class="bdg">평가</span><span class="bdg">표 · 데이터</span></div></td>
+          <td class="mid"><div class="rate"><span class="v">4.6</span><span class="n">리뷰 12</span></div></td>
+          <td class="num num--dl mid">312</td>
+          <td class="fav mid">142</td>
+          <td class="num mid">2026.06.18</td>
+        </tr>
+        <tr>
+          <td class="id mid">AIP-2026-003</td>
+          <td><div class="t">학급 회의록 요약</div>
+              <div class="d"><span class="bdg">공통</span><span class="bdg">행정</span><span class="bdg">대화형 보조</span></div></td>
+          <td class="mid"><div class="rate"><span class="v">4.5</span><span class="n">리뷰 9</span></div></td>
+          <td class="num num--dl mid">150</td>
+          <td class="fav mid">76</td>
+          <td class="num mid">2026.04.27</td>
+        </tr>
+        <tr>
+          <td class="id mid">AIP-2026-004</td>
+          <td><div class="t">과학 실험 안전 지도안</div>
+              <div class="d"><span class="bdg">중등</span><span class="bdg">수업</span><span class="bdg">문서 작성</span></div></td>
+          <td class="mid"><div class="rate"><span class="v">4.4</span><span class="n">리뷰 14</span></div></td>
+          <td class="num num--dl mid">560</td>
+          <td class="fav mid">118</td>
+          <td class="num mid">2026.05.28</td>
+        </tr>
+        <tr>
+          <td class="id mid">AIP-2026-006</td>
+          <td><div class="t">학부모 상담 준비 질문지</div>
+              <div class="d"><span class="bdg">공통</span><span class="bdg">학급경영</span><span class="bdg">대화형 보조</span></div></td>
+          <td class="mid"><div class="rate"><span class="v">4.3</span><span class="n">리뷰 11</span></div></td>
+          <td class="num num--dl mid">410</td>
+          <td class="fav mid">95</td>
+          <td class="num mid">2026.03.19</td>
+        </tr>
+        <tr>
+          <td class="id mid">AIP-2026-008</td>
+          <td><div class="t">교과 세부능력 및 특기사항 초안</div>
+              <div class="d"><span class="bdg">고등</span><span class="bdg">행정</span><span class="bdg">문서 작성</span></div></td>
+          <td class="mid"><div class="rate"><span class="v">4.2</span><span class="n">리뷰 23</span></div></td>
+          <td class="num num--dl mid">1,200</td>
+          <td class="fav mid">268</td>
+          <td class="num mid">2026.06.30</td>
+        </tr>
+        <tr>
+          <td class="id mid">AIP-2026-007</td>
+          <td><div class="t">창의적 체험활동 계획 생성</div>
+              <div class="d"><span class="bdg">초등</span><span class="bdg">수업</span><span class="bdg">이미지 · 자료</span></div></td>
+          <td class="mid"><div class="rate"><span class="v">4.1</span><span class="n">리뷰 7</span></div></td>
+          <td class="num num--dl mid">180</td>
+          <td class="fav mid">54</td>
+          <td class="num mid">2026.02.14</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tfoot">
+      <span class="count">전체 25종 중 8종 표시</span>
+      <div class="pg"><span class="on">1</span><span>2</span><span>3</span><span>다음</span></div>
+    </div>
+
+    <p class="basis">평점은 5단계 척도의 이용자 평균이며 괄호 안은 후기 건수입니다. 즐겨찾기에 담은 스킬은
+      개정 시 알림을 받습니다. 열람과 내려받기는 로그인 없이도 가능하며, 평점 · 후기 · 즐겨찾기는 로그인 후 이용합니다.</p>
+    </div>
+ </div>
+
+    <!-- 아래단 — 컬렉션 · 공지 -->
+    <div class="pair">
+      <section id="coll">
+        <div class="sec"><span class="idx">01</span><h2>컬렉션</h2></div>
+        <ul class="coll">
+          <li>
+            <div><div class="t">학기말 평가 준비</div>
+              <div class="d">수행평가 문항 · 채점 기준 · 통계 정리까지 한 자리에</div></div>
+            <span class="c">스킬 6종</span>
+          </li>
+          <li>
+            <div><div class="t">신학기 학급경영</div>
+              <div class="d">학급 규칙 · 가정통신문 · 상담 준비 자료</div></div>
+            <span class="c">스킬 6종</span>
+          </li>
+          <li>
+            <div><div class="t">생활기록부 작성 지원</div>
+              <div class="d">교과 세부능력 및 특기사항 · 행동특성 초안</div></div>
+            <span class="c">스킬 6종</span>
+          </li>
+        </ul>
+        <p class="cap">컬렉션은 업무 시기에 맞추어 담당 부서가 모아 제공합니다.</p>
+      </section>
+
+      <section id="notice">
+        <div class="sec"><span class="idx">02</span><h2>공지</h2></div>
+        <ul class="notice">
+          <li>
+            <span class="dt">2026.11.02</span>
+            <span class="t">AI 스킬 포털 개통 및 회원가입 안내</span>
+          </li>
+          <li>
+            <span class="dt">2026.11.10</span>
+            <span class="t">즐겨찾기한 스킬의 개정 알림 기능 안내</span>
+          </li>
+        </ul>
+        <p class="cap">회원가입은 교육청 업무포털 계정으로 연동됩니다. 후기 작성과 개정 알림은
+          로그인 상태에서만 제공됩니다.</p>
+      </section>
+    </div>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap wrap--wide in">
+    <div>
+      <b>부산교육청 AI 스킬 포털</b><br>
+      부산광역시교육청 디지털미래교육과 · 부산광역시 부산진구 화지로 12
+    </div>
+    <div class="num">AIP-2026-11 / REV.01</div>
+  </div>
+</footer>
+
+</body>
+</html>

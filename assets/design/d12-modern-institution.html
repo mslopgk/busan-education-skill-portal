@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>부산교육청 교육용 AI 스킬 아카이브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#FFFFFF;
+  --ink:#1A1D21;
+  --rule:#C9CFD4;
+  --hair:#E4E8EB;
+  --guide:#EDF0F2;
+  --muted:#5C666E;
+  --blue:#1F5FBF;
+  --blue-soft:#C3D5EE;
+  --blue-tint:#F2F6FC;
+  --pad:64px;          /* (1280 - 1152) / 2 */
+  --gut:24px;
+}
+*{margin:0;padding:0;box-sizing:border-box;border-radius:0}
+html{-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+body{background:var(--white);color:var(--ink);
+  font-family:'Gothic A1','Malgun Gothic',sans-serif;font-weight:400;
+  font-size:15px;line-height:1.75;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,input:focus-visible{
+  outline:3px solid var(--blue);outline-offset:2px}
+.mono{font-family:'IBM Plex Mono',monospace;font-feature-settings:"tnum" 1,"zero" 1;
+  letter-spacing:0}
+
+/* ── 12-column frame ───────────────────────────────────────── */
+.wrap{width:1280px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gut)}
+
+/* ── institutional band + utility strip ────────────────────── */
+.band{height:6px;background:var(--blue)}
+.util{border-bottom:1px solid var(--hair)}
+.util .in{display:flex;align-items:center;justify-content:space-between;height:34px}
+.skip{font-size:12px;font-weight:400;color:var(--blue);
+  border-bottom:1px solid var(--blue-soft);padding-bottom:1px}
+.util .org{font-size:12px;color:var(--muted);letter-spacing:.02em}
+
+/* ── masthead ──────────────────────────────────────────────── */
+.mast{border-bottom:1px solid var(--ink)}
+.mast .in{display:flex;align-items:center;justify-content:space-between;height:80px}
+.ident{display:flex;align-items:center;gap:16px}
+.ident svg{display:block}
+.ident .nm{font-size:18px;font-weight:800;letter-spacing:-.03em}
+.ident .code{font-size:11px;color:var(--muted);letter-spacing:.14em;
+  padding-left:16px;border-left:1px solid var(--rule);line-height:1.2}
+nav{display:flex;align-items:center;gap:40px}
+nav a{font-size:14.5px;font-weight:400;color:var(--muted);
+  padding:30px 0 28px;border-bottom:2px solid transparent;letter-spacing:-.015em}
+nav a.on{color:var(--ink);font-weight:800;border-bottom-color:var(--blue)}
+
+/* ── hero ──────────────────────────────────────────────────── */
+.hero{position:relative;border-bottom:1px solid var(--ink)}
+.guides{position:absolute;inset:0;padding-left:var(--pad);padding-right:var(--pad);pointer-events:none}
+.guides .g{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gut);height:100%}
+.guides .g i{border-left:1px solid var(--guide)}
+.guides .g i:last-child{border-right:1px solid var(--guide)}
+.hero .in{position:relative;padding-block:60px 56px}
+.eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.eyebrow .bar{width:24px;height:3px;background:var(--blue)}
+.eyebrow .t{font-size:11.5px;font-weight:600;color:var(--blue);letter-spacing:.2em}
+h1{grid-column:1 / span 8;grid-row:1;font-size:50px;font-weight:800;line-height:1.34;
+  letter-spacing:-.04em;margin-bottom:22px}
+.sub{grid-column:1 / span 8;grid-row:2;font-size:16.5px;color:var(--muted);line-height:1.8;
+  letter-spacing:-.015em}
+.facts{grid-column:10 / span 3;grid-row:1 / span 3;border-left:1px solid var(--rule);
+  padding-left:24px;align-self:stretch}
+.facts dl{display:block}
+.facts dt{font-size:11.5px;color:var(--muted);letter-spacing:.14em;line-height:1.4}
+.facts dd{display:flex;align-items:baseline;gap:4px;margin-top:6px}
+.facts .n{font-family:'IBM Plex Mono',monospace;font-size:38px;font-weight:600;
+  line-height:1;letter-spacing:-.03em}
+.facts .u{font-size:14px;font-weight:800}
+.facts .sep{height:1px;background:var(--hair);margin:20px 0}
+.facts .d{font-family:'IBM Plex Mono',monospace;font-size:16px;margin-top:6px;
+  letter-spacing:-.01em}
+
+/* ── search (inside hero band) ─────────────────────────────── */
+.searchblock{grid-column:1 / span 8;grid-row:3;margin-top:44px}
+.lab{font-size:11.5px;font-weight:800;color:var(--ink);letter-spacing:.16em;
+  display:flex;align-items:center;gap:10px}
+.lab::before{content:"";width:3px;height:12px;background:var(--blue)}
+.sform{margin-top:14px;display:flex}
+.sform input{flex:1;height:60px;border:1px solid var(--ink);border-right:0;
+  padding:0 20px;font-family:inherit;font-size:16px;color:var(--ink);
+  letter-spacing:-.015em;background:var(--white);border-radius:2px 0 0 2px}
+.sform input::placeholder{color:#8A939A}
+.sform button{width:132px;height:60px;background:var(--blue);color:#fff;border:0;
+  font-family:inherit;font-size:16px;font-weight:800;letter-spacing:.02em;
+  border-radius:0 2px 2px 0;cursor:pointer}
+.shint{margin-top:12px;font-size:12.5px;color:var(--muted);letter-spacing:-.015em}
+
+/* ── filters (definition list) ─────────────────────────────── */
+.filters{border-bottom:1px solid var(--ink);background:#F6F8FB}
+.frow{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gut);
+  align-items:center;padding:18px 0;border-top:1px solid #DDE3E9}
+.frow:first-child{border-top:0}
+.frow dt{grid-column:1 / span 2;font-size:13.5px;font-weight:800;letter-spacing:.02em;
+  display:flex;align-items:center;gap:9px}
+.frow dt::before{content:"";width:3px;height:12px;background:var(--blue)}
+.frow dd{grid-column:3 / span 10;display:flex;flex-wrap:wrap;gap:8px}
+.chip{height:36px;padding:0 16px;border:1px solid var(--rule);border-radius:2px;
+  background:var(--white);display:inline-flex;align-items:center;font-size:13.5px;
+  color:var(--muted);letter-spacing:-.01em}
+.chip.on{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:800}
+
+/* ── list ──────────────────────────────────────────────────── */
+.listhead{display:flex;align-items:flex-end;justify-content:space-between;
+  padding:60px 0 20px}
+.listhead h2{display:flex;align-items:baseline;gap:14px;font-size:22px;font-weight:800;
+  letter-spacing:-.03em}
+.listhead h2 .ix{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;
+  color:var(--blue);letter-spacing:.1em}
+.listhead h2 .ct{font-size:13px;font-weight:400;color:var(--muted);letter-spacing:0}
+.listhead h2 .ct b{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink)}
+.sort{display:flex;align-items:center;gap:0}
+.sort a{font-size:13px;color:var(--muted);padding:0 14px;line-height:1.4;
+  border-left:1px solid var(--rule)}
+.sort a:first-child{border-left:0;padding-left:0}
+.sort a:last-child{padding-right:0}
+.sort a.on{color:var(--ink);font-weight:800;
+  box-shadow:inset 0 -2px 0 0 var(--blue)}
+
+.cols{position:relative;z-index:1;background:var(--white);display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gut);
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--hair);padding:9px 0}
+.cols span{font-size:11px;color:var(--muted);letter-spacing:.14em}
+.cols .c1{grid-column:1 / span 2}
+.cols .c2{grid-column:3 / span 6}
+.cols .c3{grid-column:9 / span 2;text-align:right}
+.cols .c4{grid-column:11 / span 2;text-align:right}
+
+.list{position:relative}
+.list::after{content:"";position:absolute;left:772px;top:0;bottom:0;width:1px;
+  background:var(--hair)}
+.row{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gut);
+  align-items:start;padding:24px 0 24px;border-bottom:1px solid var(--hair);
+  margin-left:-24px;padding-left:21px;border-left:3px solid var(--blue)}
+.row .ref{grid-column:1 / span 2;font-family:'IBM Plex Mono',monospace;font-size:12px;
+  color:var(--muted);letter-spacing:.01em;padding-top:4px}
+.row .body{grid-column:3 / span 6}
+.tags{display:flex;gap:6px;margin-bottom:10px}
+.tag{height:24px;padding:0 9px;border:1px solid var(--rule);border-radius:2px;
+  display:inline-flex;align-items:center;font-size:11.5px;color:var(--ink);
+  letter-spacing:.02em;line-height:1}
+.tag.b{border-color:var(--blue-soft);color:var(--blue);background:var(--blue-tint)}
+.row h3{font-size:19px;font-weight:800;letter-spacing:-.03em;line-height:1.4}
+.row p{font-size:14.5px;color:var(--muted);line-height:1.75;letter-spacing:-.015em;
+  margin-top:6px}
+.num{font-family:'IBM Plex Mono',monospace;font-feature-settings:"tnum" 1;
+  font-size:17px;text-align:right;padding-top:2px;letter-spacing:-.01em}
+.num.v{grid-column:9 / span 2;color:var(--muted)}
+.num.d{grid-column:11 / span 2;font-weight:600}
+.more{display:flex;align-items:center;justify-content:space-between;padding:24px 0 0}
+.more a{font-size:13.5px;font-weight:800;color:var(--blue);
+  border-bottom:1px solid var(--blue-soft);padding-bottom:2px}
+.more .pg{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);
+  letter-spacing:.06em}
+
+/* ── notices ───────────────────────────────────────────────── */
+.notice{margin-top:72px;border-top:1px solid var(--ink);padding-top:20px}
+.nhead{display:flex;align-items:flex-end;justify-content:space-between;
+  padding-bottom:12px}
+.nhead h2{display:flex;align-items:baseline;gap:14px;font-size:20px;font-weight:800;
+  letter-spacing:-.03em}
+.nhead h2 .ix{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;
+  color:var(--blue);letter-spacing:.1em}
+.nhead a{font-size:12.5px;color:var(--muted);letter-spacing:.02em;
+  border-bottom:1px solid var(--rule);padding-bottom:1px}
+.nrow{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gut);
+  align-items:baseline;padding:16px 0;border-top:1px solid var(--hair)}
+.nrow .dt{grid-column:1 / span 2;font-family:'IBM Plex Mono',monospace;font-size:12.5px;
+  color:var(--muted)}
+.nrow .tt{grid-column:3 / span 8;font-size:15px;letter-spacing:-.02em}
+.nrow .tg{grid-column:12 / span 1;text-align:right;font-size:11px;color:var(--muted);
+  letter-spacing:.1em}
+
+/* ── footer ────────────────────────────────────────────────── */
+footer{margin-top:80px;border-top:3px solid var(--ink);background:var(--white)}
+footer .in{display:flex;align-items:center;justify-content:space-between;
+  padding-block:36px 44px}
+footer .l{display:flex;align-items:center;gap:16px}
+footer .l .nm{font-size:16px;font-weight:800;letter-spacing:-.02em}
+footer .l .ad{font-size:12.5px;color:var(--muted);padding-left:16px;
+  border-left:1px solid var(--rule);letter-spacing:-.01em}
+footer .r{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);
+  letter-spacing:.1em;text-align:right}
+</style>
+</head>
+<body>
+
+<div class="band"></div>
+
+<div class="util">
+  <div class="wrap in">
+    <a class="skip" href="#main">건너뛰기</a>
+    <span class="org">부산광역시교육청</span>
+  </div>
+</div>
+
+<header class="mast">
+  <div class="wrap in">
+    <div class="ident">
+      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
+        <rect width="30" height="30" fill="#1F5FBF"/>
+        <rect x="7" y="17" width="4" height="7" fill="#fff"/>
+        <rect x="13" y="12" width="4" height="12" fill="#fff"/>
+        <rect x="19" y="6" width="4" height="18" fill="#fff"/>
+      </svg>
+      <span class="nm">부산교육청 교육용 AI 스킬 아카이브</span>
+      <span class="code mono">BOE-AIS</span>
+    </div>
+    <nav>
+      <a class="on" href="#main">스킬 목록</a>
+      <a href="#">이용 안내</a>
+      <a href="#">공지사항</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="guides"><div class="g"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+  <div class="wrap in">
+    <div class="eyebrow"><span class="bar"></span><span class="t mono">BOE-AIS / 2026</span></div>
+    <div class="grid">
+      <h1>수업 준비,<br>검증된 AI 스킬로 시작하세요</h1>
+      <p class="sub">수업·평가·학급경영·행정에 바로 쓰는 교육용 AI 스킬 아카이브 — 로그인 없이 즉시 이용</p>
+      <div class="searchblock" id="main">
+        <span class="lab">스킬 검색</span>
+        <form class="sform" onsubmit="return false">
+          <input type="search" placeholder="예) 수행평가 문항, 가정통신문, 회의록 요약" aria-label="스킬 검색">
+          <button type="submit">검색</button>
+        </form>
+        <p class="shint">아래 학교급·업무유형 분류로도 바로 찾을 수 있습니다</p>
+      </div>
+      <div class="facts">
+        <dl>
+          <dt>등록 스킬</dt>
+          <dd><span class="n">10</span><span class="u">종</span></dd>
+          <div class="sep"></div>
+          <dt>최근 갱신</dt>
+          <dd><span class="d">2026.10.12</span></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="filters">
+  <div class="wrap">
+    <dl>
+      <div class="frow">
+        <dt>학교급</dt>
+        <dd>
+          <span class="chip on">전체</span><span class="chip">유치원</span><span class="chip">초등</span><span class="chip">중등</span><span class="chip">고등</span><span class="chip">특수</span>
+        </dd>
+      </div>
+      <div class="frow">
+        <dt>업무유형</dt>
+        <dd>
+          <span class="chip">수업</span><span class="chip">평가</span><span class="chip">학급경영</span><span class="chip">행정</span>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="listhead">
+    <h2><span class="ix">01</span>스킬 목록<span class="ct">공개 <b>10</b>종</span></h2>
+    <div class="sort"><a class="on" href="#">최신순</a><a href="#">다운로드순</a></div>
+  </div>
+
+  <div class="list">
+  <div class="cols">
+    <span class="c1">관리번호</span>
+    <span class="c2">스킬</span>
+    <span class="c3">조회</span>
+    <span class="c4">다운로드</span>
+  </div>
+
+  <article class="row">
+    <div class="ref">AIS-2026-001</div>
+    <div class="body">
+      <div class="tags"><span class="tag">중등</span><span class="tag b">평가</span></div>
+      <h3>수행평가 문항 초안 생성</h3>
+      <p>성취기준에 맞는 서술형 수행평가 문항 초안을 생성합니다</p>
+    </div>
+    <div class="num v">1,240</div>
+    <div class="num d">312</div>
+  </article>
+
+  <article class="row">
+    <div class="ref">AIS-2026-002</div>
+    <div class="body">
+      <div class="tags"><span class="tag">초등</span><span class="tag b">학급경영</span></div>
+      <h3>가정통신문 작성 도우미</h3>
+      <p>행사·안내 목적에 맞는 가정통신문 초안을 작성합니다</p>
+    </div>
+    <div class="num v">980</div>
+    <div class="num d">320</div>
+  </article>
+
+  <article class="row">
+    <div class="ref">AIS-2026-003</div>
+    <div class="body">
+      <div class="tags"><span class="tag">공통</span><span class="tag b">행정</span></div>
+      <h3>학급 회의록 요약</h3>
+      <p>회의 기록을 항목별 결정 사항 중심으로 요약합니다</p>
+    </div>
+    <div class="num v">850</div>
+    <div class="num d">150</div>
+  </article>
+
+  <article class="row">
+    <div class="ref">AIS-2026-004</div>
+    <div class="body">
+      <div class="tags"><span class="tag">중등</span><span class="tag b">수업</span></div>
+      <h3>과학 실험 안전 지도안</h3>
+      <p>실험 주제별 안전 수칙과 지도 시나리오를 생성합니다</p>
+    </div>
+    <div class="num v">1,100</div>
+    <div class="num d">560</div>
+  </article>
+
+  <article class="row">
+    <div class="ref">AIS-2026-005</div>
+    <div class="body">
+      <div class="tags"><span class="tag">고등</span><span class="tag b">수업</span></div>
+      <h3>영어 독해 지문 변형</h3>
+      <p>수준별 어휘·길이로 독해 지문을 재구성합니다</p>
+    </div>
+    <div class="num v">2,100</div>
+    <div class="num d">890</div>
+  </article>
+
+  <article class="row">
+    <div class="ref">AIS-2026-006</div>
+    <div class="body">
+      <div class="tags"><span class="tag">공통</span><span class="tag b">학급경영</span></div>
+      <h3>학부모 상담 준비 질문지</h3>
+      <p>상담 목적별 질문지와 안내 문구를 준비합니다</p>
+    </div>
+    <div class="num v">1,500</div>
+    <div class="num d">410</div>
+  </article>
+
+  </div>
+
+  <div class="more">
+    <a href="#">스킬 목록 전체보기</a>
+    <span class="pg mono">1 &ndash; 6 / 10</span>
+  </div>
+
+  <section class="notice">
+    <div class="nhead">
+      <h2><span class="ix">02</span>공지사항</h2>
+      <a href="#">전체보기</a>
+    </div>
+    <div class="nrow">
+      <span class="dt">2026.10.02</span>
+      <span class="tt">생성형 AI 활용 시 개인정보 보호 유의사항 안내</span>
+      <span class="tg">안내</span>
+    </div>
+    <div class="nrow">
+      <span class="dt">2026.10.05</span>
+      <span class="tt">교육용 AI 스킬 아카이브 정식 개통 안내</span>
+      <span class="tg">안내</span>
+    </div>
+    <div class="nrow">
+      <span class="dt">2026.10.12</span>
+      <span class="tt">10월 신규 스킬 2종 등록 — 평가·행정 영역</span>
+      <span class="tg">등록</span>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap in">
+    <div class="l">
+      <span class="nm">부산광역시교육청</span>
+      <span class="ad">교육용 AI 스킬 아카이브</span>
+    </div>
+    <div class="r mono">AIS-2026-10 / REV.03</div>
+  </div>
+</footer>
+
+</body>
+</html>

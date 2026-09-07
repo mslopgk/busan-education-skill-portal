@@ -1,0 +1,140 @@
+/* ============================================================
+   부산교육청 교육용 AI 스킬 — 공용 디자인 기반
+   D7(도구형 앱셸) + D9(표 인덱스) + D12(신관공서) 융합
+
+   D12에서: 상단 6px 기관 띠 · 건너뛰기 링크 · 엄격한 12칼럼 · 관리번호 · radius 2px · 그림자 0
+   D7 에서: 좌측 220px 패싯 레일 · 고정 컴팩트 툴바 · 단축키 힌트 · 상태 도트+텍스트
+   D9 에서: 실제 table · thead 1.5px 잉크 룰 · 제브라 · 우측정렬 tabular 모노 · 마지막 행 잉크 룰로 닫기
+
+   규칙 3개만 지키면 어느 페이지든 한 벌로 읽힌다.
+   ① 액센트(--blue)는 기관 띠 / 활성 상태 / 선행 룰 / 포커스 링 / 다운로드 수치 — 이 5곳에만.
+   ② 숫자는 전부 IBM Plex Mono + tabular-nums + 우측정렬.
+   ③ 박스로 나누지 않는다. 1px 헤어라인 한 종류와 여백으로만 나눈다. 그림자 금지.
+   ============================================================ */
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+:root{
+  --white:#FFFFFF; --canvas:#F4F6F8; --zebra:#F6F8FB;
+  --ink:#1A1D21; --muted:#5C666E; --rule:#C9CFD4; --rule-soft:#E3E8EC;
+  --blue:#1F5FBF; --blue-soft:#EAF0FA; --amber-t:#7C3A06; --amber-b:#FEF3C7;
+  --kr:"Gothic A1","Pretendard",sans-serif;
+  --mono:"IBM Plex Mono",monospace;
+  --col:74px; --gut:24px;             /* 12칼럼 = 74*12 + 24*11 = 1152 */
+  --pad:64px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--white);color:var(--ink);font-family:var(--kr);
+  font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body{word-break:keep-all}
+a{color:inherit;text-decoration:none}
+table{border-collapse:collapse;width:100%}
+
+/* ── 기관 띠 + 건너뛰기 ── */
+.gov-band{height:6px;background:var(--blue)}
+.skip{position:absolute;left:24px;top:14px;z-index:9;background:var(--blue);color:#fff;
+  font-size:12px;font-weight:700;padding:6px 12px;border-radius:2px;
+  outline:2px solid var(--blue);outline-offset:2px}
+
+/* ── 폭 ── */
+.wrap{max-width:1152px;margin:0 auto;padding-inline:var(--pad)}
+.wrap--wide{max-width:1280px}
+
+/* ── 머리 ── */
+.parent{border-bottom:1px solid var(--rule-soft);background:var(--white)}
+.parent .in{display:flex;justify-content:space-between;align-items:center;height:34px;
+  font-size:11.5px;color:var(--muted);letter-spacing:.02em}
+.mast{border-bottom:1px solid var(--rule)}
+.mast .in{display:flex;justify-content:space-between;align-items:flex-end;padding-block:18px 16px}
+.mark{display:flex;align-items:baseline;gap:9px}
+.mark b{font-size:19px;font-weight:800;letter-spacing:-.02em}
+.mark .code{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.08em}
+.gnb{display:flex;gap:26px;font-size:14px;font-weight:500;color:var(--muted)}
+.gnb .on{color:var(--ink);font-weight:700;box-shadow:inset 0 -2px 0 var(--blue)}
+
+/* ── 라벨 · 제목 ── */
+.lab{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.22em;
+  color:var(--muted);text-transform:uppercase}
+.lab-kr{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--muted)}
+h1{font-size:44px;font-weight:800;letter-spacing:-.035em;line-height:1.22}
+h2{font-size:20px;font-weight:800;letter-spacing:-.02em}
+h3{font-size:16px;font-weight:700;letter-spacing:-.01em}
+.sub{font-size:14.5px;color:var(--muted);max-width:52ch}
+.sec{display:flex;align-items:baseline;gap:12px;padding-block:10px;
+  border-bottom:1.5px solid var(--ink)}
+.sec .idx{font-family:var(--mono);font-size:11px;color:var(--blue);font-weight:600}
+
+/* ── 숫자 ── */
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-feature-settings:"tnum";
+  text-align:right;white-space:nowrap}
+.num--dl{color:var(--blue);font-weight:600}
+.big{font-family:var(--mono);font-size:34px;font-weight:600;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums}
+
+/* ── 레일(패싯) ── */
+.shell{display:grid;grid-template-columns:220px 1fr}
+.rail{border-right:1px solid var(--rule);background:var(--white);padding:22px 20px 24px}
+.rail section{margin-bottom:22px}
+.facet{list-style:none;margin-top:8px}
+.facet li{display:flex;justify-content:space-between;align-items:center;gap:8px;
+  padding:5px 8px;margin-left:-8px;font-size:13.5px;border-radius:2px}
+.facet li.on{background:var(--blue-soft);color:var(--blue);font-weight:700;
+  box-shadow:inset 2px 0 0 var(--blue)}
+.facet li .c{font-family:var(--mono);font-size:11.5px;color:var(--muted);
+  font-variant-numeric:tabular-nums}
+.facet li.on .c{color:var(--blue)}
+.rail .note{font-size:11px;color:var(--muted);line-height:1.6;
+  border-top:1px solid var(--rule-soft);padding-top:12px}
+
+/* ── 툴바 ── */
+.toolbar{display:flex;align-items:center;gap:14px;padding:12px 0;
+  border-bottom:1px solid var(--rule)}
+.search{flex:1;max-width:460px;display:flex;align-items:center;gap:9px;
+  border:1px solid var(--rule);border-radius:2px;padding:8px 11px;background:var(--white)}
+.search:focus-within{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue-soft)}
+.search input{border:0;outline:0;flex:1;font:inherit;font-size:13.5px;color:var(--ink);background:none}
+.search input::placeholder{color:#8B959C}
+.kbd{font-family:var(--mono);font-size:10.5px;color:var(--muted);border:1px solid var(--rule);
+  border-radius:2px;padding:1px 5px}
+.sorts{display:flex;gap:14px;font-size:13px;color:var(--muted);margin-left:auto}
+.sorts .on{color:var(--ink);font-weight:700;box-shadow:inset 0 -2px 0 var(--blue)}
+.count{font-family:var(--mono);font-size:12px;color:var(--muted);
+  font-variant-numeric:tabular-nums}
+
+/* ── 표(D9) ── */
+.tbl thead th{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--muted);
+  text-align:left;padding:9px 12px;border-bottom:1.5px solid var(--ink);white-space:nowrap}
+.tbl thead th.r{text-align:right}
+.tbl tbody td{padding:13px 12px;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+.tbl tbody tr:nth-child(even){background:var(--zebra)}
+.tbl tbody tr:last-child td{border-bottom:1.5px solid var(--ink)}
+.tbl .id{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+.tbl .lead{box-shadow:inset 3px 0 0 var(--blue)}
+.tbl .t{font-size:15px;font-weight:700;letter-spacing:-.01em}
+.tbl .d{font-size:12.5px;color:var(--muted);margin-top:3px}
+
+/* ── 배지 · 상태 ── */
+.bdg{display:inline-block;font-size:11px;font-weight:700;color:var(--muted);
+  border:1px solid var(--rule);border-radius:2px;padding:1px 6px;margin-right:4px;white-space:nowrap}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;white-space:nowrap}
+.st i{width:7px;height:7px;border-radius:50%;background:var(--blue);flex:none}
+.st.off{color:var(--muted)}
+.st.off i{background:transparent;border:1.5px solid var(--rule)}
+
+/* ── 버튼 ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  font:inherit;font-size:13.5px;font-weight:700;border-radius:2px;padding:9px 16px;cursor:pointer}
+.btn--fill{background:var(--blue);color:#fff;border:1px solid var(--blue)}
+.btn--line{background:var(--white);color:var(--ink);border:1px solid var(--rule)}
+
+/* ── 경고(유의사항 전용) ── */
+.warn{background:var(--amber-b);color:var(--amber-t);border-left:3px solid var(--amber-t);
+  padding:14px 16px;font-size:13px;line-height:1.7}
+.warn b{font-weight:800}
+
+/* ── 바닥 ── */
+.foot{border-top:1px solid var(--rule);margin-top:56px;padding-block:22px 30px;
+  font-size:12px;color:var(--muted)}
+.foot .in{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.foot b{color:var(--ink);font-weight:800;font-size:13.5px}

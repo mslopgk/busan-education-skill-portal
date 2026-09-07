@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>수행평가 문항 초안 생성 — 체험하기 · 부산교육청 AI 스킬 포털</title>
+<link rel="stylesheet" href="site/_base.css">
+<style>
+/* ── 이 화면 전용 배치만. 토큰·색·컴포넌트 재정의 없음 ── */
+
+/* 머리: 전역 메뉴 + 로그인 사용자 (B안 화면들과 동일) */
+.mast .rt{display:flex;align-items:flex-end;gap:22px}
+.mast .who{font-size:12.5px;color:var(--muted);letter-spacing:-.01em;white-space:nowrap}
+.mast .who b{color:var(--ink);font-weight:700}
+.mast .who .bar{display:inline-block;width:1px;height:10px;background:var(--rule);
+  margin-inline:9px;vertical-align:-1px}
+
+.crumb{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);
+  padding-block:18px 0}
+.crumb .sep{color:var(--rule)}
+.crumb b{color:var(--ink);font-weight:700}
+
+/* 머리 줄 — 좌측 제목, 우측 남은 횟수 */
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;
+  padding-block:12px 16px}
+.head .bdgs{display:flex;align-items:center;gap:0;margin-bottom:10px}
+.head h1{font-size:34px;margin-bottom:9px}
+.head .sub{max-width:60ch}
+.quota{flex:none;text-align:right;font-size:12.5px;color:var(--muted);white-space:nowrap}
+.quota .num{display:inline;font-size:14px;font-weight:600;color:var(--ink);margin-inline:1px}
+.quota .k{display:block;font-size:10.5px;font-weight:700;letter-spacing:.14em;
+  margin-bottom:3px}
+.quota .sl{color:var(--rule);margin-inline:4px}
+
+.warn{margin-top:2px}
+.warn p{display:flex;gap:9px}
+.warn p+p{margin-top:4px}
+.warn .n{font-family:var(--mono);font-size:11.5px;font-weight:600;flex:none;
+  padding-top:1px;letter-spacing:.04em}
+
+/* 2단 골격: 입력단 + 결과단 — 헤어라인 하나로만 나눈다 */
+.two{display:grid;grid-template-columns:404px 1fr;column-gap:40px;
+  align-items:start;padding-top:24px}
+.two .res{border-left:1px solid var(--rule);padding-left:40px;min-width:0}
+.blk-sec .body{padding-top:14px}
+.smeta{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em;
+  font-variant-numeric:tabular-nums;margin-left:auto}
+
+/* 입력 필드 — 밑줄·헤어라인 테두리, 박스 패널 아님 */
+.pair2{display:grid;grid-template-columns:1fr 1fr;column-gap:14px}
+.body>.field+.field,.pair2+.field{margin-top:16px}
+.pair2 .field{margin-top:0}
+.field .lb{display:block;font-size:11.5px;font-weight:700;letter-spacing:.14em;
+  color:var(--muted);margin-bottom:7px}
+.ctl{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  border:1px solid var(--rule);border-radius:2px;padding:8px 11px;
+  font-size:13.5px;background:var(--white)}
+.ctl .cv{font-weight:700;letter-spacing:-.01em}
+.ctl .car{color:var(--muted);font-size:10px;line-height:1}
+.ta{width:100%;border:1px solid var(--rule);border-radius:2px;background:var(--white);
+  font:inherit;font-size:13.5px;line-height:1.75;color:var(--ink);
+  padding:10px 12px;min-height:88px;resize:none;display:block}
+.ta:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 2px var(--blue-soft)}
+.cnt{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  margin-top:6px;font-size:11.5px;color:var(--muted)}
+.cnt .num{font-size:11.5px;letter-spacing:.02em}
+
+/* 문항 수 — 헤어라인 한 줄로 구분한 3칸 */
+.seg{display:flex;border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.seg span{flex:1;text-align:center;padding:8px 4px;font-size:13px;color:var(--muted);
+  border-left:1px solid var(--rule)}
+.seg span:first-child{border-left:0}
+.seg span.on{background:var(--blue-soft);color:var(--blue);font-weight:700;
+  box-shadow:inset 0 -2px 0 var(--blue)}
+.acts{margin-top:20px;display:grid;grid-template-columns:1fr 118px;column-gap:10px}
+.acts .btn{width:100%}
+.hold{margin-top:14px;background:var(--zebra);border-left:3px solid var(--rule);
+  padding:11px 13px;font-size:11.5px;line-height:1.7;color:var(--muted)}
+.tips{list-style:none;margin-top:18px;padding-top:14px;
+  border-top:1px solid var(--rule-soft);font-size:11.5px;color:var(--muted);line-height:1.75}
+.tips li{display:flex;gap:8px}
+.tips li i{font-style:normal;color:var(--rule)}
+
+/* 결과 ITEM — 3px 선행 룰만. 테두리 카드 아님 */
+.item{box-shadow:inset 3px 0 0 var(--blue);padding-left:17px}
+.item+.item{margin-top:20px;padding-top:20px;border-top:1px solid var(--rule-soft)}
+.item .ih{display:flex;align-items:baseline;gap:10px;margin-bottom:7px}
+.item .ih .n{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--ink);
+  letter-spacing:.14em;font-variant-numeric:tabular-nums}
+.item .ih .u{font-size:11.5px;color:var(--muted)}
+.item .ih .sc{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:auto;
+  font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.item .t{font-size:14.5px;font-weight:700;letter-spacing:-.01em;line-height:1.55}
+.item .t em{font-style:normal;font-family:var(--mono);font-size:12px;font-weight:600;
+  color:var(--muted);margin-right:5px;letter-spacing:.02em}
+.item .q{margin-top:8px;font-size:13.5px;line-height:1.8}
+.item .q em{font-style:normal;font-family:var(--mono);font-size:11.5px;font-weight:600;
+  color:var(--muted);margin-right:5px;letter-spacing:.02em}
+.item .rub{margin-top:10px;padding-top:9px;border-top:1px solid var(--rule-soft)}
+.item .rub .rl{font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--muted)}
+.item .rub ol{list-style:none;counter-reset:r;margin-top:5px}
+.item .rub li{counter-increment:r;display:flex;gap:9px;font-size:12.5px;line-height:1.7}
+.item .rub li::before{content:counter(r);font-family:var(--mono);font-size:11px;
+  font-weight:600;color:var(--muted);flex:none;padding-top:2px;
+  font-variant-numeric:tabular-nums}
+.res .cap{font-size:11.5px;color:var(--muted);line-height:1.65;margin-top:16px;
+  padding-top:12px;border-top:1px solid var(--rule)}
+.res .rbtns{display:flex;gap:8px;margin-top:14px}
+
+main+.foot{margin-top:40px}
+</style>
+</head>
+<body>
+
+<div class="gov-band"></div>
+
+<div class="parent">
+  <div class="wrap wrap--wide in">
+    <a class="skip" href="#main">본문 바로가기</a>
+    <span></span>
+    <span>부산광역시교육청 디지털미래교육과 · AI 스킬 포털</span>
+  </div>
+</div>
+
+<header class="mast">
+  <div class="wrap wrap--wide in">
+    <div class="mark">
+      <b>부산교육청 AI 스킬 포털</b>
+      <span class="code">BOE-AIP</span>
+    </div>
+    <div class="rt">
+      <nav class="gnb">
+        <a href="#">AI 스킬 탐색</a>
+        <a href="#">컬렉션</a>
+        <a href="#">공지</a>
+      </nav>
+      <span class="who"><b>박 교사님</b><span class="bar"></span>로그아웃</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap wrap--wide" id="main">
+
+  <nav class="crumb" aria-label="현재 위치">
+    <a href="#">AI 스킬 탐색</a><span class="sep">&gt;</span>
+    <a href="#">업무유형별</a><span class="sep">&gt;</span>
+    <b>평가</b>
+  </nav>
+
+  <div class="head">
+    <div>
+      <div class="bdgs">
+        <span class="bdg">중등</span><span class="bdg">평가</span><span class="bdg">브라우저 내 체험</span>
+      </div>
+      <h1>수행평가 문항 초안 생성 — 체험하기</h1>
+      <p class="sub">내려받지 않고 이 화면에서 바로 문항 초안을 생성해 볼 수 있습니다. 체험 결과는 저장되지 않으며,
+        정식 활용은 스킬 파일을 내려받아 진행합니다.</p>
+    </div>
+    <div class="quota">
+      <span class="k">체험 한도</span>
+      오늘 남은 체험 횟수 <span class="num">3</span>회 <span class="sl">/</span> 일 <span class="num">3</span>회
+    </div>
+  </div>
+
+  <div class="warn">
+    <p><span class="n">①</span><span><b>학생 이름·주민등록번호 등 개인정보를 입력하지 마십시오.</b></span></p>
+    <p><span class="n">②</span><span>입력값은 전송 전 개인정보 패턴이 자동 필터링됩니다.</span></p>
+    <p><span class="n">③</span><span>생성 결과는 사실과 다를 수 있으므로 교사가 검토한 뒤 사용하십시오.</span></p>
+  </div>
+
+  <div class="two">
+
+    <!-- ───── 입력단 ───── -->
+    <section class="blk-sec">
+      <div class="sec"><span class="idx">01</span><h2>입력</h2>
+        <span class="smeta">AIP-2026-001</span></div>
+      <div class="body">
+
+        <div class="pair2">
+          <div class="field">
+            <span class="lb">학교급</span>
+            <div class="ctl"><span class="cv">중학교</span><span class="car">▾</span></div>
+          </div>
+          <div class="field">
+            <span class="lb">교과</span>
+            <div class="ctl"><span class="cv">과학</span><span class="car">▾</span></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="lb">단원 · 성취기준</span>
+          <textarea class="ta" rows="3" aria-label="단원 및 성취기준 입력">생물의 구성 단계 - 세포의 구조와 기능을 설명할 수 있다</textarea>
+          <div class="cnt">
+            <span>성취기준 문장을 그대로 붙여 넣어도 됩니다.</span>
+            <span class="num"><span class="num">32</span>/<span class="num">500</span>자</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="lb">문항 수</span>
+          <div class="seg" role="radiogroup" aria-label="문항 수">
+            <span role="radio" aria-checked="false">1개</span>
+            <span class="on" role="radio" aria-checked="true">2개 (선택)</span>
+            <span role="radio" aria-checked="false">3개</span>
+          </div>
+        </div>
+
+        <div class="acts">
+          <button class="btn btn--fill" type="button">생성하기</button>
+          <button class="btn btn--line" type="button">입력 초기화</button>
+        </div>
+
+        <p class="hold">체험은 계정당 하루 3회로 제한됩니다. 입력값과 생성 결과는 화면을 벗어나면
+          보관하지 않으며, 학생 식별 정보가 감지되면 전송이 중단됩니다.</p>
+
+        <ul class="tips">
+          <li><i>·</i><span>성취기준 코드보다 문장을 넣으면 문항의 초점이 분명해집니다.</span></li>
+          <li><i>·</i><span>서술형 채점 기준이 함께 필요하면 문항 수를 2개 이상으로 두십시오.</span></li>
+          <li><i>·</i><span>교과서 지문 원문은 저작권 문제로 입력하지 않습니다.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ───── 결과단 ───── -->
+    <section class="blk-sec res">
+      <div class="sec"><span class="idx">02</span><h2>생성 결과</h2>
+        <span class="smeta">중학교 2학년 · 과학 · 2문항 · 2026.11.10 14:32</span></div>
+      <div class="body">
+
+        <article class="item">
+          <div class="ih">
+            <span class="n">ITEM 01</span>
+            <span class="u">세포의 구조와 기능</span>
+            <span class="sc">배점 20점</span>
+          </div>
+          <div class="t"><em>[서술형]</em>식물 세포와 동물 세포의 구조를 비교하고 각 구조가 하는 일 설명하기</div>
+          <p class="q"><em>[문항]</em>현미경으로 관찰한 양파 표피 세포와 사람 볼 안쪽 세포를 비교하여, 두 세포에서
+            공통으로 관찰되는 구조 두 가지와 한쪽에서만 관찰되는 구조 한 가지를 찾아 쓰고, 각 구조가 세포에서
+            하는 일을 서술하시오.</p>
+          <div class="rub">
+            <span class="rl">채점 핵심 요소:</span>
+            <ol>
+              <li><span>공통으로 관찰되는 구조로 핵과 세포막을 정확히 제시하였는가</span></li>
+              <li><span>식물 세포에서만 관찰되는 구조로 세포벽 또는 엽록체를 찾아 썼는가</span></li>
+              <li><span>각 구조의 기능을 세포의 생명 활동과 연결하여 서술하였는가</span></li>
+            </ol>
+          </div>
+        </article>
+
+        <article class="item">
+          <div class="ih">
+            <span class="n">ITEM 02</span>
+            <span class="u">세포 분열과 생물의 구성 단계</span>
+            <span class="sc">배점 20점</span>
+          </div>
+          <div class="t"><em>[서술형]</em>세포 분열이 생물의 성장에 필요한 까닭을 구성 단계와 연결하여 설명하기</div>
+          <p class="q"><em>[문항]</em>어린 개체가 자라는 동안 몸을 이루는 세포 하나의 크기는 크게 변하지 않지만
+            몸집은 커진다. 그 까닭을 세포 분열과 관련지어 쓰고, 세포에서 개체에 이르는 생물의 구성 단계를
+            순서대로 나열하시오.</p>
+          <div class="rub">
+            <span class="rl">채점 핵심 요소:</span>
+            <ol>
+              <li><span>몸집이 커지는 까닭을 세포 수의 증가, 곧 세포 분열로 설명하였는가</span></li>
+              <li><span>구성 단계를 세포 · 조직 · 기관 · 기관계 · 개체 순으로 바르게 나열하였는가</span></li>
+              <li><span>세포 분열과 성장의 관계를 한 문장 이상으로 연결하여 서술하였는가</span></li>
+            </ol>
+          </div>
+        </article>
+
+        <div class="rbtns">
+          <button class="btn btn--line" type="button">결과 복사하기</button>
+          <button class="btn btn--line" type="button">스킬 파일 내려받기(.zip)</button>
+        </div>
+
+        <p class="cap">생성 결과는 초안입니다. 문항의 난도와 채점 기준은 담당 교사가 학급 수준에 맞추어 조정한 뒤
+          평가 계획에 반영하십시오. 체험 화면에서는 결과가 저장되지 않으므로 필요한 내용은 복사해 두십시오.</p>
+      </div>
+    </section>
+
+  </div>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap wrap--wide in">
+    <div>
+      <b>부산교육청 AI 스킬 포털</b><br>
+      부산광역시교육청 디지털미래교육과 · 부산광역시 부산진구 화지로 12
+    </div>
+    <div class="num">AIP-2026-001 / REV.02</div>
+  </div>
+</footer>
+
+</body>
+</html>

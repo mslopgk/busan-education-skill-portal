@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>수행평가 문항 초안 생성 - 부산광역시교육청 교육용 AI 스킬 아카이브</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: "#1E3A5F",
+                            container: "#1E3A5F",
+                        },
+                        accent: {
+                            DEFAULT: "#17876D",
+                        },
+                        surface: {
+                            DEFAULT: "#FFFFFF",
+                        },
+                        page: {
+                            DEFAULT: "#F5F7FA",
+                        },
+                        border: {
+                            DEFAULT: "#E2E8F0",
+                        },
+                        muted: {
+                            DEFAULT: "#64748B",
+                        },
+                        warning: {
+                            DEFAULT: "#B45309",
+                            bg: "#FEF3C7"
+                        },
+                        deep: {
+                            DEFAULT: "#16324F"
+                        }
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Sans KR", "sans-serif"],
+                        "display": ["Noto Sans KR", "sans-serif"],
+                        "body": ["Noto Sans KR", "sans-serif"],
+                        "label": ["Noto Sans KR", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0; }
+    </style>
+</head>
+<body class="bg-page text-[#1E3A5F] min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface border-b border-[#E2E8F0] shadow-sm sticky top-0 z-50 w-full transition-all duration-200 ease-in-out">
+<div class="flex justify-between items-center h-16 px-6 max-w-[1280px] mx-auto">
+<div class="flex items-center gap-8">
+<a class="text-xl font-bold text-[#1E3A5F] tracking-tight" href="#">부산교육청 교육용 AI 스킬 아카이브</a>
+<nav class="hidden md:flex gap-6">
+<a class="text-[#17876D] font-bold border-b-2 border-[#17876D] pb-1 h-16 flex items-center mt-[2px]" href="#">스킬 목록</a>
+<a class="text-[#64748B] hover:text-[#1E3A5F] transition-colors h-16 flex items-center hover:bg-[#F5F7FA] px-2 rounded-t-md" href="#">이용 안내</a>
+<a class="text-[#64748B] hover:text-[#1E3A5F] transition-colors h-16 flex items-center hover:bg-[#F5F7FA] px-2 rounded-t-md" href="#">공지사항</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-muted text-xl">search</span>
+<input aria-label="검색" class="pl-10 pr-4 py-2 border border-border rounded-full text-sm w-64 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" placeholder="스킬 검색..." type="text"/>
+</div>
+<button class="md:hidden text-primary p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow max-w-[1280px] w-full mx-auto px-6 py-8 flex flex-col lg:flex-row gap-12">
+<!-- Left Content Area -->
+<div class="flex-1 min-w-0">
+<!-- Breadcrumb -->
+<nav aria-label="Breadcrumb" class="flex items-center text-sm text-muted mb-6">
+<a class="hover:text-primary transition-colors" href="#">홈</a>
+<span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">평가</a>
+<span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+<span aria-current="page" class="text-primary font-medium">수행평가 문항 초안 생성</span>
+</nav>
+<!-- Title Area -->
+<div class="mb-12">
+<div class="flex gap-2 mb-4">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#E2E8F0] text-primary">중등</span>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#E6F4F1] text-accent">평가</span>
+</div>
+<h1 class="text-4xl font-bold text-primary tracking-tight leading-tight mb-4">수행평가 문항 초안 생성</h1>
+</div>
+<!-- Content Sections -->
+<div class="space-y-12">
+<!-- 1. 활용 목적 -->
+<section>
+<h2 class="text-xl font-bold text-primary flex items-center gap-2 border-b border-border pb-2 mb-4">
+<span class="material-symbols-outlined text-accent" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+                        활용 목적
+                    </h2>
+<p class="text-base text-primary/80 leading-relaxed bg-surface p-6 rounded-lg border border-border shadow-sm">
+                        성취기준과 단원명을 입력하면 수업 맥락에 맞는 수행평가 문항 초안을 생성합니다. 교사가 문항 개발에 들이는 초기 작성 시간을 줄이고, 평가 요소와 채점 기준을 함께 검토할 수 있도록 돕습니다.
+                    </p>
+</section>
+<!-- 2. 대상 학교급·업무유형 -->
+<section>
+<h2 class="text-xl font-bold text-primary flex items-center gap-2 border-b border-border pb-2 mb-4">
+<span class="material-symbols-outlined text-accent" style="font-variation-settings: 'FILL' 1;">category</span>
+                        대상 학교급·업무유형
+                    </h2>
+<dl class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-surface p-6 rounded-lg border border-border shadow-sm">
+<div class="flex flex-col">
+<dt class="text-sm text-muted font-medium mb-1">학교급</dt>
+<dd class="text-base text-primary font-medium">중등(중학교·고등학교)</dd>
+</div>
+<div class="flex flex-col">
+<dt class="text-sm text-muted font-medium mb-1">업무유형</dt>
+<dd class="text-base text-primary font-medium">평가</dd>
+</div>
+</dl>
+</section>
+<!-- 3. 사용 절차 -->
+<section>
+<h2 class="text-xl font-bold text-primary flex items-center gap-2 border-b border-border pb-2 mb-4">
+<span class="material-symbols-outlined text-accent" style="font-variation-settings: 'FILL' 1;">integration_instructions</span>
+                        사용 절차
+                    </h2>
+<div class="bg-surface rounded-lg border border-border p-6 shadow-sm">
+<ol class="space-y-6 relative">
+<li class="relative flex items-start">
+<div class="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-surface font-bold z-10 shrink-0 shadow-sm outline outline-4 outline-surface">1</div>
+<div class="ml-4 flex-1">
+<h3 class="text-lg font-bold text-primary mb-1">단원 및 성취기준 확인</h3>
+<p class="text-sm text-muted">평가하고자 하는 단원명과 관련 성취기준을 명확히 정의합니다.</p>
+</div>
+</li>
+<li class="relative flex items-start">
+<div class="flex h-9 w-9 items-center justify-center rounded-full bg-surface border-2 border-primary text-primary font-bold z-10 shrink-0 outline outline-4 outline-surface">2</div>
+<div class="ml-4 flex-1">
+<h3 class="text-lg font-bold text-primary mb-1">평가 유형 및 조건 설정</h3>
+<p class="text-sm text-muted">서술형, 실험 보고서형 등 평가 유형과 문항 수, 채점 기준 단계를 결정합니다.</p>
+</div>
+</li>
+<li class="relative flex items-start">
+<div class="flex h-9 w-9 items-center justify-center rounded-full bg-surface border-2 border-primary text-primary font-bold z-10 shrink-0 outline outline-4 outline-surface">3</div>
+<div class="ml-4 flex-1">
+<h3 class="text-lg font-bold text-primary mb-1">프롬프트 입력 및 생성</h3>
+<p class="text-sm text-muted">아래 제공된 프롬프트 예시를 활용하여 조건에 맞게 수정 후 AI에 입력합니다.</p>
+</div>
+</li>
+<li class="relative flex items-start">
+<div class="flex h-9 w-9 items-center justify-center rounded-full bg-surface border-2 border-primary text-primary font-bold z-10 shrink-0 outline outline-4 outline-surface">4</div>
+<div class="ml-4 flex-1">
+<h3 class="text-lg font-bold text-primary mb-1">결과물 검토 및 수정</h3>
+<p class="text-sm text-muted">생성된 초안의 난이도, 교육과정 부합 여부를 반드시 교사가 직접 검토하고 수정합니다.</p>
+</div>
+</li>
+</ol>
+</div>
+</section>
+<!-- 4. 입력 예시 -->
+<section>
+<h2 class="text-xl font-bold text-primary flex items-center gap-2 border-b border-border pb-2 mb-4">
+<span class="material-symbols-outlined text-accent" style="font-variation-settings: 'FILL' 1;">terminal</span>
+                        입력 예시 (Prompt)
+                    </h2>
+<div class="relative bg-deep rounded-lg shadow-sm overflow-hidden border border-[#2a4563]">
+<div class="flex justify-between items-center px-4 py-2 bg-[#0f243b] border-b border-[#2a4563]">
+<span class="text-xs text-muted font-mono">prompt.txt</span>
+<button aria-label="코드 복사" class="text-muted hover:text-surface transition-colors flex items-center gap-1 text-xs px-2 py-1 rounded bg-[#16324F] border border-[#2a4563]">
+<span class="material-symbols-outlined text-[16px]">content_copy</span> 복사
+                            </button>
+</div>
+<div class="p-5 overflow-x-auto">
+<pre class="text-sm text-surface font-mono leading-relaxed whitespace-pre-wrap">다음 조건에 맞는 중학교 과학 수행평가 문항 초안을 작성해 주세요.
+- 단원: 물질의 상태 변화
+- 성취기준: 물질의 상태 변화를 입자 모형으로 설명할 수 있다
+- 평가 유형: 서술형 3문항, 실험 보고서형 1문항
+- 각 문항마다 평가 요소와 3단계 채점 기준(상·중·하)을 함께 제시해 주세요.</pre>
+</div>
+</div>
+</section>
+<!-- 5. 출력 예시 -->
+<section>
+<h2 class="text-xl font-bold text-primary flex items-center gap-2 border-b border-border pb-2 mb-4">
+<span class="material-symbols-outlined text-accent" style="font-variation-settings: 'FILL' 1;">output</span>
+                        출력 예시
+                    </h2>
+<div class="bg-page rounded-lg border border-border p-6 shadow-inner text-sm">
+<div class="prose prose-sm max-w-none text-primary/80">
+<p class="font-bold mb-4">중학교 과학 수행평가 문항 초안 (물질의 상태 변화)</p>
+<div class="mb-6 bg-surface p-4 rounded border border-border">
+<h4 class="font-bold text-primary mb-2">[문항 1] 서술형: 융해와 응고</h4>
+<p class="mb-2"><strong>문항:</strong> 얼음이 녹아 물이 되는 현상과 물이 얼어 얼음이 되는 현상에서 입자 배열의 변화를 설명하시오.</p>
+<p class="mb-2"><strong>평가 요소:</strong> 융해와 응고 과정에서의 입자 배열 변화 이해도</p>
+<table class="w-full text-left border-collapse mt-3">
+<thead>
+<tr class="bg-page border-b border-border">
+<th class="py-2 px-3 font-medium">평가 요소</th>
+<th class="py-2 px-3 font-medium">상</th>
+<th class="py-2 px-3 font-medium">중</th>
+<th class="py-2 px-3 font-medium">하</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border">
+<tr class="bg-surface">
+<td class="py-2 px-3 align-top">입자 배열 설명</td>
+<td class="py-2 px-3 align-top">두 현상의 입자 배열 변화를 모두 정확히 설명함</td>
+<td class="py-2 px-3 align-top">두 현상 중 하나만 정확히 설명하거나, 설명이 다소 미흡함</td>
+<td class="py-2 px-3 align-top">입자 배열 변화를 제대로 설명하지 못함</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="text-muted text-xs italic">* 위 예시는 축약된 형태이며, 실제 생성 결과는 전체 문항과 기준을 포함합니다.</p>
+</div>
+</div>
+</section>
+<!-- 6. 유의사항 -->
+<section>
+<div class="bg-warning-bg border-l-4 border-warning p-5 rounded-r-lg shadow-sm">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-warning shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">warning</span>
+<div>
+<h3 class="text-warning font-bold mb-2">활용 유의사항</h3>
+<ul class="list-disc list-outside ml-4 space-y-1 text-sm text-warning/90">
+<li>학생의 개인정보나 성적 정보를 프롬프트에 포함하지 마십시오.</li>
+<li>저작권이 있는 외부 자료나 교과서 원문을 그대로 입력하지 마십시오.</li>
+<li>생성된 문항은 초안이므로, <strong>반드시 교사의 전문적인 검토와 수정</strong>을 거쳐 사용해야 합니다.</li>
+<li>평가의 공정성과 타당성을 확보하기 위해 학교의 평가 지침을 준수하십시오.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Right Side Panel (Fixed Width 320px on lg screens) -->
+<aside class="w-full lg:w-[320px] shrink-0 space-y-6">
+<!-- Actions Card -->
+<div class="bg-surface rounded-xl border border-border p-6 shadow-sm sticky top-24">
+<div class="space-y-3 mb-8">
+<button class="w-full bg-primary hover:bg-primary/90 text-surface font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">
+<span class="material-symbols-outlined">download</span>
+                        파일 내려받기(.zip)
+                    </button>
+<button class="w-full bg-surface border border-primary text-primary hover:bg-page font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">
+<span class="material-symbols-outlined">content_copy</span>
+                        본문 복사하기
+                    </button>
+</div>
+<!-- Stats -->
+<div class="border-t border-border pt-6 mb-6">
+<h3 class="text-xs font-bold text-muted uppercase tracking-wider mb-3">통계 정보</h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-page p-3 rounded-lg text-center">
+<span class="material-symbols-outlined text-muted text-xl mb-1">visibility</span>
+<div class="text-xs text-muted mb-1">조회수</div>
+<div class="text-lg font-bold text-primary">1,240</div>
+</div>
+<div class="bg-page p-3 rounded-lg text-center">
+<span class="material-symbols-outlined text-muted text-xl mb-1">file_download</span>
+<div class="text-xs text-muted mb-1">다운로드</div>
+<div class="text-lg font-bold text-primary">312</div>
+</div>
+</div>
+</div>
+<!-- Tags -->
+<div class="border-t border-border pt-6">
+<h3 class="text-xs font-bold text-muted uppercase tracking-wider mb-3">연관 태그</h3>
+<div class="flex flex-wrap gap-2">
+<a class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-page border border-border text-primary hover:bg-[#E2E8F0] transition-colors focus:outline-none focus:ring-2 focus:ring-accent" href="#">#수행평가</a>
+<a class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-page border border-border text-primary hover:bg-[#E2E8F0] transition-colors focus:outline-none focus:ring-2 focus:ring-accent" href="#">#성취기준</a>
+<a class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-page border border-border text-primary hover:bg-[#E2E8F0] transition-colors focus:outline-none focus:ring-2 focus:ring-accent" href="#">#중등교육</a>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Footer -->
+<footer class="bg-[#F5F7FA] border-t border-[#E2E8F0] mt-auto">
+<div class="py-10 px-6 max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between gap-6">
+<div class="flex flex-col gap-4">
+<div class="text-lg font-bold text-[#1E3A5F]">부산광역시교육청</div>
+<div class="font-body text-sm leading-relaxed text-[#64748B]">
+                    © 2026 부산광역시교육청. 모든 권리 보유.
+                </div>
+</div>
+<nav class="flex flex-wrap gap-x-6 gap-y-2 items-center text-sm font-body">
+<a class="text-[#1E3A5F] font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-accent rounded" href="#">개인정보처리방침</a>
+<a class="text-[#64748B] hover:text-[#1E3A5F] hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-accent rounded" href="#">이용약관</a>
+<a class="text-[#64748B] hover:text-[#1E3A5F] hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-accent rounded" href="#">이메일무단수집거부</a>
+<a class="text-[#64748B] hover:text-[#1E3A5F] hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-accent rounded" href="#">찾아오시는길</a>
+</nav>
+</div>
+</footer>
+</body></html>

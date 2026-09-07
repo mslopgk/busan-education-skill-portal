@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>부산교육청 교육용 AI 스킬 아카이브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --ink:#0D0D0D;
+  --paper:#FFFFFF;
+  --rule:#DADADA;
+  --zebra:#F6F6F4;
+  --accent:#B3391F;
+  --i72:rgba(13,13,13,.72);
+  --i56:rgba(13,13,13,.56);
+  --i60:rgba(13,13,13,.60);
+  --i40:rgba(13,13,13,.40);
+  --pad:64px;
+}
+*{margin:0;padding:0;box-sizing:border-box;border-radius:0!important;box-shadow:none!important}
+html,body{background:var(--paper);color:var(--ink);
+  -webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+body{font-family:'Pretendard',sans-serif;font-size:14px;line-height:1.5;
+  letter-spacing:-.012em}
+.mono{font-family:'IBM Plex Mono','Pretendard',monospace;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.wrap{max-width:1280px;margin:0 auto;padding:0 var(--pad)}
+/* accent leading rule — the only accent rule on the page */
+.lead{height:3px;background:var(--accent)}
+
+/* ── header band ───────────────────────────────────── */
+.band{display:flex;align-items:center;justify-content:space-between;
+  height:52px;border-bottom:1px solid var(--rule)}
+.mark{display:flex;align-items:center;gap:9px}
+.mark .sq{width:7px;height:7px;background:var(--ink)}
+.mark .nm{font-size:12.5px;font-weight:600;letter-spacing:-.014em}
+.mark .cd{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:500;
+  letter-spacing:.16em;color:var(--i40);padding-left:10px;margin-left:1px;
+  border-left:1px solid var(--rule)}
+.band nav{display:flex;gap:26px;margin-left:auto;margin-right:28px}
+.band nav a{font-size:12.5px;font-weight:500;color:var(--i56);text-decoration:none;
+  letter-spacing:-.014em}
+.band nav a.on{color:var(--ink);font-weight:600}
+.band .sum{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;
+  letter-spacing:.05em;color:var(--i40);padding-left:28px;
+  border-left:1px solid var(--rule);height:52px;display:flex;align-items:center;
+  font-variant-numeric:tabular-nums}
+
+/* ── masthead: headline left / key figures right ───── */
+.mast{display:grid;grid-template-columns:1fr 268px;gap:64px;
+  padding:44px 0 34px;align-items:end;border-bottom:1px solid var(--ink)}
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;
+  letter-spacing:.22em;color:var(--i40);margin-bottom:22px}
+h1{font-size:50px;font-weight:700;line-height:1.16;letter-spacing:-.046em;
+  word-break:keep-all}
+.lede{margin-top:22px;font-size:14.5px;line-height:1.72;color:var(--i56);
+  max-width:44em;word-break:keep-all;letter-spacing:-.014em}
+.lede .sep{color:var(--i40);padding:0 1px}
+
+/* key figures — a micro table that echoes the index */
+.keys{width:100%;border-collapse:collapse}
+.keys th{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;
+  letter-spacing:.1em;color:var(--i56);text-align:left;
+  padding:0 0 7px;border-bottom:1.5px solid var(--ink)}
+.keys th.r{text-align:right}
+.keys td{padding:7px 0;border-bottom:1px solid var(--rule);
+  font-size:12px;color:var(--i72);letter-spacing:-.01em;vertical-align:baseline}
+.keys td.v{text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13px;
+  font-weight:500;color:var(--ink);letter-spacing:-.01em;
+  font-variant-numeric:tabular-nums}
+.keys tr:last-child td{border-bottom:0}
+
+/* ── search line ───────────────────────────────────── */
+.search{display:grid;grid-template-columns:auto 1fr auto;align-items:center;
+  gap:22px;padding:17px 0;border-bottom:1px solid var(--rule)}
+.slab{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;
+  letter-spacing:.2em;color:var(--i40)}
+.search input{border:0;background:transparent;outline:0;width:100%;
+  font-family:'Pretendard',sans-serif;font-size:17px;color:var(--ink);
+  letter-spacing:-.02em}
+.search input::placeholder{color:var(--i40)}
+.search .go{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;
+  letter-spacing:.04em;color:var(--ink);display:flex;align-items:center;gap:9px}
+.search .go i{font-style:normal;font-size:13px;letter-spacing:0}
+
+/* ── filter legend: one horizontal row ─────────────── */
+.legend{display:flex;align-items:center;gap:0;padding:13px 0;
+  border-bottom:1px solid var(--rule);flex-wrap:nowrap}
+.axis{display:flex;align-items:baseline;gap:16px}
+.axis+.axis{margin-left:26px;padding-left:26px;border-left:1px solid var(--rule)}
+.axis .ax{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;
+  letter-spacing:.16em;color:var(--i40);white-space:nowrap}
+.opts{display:flex;gap:15px}
+.opts span{font-size:12.5px;color:var(--i56);letter-spacing:-.014em;white-space:nowrap}
+.opts span.on{color:var(--accent);font-weight:600;
+  box-shadow:none;border-bottom:1.5px solid var(--accent);padding-bottom:1px}
+.sortbox{margin-left:auto;display:flex;align-items:baseline;gap:14px;
+  padding-left:26px;border-left:1px solid var(--rule)}
+.sortbox .ax{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;
+  letter-spacing:.16em;color:var(--i40)}
+.sortbox b{font-size:12.5px;font-weight:600;color:var(--ink);letter-spacing:-.014em;
+  border-bottom:1.5px solid var(--ink);padding-bottom:1px}
+.sortbox s{text-decoration:none;font-size:12.5px;color:var(--i56);letter-spacing:-.014em}
+
+/* ── index table ───────────────────────────────────── */
+.idx{display:flex;align-items:baseline;justify-content:space-between;
+  padding:34px 0 11px}
+.idx h2{font-size:15px;font-weight:600;letter-spacing:-.02em;display:flex;align-items:baseline;gap:11px}
+.secno{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;
+  letter-spacing:.1em;color:var(--i40)}
+.idx .cnt{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;
+  letter-spacing:.05em;color:var(--i40);font-variant-numeric:tabular-nums}
+
+table.tab{width:100%;border-collapse:collapse;table-layout:fixed}
+table.tab thead th{position:sticky;top:0;background:var(--zebra);
+  font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;
+  letter-spacing:.1em;color:var(--i56);text-align:left;
+  padding:8px 14px;border-top:1px solid var(--ink);
+  border-bottom:1.5px solid var(--ink);white-space:nowrap}
+table.tab thead th:first-child{padding-left:0}
+table.tab thead th:last-child{padding-right:0}
+table.tab thead th.r{text-align:right}
+table.tab tbody td{padding:12px 14px;border-bottom:1px solid var(--rule);
+  vertical-align:baseline}
+table.tab tbody td:first-child{padding-left:0}
+table.tab tbody td:last-child{padding-right:0}
+table.tab tbody tr:nth-child(even){background:var(--zebra)}
+table.tab tbody tr:last-child td{border-bottom:1px solid var(--ink)}
+/* zebra must bleed to the page gutters, not stop at the text edge */
+table.tab tbody tr:nth-child(even) td:first-child{
+  box-shadow:none;position:relative}
+.cat{font-size:11.5px;font-weight:500;letter-spacing:.005em;
+  white-space:nowrap;line-height:1.4}
+.cat .a{color:var(--ink)}
+.cat .d{color:var(--i40);padding:0 3px}
+.cat .b{color:var(--i56)}
+.nmcell{font-size:14.5px;font-weight:600;letter-spacing:-.022em;line-height:1.42;
+  word-break:keep-all;display:flex;gap:9px;align-items:baseline}
+.nmcell .rid{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;
+  letter-spacing:.02em;color:var(--i40);font-variant-numeric:tabular-nums;
+  flex:0 0 auto}
+.dsc{font-size:12.5px;color:var(--i60);letter-spacing:-.014em;line-height:1.55;
+  word-break:keep-all}
+.n{text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13.5px;
+  font-weight:400;color:var(--i72);letter-spacing:-.01em;
+  font-variant-numeric:tabular-nums;line-height:1.4}
+.n.dl{color:var(--ink);font-weight:500}
+.tfootrow{display:flex;align-items:center;justify-content:space-between;
+  padding:12px 0 0}
+.tfootrow .m{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;
+  letter-spacing:.05em;color:var(--i40);font-variant-numeric:tabular-nums}
+.tfootrow .g{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;
+  letter-spacing:.03em;color:var(--ink);display:flex;align-items:center;gap:8px}
+.tfootrow .g i{font-style:normal;font-size:12px;letter-spacing:0}
+
+/* ── notices — same tabular grammar, denser ────────── */
+.notice{padding:44px 0 0}
+.nhead{display:flex;align-items:baseline;justify-content:space-between;
+  padding:0 0 11px}
+.nhead h3{font-size:15px;font-weight:600;letter-spacing:-.02em;display:flex;align-items:baseline;gap:11px}
+.nhead .cnt{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;
+  letter-spacing:.05em;color:var(--i40)}
+table.nt{width:100%;border-collapse:collapse;table-layout:fixed}
+table.nt th{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;
+  letter-spacing:.1em;color:var(--i56);text-align:left;padding:8px 14px;
+  border-top:1px solid var(--ink);border-bottom:1.5px solid var(--ink);
+  background:var(--zebra);white-space:nowrap}
+table.nt th:first-child{padding-left:0}
+table.nt th:last-child{padding-right:0;text-align:right}
+table.nt td{padding:11px 14px;border-bottom:1px solid var(--rule);
+  vertical-align:baseline}
+table.nt td:first-child{padding-left:0}
+table.nt td:last-child{padding-right:0;text-align:right}
+table.nt tbody tr:nth-child(even){background:var(--zebra)}
+table.nt tbody tr:last-child td{border-bottom:1px solid var(--ink)}
+.dt{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--i40);
+  letter-spacing:.01em;font-variant-numeric:tabular-nums}
+.tx{font-size:13.5px;color:var(--ink);letter-spacing:-.018em;word-break:keep-all}
+.arw{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;
+  letter-spacing:.04em;color:var(--i40);white-space:nowrap}
+.arw i{font-style:normal;font-size:11.5px;letter-spacing:0;padding-left:6px}
+
+/* ── footer ────────────────────────────────────────── */
+footer{margin-top:44px;border-top:1px solid var(--ink);padding:20px 0 30px;
+  display:flex;align-items:flex-start;justify-content:space-between}
+footer .l{display:flex;align-items:center;gap:9px}
+footer .l .sq{width:7px;height:7px;background:var(--ink)}
+footer .org{font-size:13px;font-weight:600;letter-spacing:-.018em}
+footer .meta{margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+  font-weight:500;letter-spacing:.04em;color:var(--i40)}
+footer .r{display:flex;gap:24px}
+footer .r a{font-size:12px;color:var(--i56);text-decoration:none;letter-spacing:-.014em}
+</style>
+</head>
+<body>
+<div class="lead"></div>
+<div class="wrap">
+
+  <header class="band">
+    <div class="mark">
+      <span class="sq"></span>
+      <span class="nm">부산교육청 교육용 AI 스킬 아카이브</span>
+      <span class="cd">BSE-AI-ARCHIVE</span>
+    </div>
+    <nav>
+      <a href="#" class="on">스킬 목록</a>
+      <a href="#">이용 안내</a>
+      <a href="#">공지사항</a>
+    </nav>
+    <div class="sum">총 10종 · 최종 갱신 2026.10.12</div>
+  </header>
+
+  <section class="mast">
+    <div>
+      <div class="kicker">교육용 AI 스킬 색인 / 2026</div>
+      <h1>수업 준비, 검증된<br>AI 스킬로 시작하세요</h1>
+      <p class="lede">수업·평가·학급경영·행정에 바로 쓰는 교육용 AI 스킬 아카이브<span class="sep"> — </span>로그인 없이 즉시 이용</p>
+    </div>
+    <table class="keys">
+      <thead><tr><th>구분</th><th class="r">수량</th></tr></thead>
+      <tbody>
+        <tr><td>공개 스킬</td><td class="v">10종</td></tr>
+        <tr><td>학교급 구분</td><td class="v">6</td></tr>
+        <tr><td>업무유형 구분</td><td class="v">4</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="search">
+    <span class="slab">검색</span>
+    <input type="text" placeholder="예) 수행평가 문항, 가정통신문, 회의록 요약">
+    <span class="go">찾기 <i>→</i></span>
+  </section>
+
+  <section class="legend">
+    <div class="axis">
+      <span class="ax">학교급</span>
+      <div class="opts">
+        <span class="on">전체</span><span>유치원</span><span>초등</span><span>중등</span><span>고등</span><span>특수</span>
+      </div>
+    </div>
+    <div class="axis">
+      <span class="ax">업무유형</span>
+      <div class="opts">
+        <span>수업</span><span>평가</span><span>학급경영</span><span>행정</span>
+      </div>
+    </div>
+    <div class="sortbox">
+      <span class="ax">정렬</span>
+      <b>최신순</b><s>다운로드순</s>
+    </div>
+  </section>
+
+  <div class="idx">
+    <h2><span class="secno">01</span>스킬 색인</h2>
+    <span class="cnt">06 / 10 표시</span>
+  </div>
+
+  <table class="tab">
+    <colgroup>
+      <col style="width:126px"><col style="width:212px"><col>
+      <col style="width:96px"><col style="width:112px">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>분류</th><th>스킬명</th><th>설명</th>
+        <th class="r">조회</th><th class="r">다운로드</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="cat"><span class="a">중등</span><span class="d">·</span><span class="b">평가</span></span></td>
+        <td><span class="nmcell"><span class="rid">01</span>수행평가 문항 초안 생성</span></td>
+        <td><span class="dsc">성취기준에 맞는 서술형 수행평가 문항 초안을 생성합니다</span></td>
+        <td class="n">1,240</td><td class="n dl">312</td>
+      </tr>
+      <tr>
+        <td><span class="cat"><span class="a">초등</span><span class="d">·</span><span class="b">학급경영</span></span></td>
+        <td><span class="nmcell"><span class="rid">02</span>가정통신문 작성 도우미</span></td>
+        <td><span class="dsc">행사·안내 목적에 맞는 가정통신문 초안을 작성합니다</span></td>
+        <td class="n">980</td><td class="n dl">320</td>
+      </tr>
+      <tr>
+        <td><span class="cat"><span class="a">공통</span><span class="d">·</span><span class="b">행정</span></span></td>
+        <td><span class="nmcell"><span class="rid">03</span>학급 회의록 요약</span></td>
+        <td><span class="dsc">회의 기록을 항목별 결정 사항 중심으로 요약합니다</span></td>
+        <td class="n">850</td><td class="n dl">150</td>
+      </tr>
+      <tr>
+        <td><span class="cat"><span class="a">중등</span><span class="d">·</span><span class="b">수업</span></span></td>
+        <td><span class="nmcell"><span class="rid">04</span>과학 실험 안전 지도안</span></td>
+        <td><span class="dsc">실험 주제별 안전 수칙과 지도 시나리오를 생성합니다</span></td>
+        <td class="n">1,100</td><td class="n dl">560</td>
+      </tr>
+      <tr>
+        <td><span class="cat"><span class="a">고등</span><span class="d">·</span><span class="b">수업</span></span></td>
+        <td><span class="nmcell"><span class="rid">05</span>영어 독해 지문 변형</span></td>
+        <td><span class="dsc">수준별 어휘·길이로 독해 지문을 재구성합니다</span></td>
+        <td class="n">2,100</td><td class="n dl">890</td>
+      </tr>
+      <tr>
+        <td><span class="cat"><span class="a">공통</span><span class="d">·</span><span class="b">학급경영</span></span></td>
+        <td><span class="nmcell"><span class="rid">06</span>학부모 상담 준비 질문지</span></td>
+        <td><span class="dsc">상담 목적별 질문지와 안내 문구를 준비합니다</span></td>
+        <td class="n">1,500</td><td class="n dl">410</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="tfootrow">
+    <span class="m">총 10종 · 06 표시</span>
+    <span class="g">전체 스킬 보기 <i>→</i></span>
+  </div>
+
+  <section class="notice">
+    <div class="nhead">
+      <h3><span class="secno">02</span>공지사항</h3>
+      <span class="cnt">3건</span>
+    </div>
+    <table class="nt">
+      <colgroup><col style="width:126px"><col><col style="width:96px"></colgroup>
+      <thead><tr><th>게시일</th><th>제목</th><th></th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="dt">2026.10.12</span></td>
+          <td><span class="tx">10월 신규 스킬 2종 등록 — 평가·행정 영역</span></td>
+          <td><span class="arw">자세히<i>→</i></span></td>
+        </tr>
+        <tr>
+          <td><span class="dt">2026.10.05</span></td>
+          <td><span class="tx">교육용 AI 스킬 아카이브 정식 개통 안내</span></td>
+          <td><span class="arw">자세히<i>→</i></span></td>
+        </tr>
+        <tr>
+          <td><span class="dt">2026.10.02</span></td>
+          <td><span class="tx">생성형 AI 활용 시 개인정보 보호 유의사항 안내</span></td>
+          <td><span class="arw">자세히<i>→</i></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    <div>
+      <div class="l"><span class="sq"></span><span class="org">부산광역시교육청</span></div>
+      <div class="meta">교육용 AI 스킬 아카이브 · 로그인 없이 이용</div>
+    </div>
+    <div class="r">
+      <a href="#">스킬 목록</a>
+      <a href="#">이용 안내</a>
+      <a href="#">공지사항</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

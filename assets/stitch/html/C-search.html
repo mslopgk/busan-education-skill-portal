@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>부산교육청 AI 스킬 포털 - 검색 결과</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: "#1E3A5F",
+                            container: "#1E3A5F",
+                        },
+                        secondary: {
+                            DEFAULT: "#16324F",
+                        },
+                        accent: {
+                            DEFAULT: "#17876D",
+                        },
+                        surface: "#FFFFFF",
+                        background: "#F5F7FA",
+                        border: "#E2E8F0",
+                        muted: "#64748B",
+                        warning: {
+                            DEFAULT: "#B45309",
+                            bg: "#FEF3C7"
+                        }
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "card": "8px"
+                    },
+                    fontFamily: {
+                        headline: ["Public Sans", "sans-serif"],
+                        display: ["Public Sans", "sans-serif"],
+                        body: ["Public Sans", "sans-serif"],
+                        label: ["Public Sans", "sans-serif"]
+                    },
+                    boxShadow: {
+                        'card': '0 1px 2px rgba(0,0,0,.04)',
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-primary-container min-h-screen pt-16 flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-white flex justify-between items-center px-6 h-16 max-w-[1280px] mx-auto border-b border-[#E2E8F0] shadow-sm font-headline text-[15px] font-medium text-primary">
+<div class="flex items-center gap-8">
+<h1 class="text-xl font-bold text-[#1E3A5F]">부산교육청 AI 스킬 포털</h1>
+<nav class="hidden md:flex gap-6 h-full">
+<a class="h-16 flex items-center text-[#17876D] font-bold border-b-2 border-[#17876D] pb-1 opacity-80 transition-all hover:bg-[#F5F7FA] px-2" href="#">AI 스킬 탐색</a>
+<a class="h-16 flex items-center text-[#1E3A5F] hover:text-[#17876D] hover:bg-[#F5F7FA] transition-colors px-2" href="#">학교급별</a>
+<a class="h-16 flex items-center text-[#1E3A5F] hover:text-[#17876D] hover:bg-[#F5F7FA] transition-colors px-2" href="#">교과별</a>
+<a class="h-16 flex items-center text-[#1E3A5F] hover:text-[#17876D] hover:bg-[#F5F7FA] transition-colors px-2" href="#">업무유형별</a>
+<a class="h-16 flex items-center text-[#1E3A5F] hover:text-[#17876D] hover:bg-[#F5F7FA] transition-colors px-2" href="#">활용도구</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-primary hover:bg-[#F5F7FA] rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+</button>
+<button class="p-2 text-primary hover:bg-[#F5F7FA] rounded-full transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<div class="flex-1 w-full max-w-[1280px] mx-auto px-6 py-12 flex gap-8">
+<!-- Left Sidebar (240px) -->
+<aside class="w-[240px] shrink-0 hidden md:block">
+<div class="mb-6">
+<h2 class="text-lg font-bold text-primary mb-1">AI 스킬 분류</h2>
+<p class="text-sm text-muted">업무 유형별</p>
+</div>
+<ul class="space-y-1">
+<li>
+<a class="flex justify-between items-center bg-accent/10 text-accent font-bold px-4 py-3 rounded-lg border border-accent/20" href="#">
+<span class="font-label">수업</span>
+<span class="text-xs bg-white text-accent px-2 py-0.5 rounded-full shadow-sm border border-accent/10">10</span>
+</a>
+</li>
+<li>
+<a class="flex justify-between items-center text-primary hover:bg-background px-4 py-3 rounded-lg transition-colors" href="#">
+<span class="font-label">평가</span>
+<span class="text-xs bg-background text-muted px-2 py-0.5 rounded-full border border-border">9</span>
+</a>
+</li>
+<li>
+<a class="flex justify-between items-center text-primary hover:bg-background px-4 py-3 rounded-lg transition-colors" href="#">
+<span class="font-label">학급경영</span>
+<span class="text-xs bg-background text-muted px-2 py-0.5 rounded-full border border-border">6</span>
+</a>
+</li>
+<li>
+<a class="flex justify-between items-center text-primary hover:bg-background px-4 py-3 rounded-lg transition-colors" href="#">
+<span class="font-label">행정</span>
+<span class="text-xs bg-background text-muted px-2 py-0.5 rounded-full border border-border">7</span>
+</a>
+</li>
+</ul>
+</aside>
+<!-- Center Main Content -->
+<main class="flex-1 min-w-0 flex flex-col gap-12">
+<!-- Search Area -->
+<section class="flex flex-col gap-4">
+<div class="relative w-full flex items-center shadow-card bg-surface rounded-card border border-border focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/20 transition-all">
+<div class="pl-5 text-accent flex items-center justify-center">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<input aria-label="AI 스킬 검색" class="w-full py-4 px-4 bg-transparent border-none focus:ring-0 text-primary text-[15px]" type="text" value="중학교 2학년 과학 수행평가 문항을 만들고 싶다"/>
+<button class="bg-primary text-white font-bold py-3 px-6 m-1 rounded-card hover:bg-primary-container/90 transition-colors whitespace-nowrap">분석 및 검색</button>
+</div>
+<div class="flex items-center gap-3 text-sm">
+<span class="text-muted font-medium">연관 태그:</span>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface border border-border rounded-full text-primary hover:border-accent cursor-pointer transition-colors">중학교 2학년</span>
+<span class="px-3 py-1 bg-surface border border-border rounded-full text-primary hover:border-accent cursor-pointer transition-colors">과학</span>
+<span class="px-3 py-1 bg-surface border border-border rounded-full text-primary hover:border-accent cursor-pointer transition-colors">수행평가</span>
+</div>
+</div>
+</section>
+<!-- AI Recommended Results -->
+<section>
+<div class="flex justify-between items-end mb-6">
+<h2 class="text-2xl font-bold text-primary">AI 추천 결과</h2>
+<span class="text-sm text-muted">분석된 의도와의 일치도 순으로 제시합니다</span>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface border border-border rounded-card p-6 shadow-card hover:border-accent/30 transition-all flex flex-col sm:flex-row gap-6 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<h3 class="text-[17px] font-bold text-primary">수행평가 문항 초안 생성</h3>
+</div>
+<p class="text-[15px] text-muted mb-4 line-clamp-2">입력된 성취기준과 평가 목표를 바탕으로 서술형/논술형 수행평가 문항의 초안을 다각도로 제안합니다.</p>
+<div class="bg-[#F0FDF4] border border-accent/20 rounded-md p-3 mb-4 flex gap-2 items-start text-sm">
+<span class="material-symbols-outlined text-accent text-[18px]">lightbulb</span>
+<span class="text-primary font-medium">AI 추천 이유: 중등 과학 · 평가 유형 일치</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-2">
+<div class="text-sm text-muted">조회 1,200 | 사용 842</div>
+<button class="text-accent font-bold hover:underline flex items-center gap-1 group/btn">
+                                    실행하기 <span class="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="shrink-0 flex items-center justify-center w-24 sm:w-32">
+<div class="relative w-20 h-20 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 36 36">
+<path class="text-border" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-accent" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="96, 100" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-lg font-bold text-primary">96%</span>
+<span class="text-[10px] text-muted">일치</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface border border-border rounded-card p-6 shadow-card hover:border-accent/30 transition-all flex flex-col sm:flex-row gap-6">
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="text-[17px] font-bold text-primary mb-2">과학 실험 보고서 평가 루브릭</h3>
+<p class="text-[15px] text-muted mb-4 line-clamp-2">과학 실험 설계, 수행, 결과 분석 및 결론 도출의 각 단계별 구체적인 채점 기준(루브릭)을 생성합니다.</p>
+<div class="bg-[#F0FDF4] border border-accent/20 rounded-md p-3 mb-4 flex gap-2 items-start text-sm">
+<span class="material-symbols-outlined text-accent text-[18px]">lightbulb</span>
+<span class="text-primary font-medium">AI 추천 이유: 교과(과학) 및 평가 유형 연관성</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-2">
+<div class="text-sm text-muted">조회 850 | 사용 521</div>
+<button class="text-accent font-bold hover:underline flex items-center gap-1 group/btn">
+                                    실행하기 <span class="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="shrink-0 flex items-center justify-center w-24 sm:w-32">
+<div class="relative w-20 h-20 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 36 36">
+<path class="text-border" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-accent/80" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="89, 100" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-lg font-bold text-primary">89%</span>
+<span class="text-[10px] text-muted">일치</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Keyword Matches -->
+<section>
+<h2 class="text-xl font-bold text-primary mb-4 border-b border-border pb-2">키워드 일치 결과</h2>
+<div class="bg-surface border border-border rounded-card shadow-card overflow-hidden">
+<ul class="divide-y divide-border">
+<li class="p-4 hover:bg-background transition-colors flex justify-between items-center group cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="px-2 py-1 text-xs font-medium rounded-full bg-[#E2E8F0] text-muted border border-[#CBD5E1]">행정</span>
+<span class="text-[15px] font-medium text-primary">교과 세부능력 및 특기사항 초안</span>
+</div>
+<span class="material-symbols-outlined text-muted group-hover:text-accent transition-colors">chevron_right</span>
+</li>
+<li class="p-4 hover:bg-background transition-colors flex justify-between items-center group cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="px-2 py-1 text-xs font-medium rounded-full bg-[#E2E8F0] text-muted border border-[#CBD5E1]">수업</span>
+<span class="text-[15px] font-medium text-primary">과학 실험 안전 지도안</span>
+</div>
+<span class="material-symbols-outlined text-muted group-hover:text-accent transition-colors">chevron_right</span>
+</li>
+<li class="p-4 hover:bg-background transition-colors flex justify-between items-center group cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="px-2 py-1 text-xs font-medium rounded-full bg-[#E2E8F0] text-muted border border-[#CBD5E1]">평가</span>
+<span class="text-[15px] font-medium text-primary">수행평가 통계 분석</span>
+</div>
+<span class="material-symbols-outlined text-muted group-hover:text-accent transition-colors">chevron_right</span>
+</li>
+</ul>
+</div>
+</section>
+</main>
+<!-- Right Sidebar (300px) -->
+<aside class="w-[300px] shrink-0 hidden lg:flex flex-col gap-6">
+<!-- Recommendations -->
+<div class="bg-surface border border-border rounded-card p-5 shadow-card">
+<h3 class="font-bold text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-accent text-[20px]">help_center</span>
+                    이런 질문은 어때요?
+                </h3>
+<ul class="space-y-3">
+<li>
+<a class="block p-3 bg-background rounded-md text-[14px] text-primary hover:bg-border/50 hover:text-accent transition-colors" href="#">
+<span class="text-muted mr-1">"</span>중학교 과학 1단원 활동지 만들어줘<span class="text-muted ml-1">"</span>
+</a>
+</li>
+<li>
+<a class="block p-3 bg-background rounded-md text-[14px] text-primary hover:bg-border/50 hover:text-accent transition-colors" href="#">
+<span class="text-muted mr-1">"</span>서술형 평가 채점 시 유의할 점<span class="text-muted ml-1">"</span>
+</a>
+</li>
+<li>
+<a class="block p-3 bg-background rounded-md text-[14px] text-primary hover:bg-border/50 hover:text-accent transition-colors" href="#">
+<span class="text-muted mr-1">"</span>학생 참여를 유도하는 실험 수업 아이디어<span class="text-muted ml-1">"</span>
+</a>
+</li>
+</ul>
+</div>
+<!-- Popular Tags -->
+<div class="bg-surface border border-border rounded-card p-5 shadow-card">
+<h3 class="font-bold text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-accent text-[20px]">trending_up</span>
+                    인기 분류
+                </h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 bg-background border border-border rounded-full text-sm text-primary hover:border-accent hover:text-accent cursor-pointer transition-colors">#2022개정교육과정</span>
+<span class="px-3 py-1.5 bg-background border border-border rounded-full text-sm text-primary hover:border-accent hover:text-accent cursor-pointer transition-colors">#프롬프트</span>
+<span class="px-3 py-1.5 bg-background border border-border rounded-full text-sm text-primary hover:border-accent hover:text-accent cursor-pointer transition-colors">#생기부작성</span>
+<span class="px-3 py-1.5 bg-background border border-border rounded-full text-sm text-primary hover:border-accent hover:text-accent cursor-pointer transition-colors">#디지털교과서</span>
+</div>
+</div>
+<!-- Feedback Notice -->
+<div class="bg-background border border-border rounded-card p-4 mt-auto">
+<p class="text-sm text-muted leading-relaxed">
+                    찾으시는 결과가 없나요?<br/>
+                    검색어는 자동 수집되어 신규 스킬 제작 우선순위에 반영됩니다.
+                </p>
+</div>
+</aside>
+</div>
+<script>document.addEventListener("DOMContentLoaded",function(){
+ // ① 사이드바에 특수·상담 4 / 학교 실무 4 추가 (합계 40종)
+ var ul=document.querySelector('aside ul');
+ if(ul && ul.children.length===4){
+   [['특수·상담','4'],['학교 실무','4']].forEach(function(p){
+     var li=ul.children[3].cloneNode(true), sp=li.querySelectorAll('span');
+     sp[0].textContent=p[0]; sp[1].textContent=p[1]; ul.appendChild(li);
+   });
+ }
+ // ② AI 추천 결과 3번째 카드 — 2번 카드를 복제해 텍스트/일치율만 교체
+ var grid=document.querySelector('section .grid.grid-cols-1');
+ if(grid && grid.children.length===2){
+   var c=grid.children[1].cloneNode(true);
+   c.querySelector('h3').textContent='서술형 채점 기준표 생성';
+   c.querySelector('p').textContent='과학 교과 서술형 문항에 최적화된 부분 점수 산정 기준과 정답 예시를 생성합니다.';
+   var reason=c.querySelectorAll('.bg-\\[\\#F0FDF4\\] span');
+   if(reason.length>1) reason[1].textContent='AI 추천 이유: 중등 과학 · 평가 유형 일치';
+   var stat=c.querySelector('.text-sm.text-muted');
+   if(stat) stat.textContent='조회 620 | 사용 355';
+   var arc=c.querySelectorAll('svg path');
+   if(arc.length>1) arc[1].setAttribute('stroke-dasharray','84, 100');
+   var pct=c.querySelector('.text-lg.font-bold');
+   if(pct) pct.textContent='84%';
+   grid.appendChild(c);
+ }
+});</script>
+</body></html>

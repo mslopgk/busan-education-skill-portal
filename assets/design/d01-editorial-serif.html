@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>부산교육청 교육용 AI 스킬 아카이브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --paper:#F7F5F0;
+  --ink:#14181C;
+  --green:#0F5F4E;
+  --i70:rgba(20,24,28,.70);
+  --i55:rgba(20,24,28,.55);
+  --i42:rgba(20,24,28,.42);
+  --i30:rgba(20,24,28,.30);
+  --rule:rgba(20,24,28,.20);
+  --rule-soft:rgba(20,24,28,.135);
+  --pad:76px;
+}
+*{margin:0;padding:0;box-sizing:border-box;border-radius:0}
+html,body{background:var(--paper);color:var(--ink);
+  -webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+body{font-family:'Pretendard',sans-serif;font-size:15px;line-height:1.6}
+.serif{font-family:'Nanum Myeongjo','Pretendard',serif}
+.mono{font-family:'IBM Plex Mono','Pretendard',monospace;font-feature-settings:"tnum" 1}
+.wrap{max-width:1280px;margin:0 auto;padding:0 var(--pad)}
+.lab{font-family:'IBM Plex Mono','Pretendard',monospace;font-size:10.5px;font-weight:500;
+  letter-spacing:.18em;color:var(--i42);text-transform:uppercase;white-space:nowrap}
+.rule{height:1px;background:var(--rule)}
+.rule-soft{height:1px;background:var(--rule-soft)}
+
+/* ── masthead ───────────────────────────── */
+.mast{display:flex;align-items:center;justify-content:space-between;
+  height:70px;border-bottom:1px solid var(--ink)}
+.brand{display:flex;align-items:center;gap:12px}
+.mark{width:9px;height:9px;background:var(--green)}
+.brand .nm{font-size:14px;font-weight:600;letter-spacing:-.01em}
+.brand .sub{font-family:'IBM Plex Mono','Pretendard',monospace;font-size:10px;
+  letter-spacing:.2em;color:var(--i42);padding-left:12px;margin-left:2px;
+  border-left:1px solid var(--rule)}
+nav{display:flex;gap:40px}
+nav a{font-size:13px;font-weight:500;color:var(--ink);text-decoration:none;letter-spacing:-.01em;
+  position:relative;padding-bottom:2px}
+nav a:first-child::after{content:"";position:absolute;left:0;right:0;bottom:-1px;
+  height:1.5px;background:var(--green)}
+nav a:not(:first-child){color:var(--i55)}
+
+/* ── hero ───────────────────────────────── */
+.hero{display:grid;grid-template-columns:1fr 268px;gap:56px;
+  padding:92px 0 68px;position:relative}
+.hero .colrule{position:absolute;top:0;bottom:0;width:1px;background:var(--rule-soft);
+  right:268px;margin-right:28px}
+.eyebrow{display:flex;align-items:baseline;gap:16px;margin-bottom:34px}
+.eyebrow .n{font-family:'IBM Plex Mono','Pretendard',monospace;font-size:11px;
+  font-weight:600;color:var(--green);letter-spacing:.1em}
+h1{font-family:'Nanum Myeongjo','Pretendard',serif;font-weight:700;
+  font-size:82px;line-height:1.24;letter-spacing:-.035em;
+  max-width:14.2em;word-break:keep-all}
+h1 em{font-style:normal;color:var(--green)}
+.lede{margin-top:36px;max-width:600px;font-size:16.5px;line-height:1.9;
+  color:var(--i70);word-break:keep-all;letter-spacing:-.012em}
+.lede .sep{color:var(--green);padding-right:6px}
+
+.rail{display:flex;flex-direction:column;justify-content:space-between;
+  align-items:flex-end;padding-bottom:8px}
+.rail .top{text-align:right}
+.rail .top .lab{display:block;margin-bottom:12px}
+.rail .top .ax{font-family:'IBM Plex Mono','Pretendard',monospace;font-size:12px;
+  color:var(--i55);letter-spacing:.02em;line-height:1.9}
+.rail .top .ax b{color:var(--ink);font-weight:500}
+.stat{text-align:right}
+.stat .k{font-family:'IBM Plex Mono','Pretendard',monospace;font-size:76px;
+  font-weight:400;line-height:.86;letter-spacing:-.05em;color:var(--ink);
+  display:block}
+.stat .k b{font-family:'Nanum Myeongjo','Pretendard',serif;font-weight:400;
+  font-size:28px;letter-spacing:0;margin-left:10px}
+.stat .lab{margin-top:18px;display:block}
+.stat .upd{margin-top:14px;padding-top:14px;border-top:1px solid var(--rule);
+  font-family:'IBM Plex Mono','Pretendard',monospace;font-size:11px;
+  color:var(--i55);letter-spacing:.04em}
+
+/* ── search line ────────────────────────── */
+.search{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:26px;
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);
+  padding:26px 0}
+.search input{border:0;background:transparent;outline:0;width:100%;
+  font-family:'Pretendard',sans-serif;font-size:23px;font-weight:400;
+  color:var(--ink);letter-spacing:-.02em}
+.search input::placeholder{color:var(--i30)}
+.search .go{font-family:'IBM Plex Mono','Pretendard',monospace;font-size:12px;
+  font-weight:600;letter-spacing:.18em;color:var(--green);display:flex;
+  align-items:center;gap:12px}
+.search .go .arw{font-size:19px;letter-spacing:0;line-height:1}
+
+/* ── filters ────────────────────────────── */
+.filters{padding:6px 0 0}
+.frow{display:grid;grid-template-columns:112px 1fr;align-items:baseline;
+  gap:32px;padding:22px 0;border-bottom:1px solid var(--rule-soft)}
+.opts{display:flex;flex-wrap:wrap;gap:34px}
+.opts span{font-size:14.5px;color:var(--i70);letter-spacing:-.01em;position:relative}
+.opts span.on{color:var(--green);font-weight:600}
+.opts span.on::after{content:"";position:absolute;left:0;right:0;bottom:-7px;
+  height:1.5px;background:var(--green)}
+
+/* ── index ──────────────────────────────── */
+.idxhead{display:flex;align-items:flex-end;justify-content:space-between;
+  padding:68px 0 22px}
+.idxhead h2{font-family:'Nanum Myeongjo','Pretendard',serif;font-weight:700;
+  font-size:31px;letter-spacing:-.03em;line-height:1;margin-top:26px}
+.idxhead .cnt{font-family:'IBM Plex Mono','Pretendard',monospace;font-size:11px;
+  color:var(--i42);letter-spacing:.12em;margin-left:14px}
+.sort{display:flex;gap:24px;align-items:baseline}
+.sort b{font-family:'IBM Plex Mono','Pretendard',monospace;font-size:12.5px;
+  font-weight:600;color:var(--green);letter-spacing:-.01em;
+  border-bottom:1.5px solid var(--green);padding-bottom:3px}
+.sort i{font-style:normal;font-family:'IBM Plex Mono','Pretendard',monospace;
+  font-size:12.5px;color:var(--i42);letter-spacing:-.01em;padding-bottom:3px}
+
+.grid5{display:grid;grid-template-columns:62px 128px 1fr 132px 132px;
+  gap:28px;align-items:baseline}
+.thead{padding:0 0 12px;border-bottom:1px solid var(--ink)}
+.thead .r{text-align:right}
+.row{padding:31px 0 33px;border-bottom:1px solid var(--rule-soft)}
+.row:last-of-type{border-bottom:1px solid var(--ink)}
+.row .no{font-family:'IBM Plex Mono','Pretendard',monospace;font-size:16px;
+  font-weight:500;color:var(--i42);letter-spacing:.02em}
+.tag{font-family:'IBM Plex Mono','Pretendard',monospace;font-size:11.5px;
+  font-weight:500;letter-spacing:.09em;line-height:1.7}
+.tag .a{color:var(--green)}
+.tag .d{color:var(--i30);padding:0 3px}
+.tag .b{color:var(--i55)}
+.ttl{font-family:'Nanum Myeongjo','Pretendard',serif;font-weight:700;
+  font-size:25px;letter-spacing:-.032em;line-height:1.35;word-break:keep-all}
+.dsc{margin-top:9px;font-size:13.5px;color:var(--i55);letter-spacing:-.012em;
+  line-height:1.65;max-width:38em;word-break:keep-all}
+.num{text-align:right;font-family:'IBM Plex Mono','Pretendard',monospace;
+  font-size:25px;font-weight:400;letter-spacing:-.03em;line-height:1.25}
+.num.dl{color:var(--green);font-weight:500}
+.more{display:flex;justify-content:space-between;align-items:center;padding:22px 0 0}
+.more .m{font-family:'IBM Plex Mono','Pretendard',monospace;font-size:12px;
+  letter-spacing:.1em;color:var(--i42)}
+.more .g{font-family:'IBM Plex Mono','Pretendard',monospace;font-size:12px;
+  font-weight:600;letter-spacing:.1em;color:var(--green)}
+
+/* ── notices ────────────────────────────── */
+.notice{display:grid;grid-template-columns:236px 1fr;gap:56px;
+  padding:92px 0 0}
+.notice .side .lab{display:block;margin-bottom:16px}
+.notice .side h3{font-family:'Nanum Myeongjo','Pretendard',serif;font-weight:700;
+  font-size:26px;letter-spacing:-.03em;line-height:1.3}
+.notice .side p{margin-top:16px;font-size:13px;color:var(--i55);line-height:1.75;
+  letter-spacing:-.01em;word-break:keep-all;max-width:15em}
+.nlist{border-top:1px solid var(--ink)}
+.nrow{display:grid;grid-template-columns:110px 1fr 24px;gap:28px;align-items:baseline;
+  padding:22px 0;border-bottom:1px solid var(--rule-soft)}
+.nrow:last-child{border-bottom:1px solid var(--rule)}
+.nrow .dt{font-family:'IBM Plex Mono','Pretendard',monospace;font-size:12.5px;
+  color:var(--i42);letter-spacing:.01em}
+.nrow .tx{font-size:15.5px;letter-spacing:-.017em;color:var(--ink);word-break:keep-all}
+.nrow:first-child .tx{font-weight:500}
+.nrow .ar{text-align:right;color:var(--i30);font-size:14px}
+.nrow:first-child .ar{color:var(--green)}
+
+/* ── footer ─────────────────────────────── */
+footer{margin-top:96px;border-top:1px solid var(--ink);padding:30px 0 52px;
+  display:flex;justify-content:space-between;align-items:flex-start}
+footer .l{display:flex;align-items:center;gap:12px}
+footer .l .mark{width:9px;height:9px;background:var(--green)}
+footer .org{font-family:'Nanum Myeongjo','Pretendard',serif;font-weight:700;
+  font-size:18px;letter-spacing:-.02em}
+footer .meta{font-size:12.5px;color:var(--i42);margin-top:10px;letter-spacing:-.01em}
+footer .r{text-align:right;display:flex;gap:34px}
+footer .r a{font-size:12.5px;color:var(--i55);text-decoration:none;letter-spacing:-.01em}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast">
+    <div class="brand">
+      <div class="mark"></div>
+      <div class="nm">부산교육청 교육용 AI 스킬 아카이브</div>
+      <div class="sub">2026</div>
+    </div>
+    <nav>
+      <a href="#">스킬 목록</a>
+      <a href="#">이용 안내</a>
+      <a href="#">공지사항</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="colrule"></div>
+    <div>
+      <div class="eyebrow">
+        <span class="n">01</span>
+        <span class="lab">교육용 AI 스킬 색인</span>
+      </div>
+      <h1>수업 준비,<br>검증된 AI 스킬로<br><em>시작하세요</em></h1>
+      <p class="lede">수업·평가·학급경영·행정에 바로 쓰는 교육용 AI 스킬 아카이브<br><span class="sep">—</span>로그인 없이 즉시 이용</p>
+    </div>
+    <div class="rail">
+      <div class="top">
+        <span class="lab">분류 체계</span>
+        <div class="ax">학교급 <b>6</b> · 업무유형 <b>4</b></div>
+      </div>
+      <div class="stat">
+        <span class="k">10<b>종</b></span>
+        <span class="lab">공개 스킬</span>
+        <div class="upd">최종 갱신 2026.10.12</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="search">
+    <span class="lab">검색</span>
+    <input type="text" placeholder="예) 수행평가 문항, 가정통신문, 회의록 요약">
+    <span class="go">찾기 <span class="arw">→</span></span>
+  </section>
+
+  <section class="filters">
+    <div class="frow">
+      <span class="lab">학교급</span>
+      <div class="opts">
+        <span class="on">전체</span><span>유치원</span><span>초등</span><span>중등</span><span>고등</span><span>특수</span>
+      </div>
+    </div>
+    <div class="frow">
+      <span class="lab">업무유형</span>
+      <div class="opts">
+        <span>수업</span><span>평가</span><span>학급경영</span><span>행정</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="idxhead">
+      <div>
+        <div class="eyebrow" style="margin-bottom:0">
+          <span class="n">02</span><span class="lab">스킬 목록</span>
+        </div>
+        <h2>스킬 색인<span class="cnt">총 10종 / 06 표시</span></h2>
+      </div>
+      <div class="sort"><b>최신순</b><i>다운로드순</i></div>
+    </div>
+
+    <div class="grid5 thead">
+      <span class="lab">번호</span>
+      <span class="lab">분류</span>
+      <span class="lab">스킬</span>
+      <span class="lab r">조회</span>
+      <span class="lab r">다운로드</span>
+    </div>
+
+    <div class="grid5 row">
+      <span class="no">01</span>
+      <span class="tag"><span class="a">중등</span><span class="d">·</span><span class="b">평가</span></span>
+      <div>
+        <div class="ttl">수행평가 문항 초안 생성</div>
+        <div class="dsc">성취기준에 맞는 서술형 수행평가 문항 초안을 생성합니다</div>
+      </div>
+      <span class="num">1,240</span>
+      <span class="num dl">312</span>
+    </div>
+
+    <div class="grid5 row">
+      <span class="no">02</span>
+      <span class="tag"><span class="a">초등</span><span class="d">·</span><span class="b">학급경영</span></span>
+      <div>
+        <div class="ttl">가정통신문 작성 도우미</div>
+        <div class="dsc">행사·안내 목적에 맞는 가정통신문 초안을 작성합니다</div>
+      </div>
+      <span class="num">980</span>
+      <span class="num dl">320</span>
+    </div>
+
+    <div class="grid5 row">
+      <span class="no">03</span>
+      <span class="tag"><span class="a">공통</span><span class="d">·</span><span class="b">행정</span></span>
+      <div>
+        <div class="ttl">학급 회의록 요약</div>
+        <div class="dsc">회의 기록을 항목별 결정 사항 중심으로 요약합니다</div>
+      </div>
+      <span class="num">850</span>
+      <span class="num dl">150</span>
+    </div>
+
+    <div class="grid5 row">
+      <span class="no">04</span>
+      <span class="tag"><span class="a">중등</span><span class="d">·</span><span class="b">수업</span></span>
+      <div>
+        <div class="ttl">과학 실험 안전 지도안</div>
+        <div class="dsc">실험 주제별 안전 수칙과 지도 시나리오를 생성합니다</div>
+      </div>
+      <span class="num">1,100</span>
+      <span class="num dl">560</span>
+    </div>
+
+    <div class="grid5 row">
+      <span class="no">05</span>
+      <span class="tag"><span class="a">고등</span><span class="d">·</span><span class="b">수업</span></span>
+      <div>
+        <div class="ttl">영어 독해 지문 변형</div>
+        <div class="dsc">수준별 어휘·길이로 독해 지문을 재구성합니다</div>
+      </div>
+      <span class="num">2,100</span>
+      <span class="num dl">890</span>
+    </div>
+
+    <div class="grid5 row">
+      <span class="no">06</span>
+      <span class="tag"><span class="a">공통</span><span class="d">·</span><span class="b">학급경영</span></span>
+      <div>
+        <div class="ttl">학부모 상담 준비 질문지</div>
+        <div class="dsc">상담 목적별 질문지와 안내 문구를 준비합니다</div>
+      </div>
+      <span class="num">1,500</span>
+      <span class="num dl">410</span>
+    </div>
+
+    <div class="more">
+      <span class="m">06 / 10</span>
+      <span class="g">전체 스킬 보기 →</span>
+    </div>
+  </section>
+
+  <section class="notice">
+    <div class="side">
+      <div class="eyebrow" style="margin-bottom:14px">
+        <span class="n">03</span><span class="lab">공지사항</span>
+      </div>
+      <h3>운영 안내와<br>신규 등록 소식</h3>
+      <p>개인정보 보호 지침과 신규 스킬 등록 내역을 이곳에서 확인하세요.</p>
+    </div>
+    <div class="nlist">
+      <div class="nrow">
+        <span class="dt">2026.10.12</span>
+        <span class="tx">10월 신규 스킬 2종 등록 — 평가·행정 영역</span>
+        <span class="ar">→</span>
+      </div>
+      <div class="nrow">
+        <span class="dt">2026.10.05</span>
+        <span class="tx">교육용 AI 스킬 아카이브 정식 개통 안내</span>
+        <span class="ar">→</span>
+      </div>
+      <div class="nrow">
+        <span class="dt">2026.10.02</span>
+        <span class="tx">생성형 AI 활용 시 개인정보 보호 유의사항 안내</span>
+        <span class="ar">→</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <div class="l"><span class="mark"></span><span class="org">부산광역시교육청</span></div>
+      <div class="meta">부산광역시교육청 교육용 AI 스킬 아카이브 · 로그인 없이 이용할 수 있습니다</div>
+    </div>
+    <div class="r">
+      <a href="#">스킬 목록</a>
+      <a href="#">이용 안내</a>
+      <a href="#">공지사항</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>부산교육청 교육용 AI 스킬 아카이브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --pine:#0E2A26;
+  --chalk:#F4F3EF;
+  --ink:#131614;
+  --sand:#D9A441;
+  --w92:rgba(244,243,239,.92);
+  --w70:rgba(244,243,239,.70);
+  --w52:rgba(244,243,239,.52);
+  --w38:rgba(244,243,239,.38);
+  --w26:rgba(244,243,239,.26);
+  --w16:rgba(244,243,239,.16);
+  --w09:rgba(244,243,239,.09);
+  --i70:rgba(19,22,20,.70);
+  --i55:rgba(19,22,20,.55);
+  --i40:rgba(19,22,20,.40);
+  --rule:rgba(19,22,20,.16);
+  --rule-s:rgba(19,22,20,.10);
+  --lp:56px;   /* left field padding */
+  --rp:60px;   /* right field padding */
+  --seam:88px; /* y of the list rule = bottom edge of the sand block */
+}
+*{margin:0;padding:0;box-sizing:border-box;border-radius:0!important;box-shadow:none!important}
+html,body{height:100%;background:var(--chalk);color:var(--ink);
+  -webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+body{font-family:'Pretendard',sans-serif;font-size:15px;line-height:1.6;
+  font-feature-settings:"ss01" 1;word-break:keep-all}
+.mono{font-family:'IBM Plex Mono','Pretendard',monospace;
+  font-feature-settings:"tnum" 1;font-variant-numeric:tabular-nums}
+
+/* ═══ split canvas ═══════════════════════════════════════ */
+.split{display:grid;grid-template-columns:563px 717px;width:1280px;
+  min-height:100vh;position:relative;align-items:stretch}
+
+/* ── LEFT FIELD : control panel ─────────────────────────── */
+.left{background:var(--pine);color:var(--chalk);position:relative;
+  padding:56px var(--lp) 44px;display:flex;flex-direction:column;overflow:hidden}
+/* one hairline runs the full height just inside the seam */
+.left::after{content:"";position:absolute;top:0;bottom:0;right:26px;width:1px;
+  background:var(--w09);pointer-events:none}
+.left>*{position:relative;z-index:1}
+
+/* identity */
+.brand{display:flex;align-items:flex-start;gap:14px;padding-bottom:26px}
+.mark{width:26px;height:26px;background:var(--chalk);flex:none;position:relative;margin-top:1px}
+.mark i{position:absolute;left:0;top:13px;width:13px;height:13px;background:var(--pine)}
+.bname{font-size:15.5px;font-weight:700;letter-spacing:-.022em;line-height:1.35;color:var(--chalk)}
+.bmeta{font-size:10px;font-weight:500;letter-spacing:.16em;color:var(--w38);margin-top:7px}
+
+/* stacked menu */
+.menu{border-top:1px solid var(--w16);border-bottom:1px solid var(--w16)}
+.menu a{display:flex;align-items:baseline;gap:14px;text-decoration:none;
+  padding:11px 0;color:var(--w52);font-size:13.5px;font-weight:500;letter-spacing:-.012em;
+  border-bottom:1px solid var(--w09)}
+.menu a:last-child{border-bottom:0}
+.menu a .n{font-size:10px;font-weight:500;letter-spacing:.14em;color:var(--w26);width:22px;flex:none}
+.menu a.on{color:var(--chalk);font-weight:700}
+.menu a.on .n{color:var(--w52)}
+.menu a.on .bar{display:block;width:16px;height:1px;background:var(--chalk);
+  margin-left:auto;transform:translateY(-4px)}
+
+/* headline */
+.hl{padding:40px 0 0}
+h1{font-size:50px;line-height:1.15;letter-spacing:-.042em;color:var(--chalk)}
+h1 .lt{display:block;font-weight:200;letter-spacing:-.032em;color:var(--w70)}
+h1 .bd{display:block;font-weight:800}
+.sub{margin-top:24px;font-size:13.5px;line-height:1.8;color:var(--w52);
+  letter-spacing:-.012em;max-width:344px;padding-bottom:40px}
+
+/* search */
+.search{display:flex;align-items:stretch;height:58px;border:1px solid var(--w26);
+  background:rgba(244,243,239,.035)}
+.search .ph{flex:1;display:flex;align-items:center;padding:0 18px;
+  font-size:13px;color:var(--w38);letter-spacing:-.012em}
+.search .go{width:88px;display:flex;align-items:center;justify-content:center;
+  border-left:1px solid var(--w26);font-size:12.5px;font-weight:700;
+  letter-spacing:.02em;color:var(--chalk);background:rgba(244,243,239,.09)}
+
+/* filter axes */
+.axes{padding-top:42px}
+.axis+.axis{margin-top:30px}
+.axis .lab{display:flex;align-items:center;gap:12px;margin-bottom:13px}
+.axis .lab span{font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--w38);flex:none}
+.axis .lab i{height:1px;background:var(--w16);flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{height:33px;padding:0 13px;display:flex;align-items:center;
+  border:1px solid var(--w16);font-size:12.5px;color:var(--w70);letter-spacing:-.01em}
+.chip.on{background:var(--sand);border-color:var(--sand);color:#0E2A26;font-weight:700}
+
+/* notices, pinned bottom */
+.notice{margin-top:auto;padding-top:46px}
+.nlab{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.nlab span{font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--w38)}
+.nlab i{height:1px;background:var(--w16);flex:1}
+.nlist{border-top:1px solid var(--w16)}
+.nlist a{display:flex;gap:16px;align-items:baseline;text-decoration:none;
+  padding:13px 0;border-bottom:1px solid var(--w09)}
+.nlist a:last-child{border-bottom:0}
+.nlist .d{font-size:10.5px;letter-spacing:.02em;color:var(--w38);flex:none;padding-top:1px}
+.nlist .t{font-size:13px;color:var(--w70);letter-spacing:-.016em;line-height:1.5}
+.lfoot{margin-top:30px;padding-top:16px;border-top:1px solid var(--w16);
+  display:flex;align-items:baseline;justify-content:space-between}
+.lfoot .org{font-size:11.5px;font-weight:600;letter-spacing:-.01em;color:var(--w52)}
+.lfoot .yr{font-size:10px;letter-spacing:.18em;color:var(--w26)}
+
+/* ── RIGHT FIELD : the list ─────────────────────────────── */
+.right{background:var(--chalk);padding:40px var(--rp) 46px;display:flex;flex-direction:column}
+.rhead{display:flex;align-items:flex-end;justify-content:space-between;
+  height:32px;padding-bottom:16px;box-sizing:content-box}
+.rhead .h2{font-size:19px;font-weight:700;letter-spacing:-.028em;line-height:1.1}
+.rhead .h2 em{font-style:normal;font-size:11px;font-weight:500;letter-spacing:.14em;
+  color:var(--i40);margin-left:13px}
+.sort{display:flex;align-items:baseline;gap:18px}
+.sort b{font-size:12.5px;font-weight:700;letter-spacing:-.01em;color:var(--ink);
+  border-bottom:1.5px solid var(--ink);padding-bottom:2px}
+.sort a{font-size:12.5px;font-weight:500;letter-spacing:-.01em;color:var(--i40);
+  text-decoration:none;padding-bottom:2px}
+
+/* list block : one faint column rule echoes the seam */
+.list{position:relative;display:flex;flex-direction:column}
+.list::after{content:"";position:absolute;top:0;bottom:0;left:437px;width:1px;
+  background:var(--rule-s);pointer-events:none}
+
+/* table head */
+.thead{display:grid;grid-template-columns:40px 1fr 78px 82px;
+  border-top:2px solid var(--ink);
+  padding:10px 0 0;font-size:9.5px;font-weight:500;letter-spacing:.16em;color:var(--i40)}
+.thead .r{text-align:right}
+
+/* rows */
+.row{display:grid;grid-template-columns:40px 1fr 78px 82px;align-items:start;
+  padding:31px 0 33px;border-bottom:1px solid var(--rule-s)}
+.row:first-of-type{margin-top:15px;border-top:1px solid var(--rule-s)}
+.row:last-of-type{border-bottom:2px solid var(--ink)}
+.row .ix{font-size:11.5px;font-weight:500;color:var(--i40);letter-spacing:.04em;padding-top:6px}
+.row .bd{padding-right:30px}
+.tag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.03em;color:var(--i70);
+  border:1px solid var(--rule);padding:3px 9px 4px;margin-bottom:12px}
+.tag b{font-weight:500;color:var(--i40);padding:0 4px}
+.row h3{font-size:21px;font-weight:700;letter-spacing:-.034em;line-height:1.28}
+.row p{margin-top:8px;font-size:13px;line-height:1.62;color:var(--i55);letter-spacing:-.014em}
+.row .num{text-align:right;font-size:15px;font-weight:500;letter-spacing:.01em;padding-top:5px}
+.row .num.dl{font-weight:600}
+.row .num.vw{color:var(--i55)}
+
+.rfoot{margin-top:auto;padding-top:22px;display:flex;align-items:baseline;
+  justify-content:flex-end}
+.rfoot .pg{font-size:10.5px;letter-spacing:.16em;color:var(--i40)}
+.rfoot .pg b{color:var(--ink);font-weight:600}
+.rfoot .note{font-size:10.5px;letter-spacing:.14em;color:var(--i40)}
+
+/* ── the one element that crosses the seam ──────────────── */
+.count{position:absolute;top:0;left:563px;transform:translateX(-50%);
+  width:104px;height:88px;background:var(--sand);color:#0E2A26;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;z-index:5}
+.count .k{font-size:9.5px;font-weight:700;letter-spacing:.2em;opacity:.72}
+.count .v{font-size:34px;font-weight:600;letter-spacing:-.03em;line-height:1;
+  display:flex;align-items:baseline;gap:2px;margin-top:3px}
+.count .v i{font-size:14px;font-weight:700;font-style:normal;font-family:'Pretendard',sans-serif}
+</style>
+</head>
+<body>
+<div class="split">
+
+  <!-- ══ LEFT : fixed control panel ══ -->
+  <aside class="left">
+    <div class="brand">
+      <div class="mark"><i></i></div>
+      <div>
+        <div class="bname">부산교육청<br>교육용 AI 스킬 아카이브</div>
+        <div class="bmeta mono">운영 · 부산광역시교육청</div>
+      </div>
+    </div>
+
+    <nav class="menu">
+      <a class="on" href="#"><span class="n mono">01</span>스킬 목록<span class="bar"></span></a>
+      <a href="#"><span class="n mono">02</span>이용 안내</a>
+      <a href="#"><span class="n mono">03</span>공지사항</a>
+    </nav>
+
+    <div class="hl">
+      <h1><span class="lt">수업 준비,</span><span class="bd">검증된 AI 스킬로</span><span class="bd">시작하세요</span></h1>
+      <p class="sub">수업·평가·학급경영·행정에 바로 쓰는 교육용 AI 스킬 아카이브 — 로그인 없이 즉시 이용</p>
+    </div>
+
+    <div class="search">
+      <div class="ph">예) 수행평가 문항, 가정통신문, 회의록 요약</div>
+      <div class="go">검색</div>
+    </div>
+
+    <div class="axes">
+      <div class="axis">
+        <div class="lab"><span class="mono">학교급</span><i></i></div>
+        <div class="chips">
+          <span class="chip on">전체</span>
+          <span class="chip">유치원</span>
+          <span class="chip">초등</span>
+          <span class="chip">중등</span>
+          <span class="chip">고등</span>
+          <span class="chip">특수</span>
+        </div>
+      </div>
+      <div class="axis">
+        <div class="lab"><span class="mono">업무유형</span><i></i></div>
+        <div class="chips">
+          <span class="chip">수업</span>
+          <span class="chip">평가</span>
+          <span class="chip">학급경영</span>
+          <span class="chip">행정</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="notice">
+      <div class="nlab"><span class="mono">공지사항</span><i></i></div>
+      <div class="nlist">
+        <a href="#"><span class="d mono">2026.10.02</span><span class="t">생성형 AI 활용 시 개인정보 보호 유의사항 안내</span></a>
+        <a href="#"><span class="d mono">2026.10.05</span><span class="t">교육용 AI 스킬 아카이브 정식 개통 안내</span></a>
+        <a href="#"><span class="d mono">2026.10.12</span><span class="t">10월 신규 스킬 2종 등록 — 평가·행정 영역</span></a>
+      </div>
+      <div class="lfoot">
+        <span class="org">부산광역시교육청</span>
+        <span class="yr mono">2026</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ══ RIGHT : scrolling list ══ -->
+  <main class="right">
+    <div class="rhead">
+      <div class="h2">스킬 목록</div>
+      <div class="sort"><b>최신순</b><a href="#">다운로드순</a></div>
+    </div>
+
+    <div class="list">
+    <div class="thead mono">
+      <div>번호</div><div>스킬</div><div class="r">조회</div><div class="r">다운로드</div>
+    </div>
+
+    <article class="row">
+      <div class="ix mono">01</div>
+      <div class="bd">
+        <span class="tag">중등<b>·</b>평가</span>
+        <h3>수행평가 문항 초안 생성</h3>
+        <p>성취기준에 맞는 서술형 수행평가 문항 초안을 생성합니다</p>
+      </div>
+      <div class="num vw mono">1,240</div>
+      <div class="num dl mono">312</div>
+    </article>
+
+    <article class="row">
+      <div class="ix mono">02</div>
+      <div class="bd">
+        <span class="tag">초등<b>·</b>학급경영</span>
+        <h3>가정통신문 작성 도우미</h3>
+        <p>행사·안내 목적에 맞는 가정통신문 초안을 작성합니다</p>
+      </div>
+      <div class="num vw mono">980</div>
+      <div class="num dl mono">320</div>
+    </article>
+
+    <article class="row">
+      <div class="ix mono">03</div>
+      <div class="bd">
+        <span class="tag">공통<b>·</b>행정</span>
+        <h3>학급 회의록 요약</h3>
+        <p>회의 기록을 항목별 결정 사항 중심으로 요약합니다</p>
+      </div>
+      <div class="num vw mono">850</div>
+      <div class="num dl mono">150</div>
+    </article>
+
+    <article class="row">
+      <div class="ix mono">04</div>
+      <div class="bd">
+        <span class="tag">중등<b>·</b>수업</span>
+        <h3>과학 실험 안전 지도안</h3>
+        <p>실험 주제별 안전 수칙과 지도 시나리오를 생성합니다</p>
+      </div>
+      <div class="num vw mono">1,100</div>
+      <div class="num dl mono">560</div>
+    </article>
+
+    <article class="row">
+      <div class="ix mono">05</div>
+      <div class="bd">
+        <span class="tag">고등<b>·</b>수업</span>
+        <h3>영어 독해 지문 변형</h3>
+        <p>수준별 어휘·길이로 독해 지문을 재구성합니다</p>
+      </div>
+      <div class="num vw mono">2,100</div>
+      <div class="num dl mono">890</div>
+    </article>
+
+    <article class="row">
+      <div class="ix mono">06</div>
+      <div class="bd">
+        <span class="tag">공통<b>·</b>학급경영</span>
+        <h3>학부모 상담 준비 질문지</h3>
+        <p>상담 목적별 질문지와 안내 문구를 준비합니다</p>
+      </div>
+      <div class="num vw mono">1,500</div>
+      <div class="num dl mono">410</div>
+    </article>
+    </div>
+
+    <div class="rfoot">
+      <span class="pg mono"><b>01</b> / 02</span>
+    </div>
+  </main>
+
+  <!-- straddles the seam -->
+  <div class="count">
+    <span class="k mono">공개 스킬</span>
+    <span class="v mono">10<i>종</i></span>
+  </div>
+
+</div>
+</body>
+</html>

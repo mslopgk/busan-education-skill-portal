@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>AI 스킬 포털 관리 시스템 — 검색어 분석</title>
+<link rel="stylesheet" href="site/_base.css">
+<style>
+  /* ── 페이지 전용 레이아웃(토큰·컴포넌트 재정의 없음) ── */
+  body{width:1280px}
+  .shell{min-height:100vh;align-items:stretch}
+
+  /* 레일 머리 — s-a-admin · s-b-admin 과 동일 구조 */
+  .rail .brand{padding-bottom:16px;border-bottom:1px solid var(--rule-soft);margin-bottom:20px}
+  .rail .brand .l1{display:block;font-size:10.5px;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+  .rail .brand .l2{display:block;margin-top:3px;font-size:14px;font-weight:800;letter-spacing:-.025em}
+  .rail .brand .l3{display:block;margin-top:5px;font-family:var(--mono);font-size:10px;
+    letter-spacing:.08em;color:var(--muted)}
+  .rail .facet li.out{margin-top:14px;padding-top:12px;border-top:1px solid var(--rule-soft);
+    color:var(--muted);border-radius:0}
+  .rail .newskill{width:100%;margin-top:16px;padding:9px 10px;font-size:12.5px}
+  .rail .foothint{margin-top:auto}
+
+  /* 캔버스 */
+  .canvas{min-width:0;display:flex;flex-direction:column}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:24px;
+    height:54px;padding:0 32px;border-bottom:1px solid var(--rule)}
+  .topbar .sys{font-size:15px;font-weight:800;letter-spacing:-.025em;display:flex;
+    align-items:baseline;gap:13px}
+  .topbar .sys em{font-style:normal;font-size:13px;font-weight:700;color:var(--muted);
+    padding-left:13px;border-left:1px solid var(--rule)}
+  .topbar .rt{display:flex;align-items:center;gap:18px;flex:none}
+  .topbar .who{font-size:12.5px;color:var(--muted);letter-spacing:-.01em}
+  .topbar .who b{color:var(--ink);font-weight:700}
+  .topbar .btn{padding:7px 14px;font-size:12.5px}
+  .body{padding:24px 32px 0}
+
+  /* 머리 줄 */
+  .phead{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;padding-bottom:18px}
+  .phead h2{margin-top:7px}
+  .phead .per{text-align:right;flex:none}
+  .phead .per .k{font-size:10.5px;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+  .phead .per .v{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;
+    letter-spacing:-.01em;margin-top:2px}
+
+  /* KPI 4열 — 헤어라인과 여백만 */
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);
+    border-top:1.5px solid var(--ink);border-bottom:1px solid var(--rule-soft)}
+  .kpi > div{padding:16px 0 18px}
+  .kpi > div + div{border-left:1px solid var(--rule-soft);padding-left:24px}
+  .kpi .k{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--muted)}
+  .kpi .v{display:flex;align-items:baseline;gap:6px;margin-top:8px}
+  .kpi .v s{text-decoration:none;font-family:var(--kr);font-size:14px;font-weight:700;color:var(--muted)}
+  .kpi .delta{font-size:12px;font-weight:700;letter-spacing:-.01em;margin-left:2px}
+  .kpi .delta i{font-style:normal;font-family:var(--mono);font-variant-numeric:tabular-nums}
+  .kpi .m{margin-top:5px;font-size:11.5px;color:var(--muted)}
+
+  /* 구역 머리 */
+  .sec{margin-top:26px}
+  .sec .rt{margin-left:auto;display:flex;align-items:baseline;gap:16px}
+
+  /* 표 부속 */
+  .tbl tbody td.mid{vertical-align:middle}
+  .tbl .q{font-size:14.5px;font-weight:700;letter-spacing:-.01em}
+  .tbl tbody td{padding:10px 12px}
+
+  /* 클릭률 막대 — 헤어라인 회색 트랙 위 파랑 */
+  .rate{display:flex;align-items:center;gap:12px}
+  .rate .track{flex:1;height:6px;background:var(--rule-soft);border-radius:1px;min-width:80px}
+  .rate .track i{display:block;height:6px;background:var(--blue);border-radius:1px}
+  .rate .pct{width:44px;font-size:13px}
+
+  /* 추이 — 잉크/뮤티드 + 글자 라벨(색만으로 구분하지 않음) */
+  .trend{display:inline-flex;align-items:baseline;gap:6px;font-size:12.5px;font-weight:700;
+    letter-spacing:-.01em;white-space:nowrap}
+  .trend i{font-style:normal;font-family:var(--mono);font-size:12px;line-height:1}
+  .trend.flat{color:var(--muted);font-weight:400}
+
+  .tfoot{display:flex;align-items:center;justify-content:space-between;padding-top:11px}
+  .tfoot .more{font-size:13px;font-weight:700;letter-spacing:-.01em;
+    box-shadow:inset 0 -1px 0 var(--rule)}
+
+  /* 아래 2열 */
+  .duo{display:grid;grid-template-columns:1fr 452px;gap:0;margin-bottom:4px}
+  .duo > .rgt{border-left:1px solid var(--rule-soft);padding-left:28px;margin-left:28px}
+
+  /* 검색 유형 비율 — 가로 누적 막대 */
+  .ratio{padding-top:16px}
+  .ratio .lgs{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+    padding-bottom:9px}
+  .ratio .lgs .k{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+  .ratio .lgs .em .v{font-family:var(--mono);font-size:26px;font-weight:600;letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums;display:block;margin-top:3px;line-height:1.1}
+  .ratio .lgs .em .v s{text-decoration:none;font-family:var(--kr);font-size:13px;font-weight:700;
+    color:var(--muted);margin-left:5px}
+  .ratio .lgs .qt{text-align:right}
+  .ratio .lgs .qt .v{font-family:var(--mono);font-size:17px;font-weight:600;color:var(--muted);
+    font-variant-numeric:tabular-nums;display:block;margin-top:3px;line-height:1.1}
+  .stack{display:flex;height:26px;border-radius:1px;overflow:hidden}
+  .stack .nl{background:var(--blue)}
+  .stack .kw{background:var(--rule)}
+  .stfoot{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding-top:10px}
+  .stfoot .lg{display:flex;gap:16px;font-size:12px;color:var(--muted)}
+  .stfoot .lg span{display:inline-flex;align-items:center;gap:6px}
+  .stfoot .lg b{display:block;width:13px;height:8px;border-radius:1px}
+  .stfoot .lg .sw-n{background:var(--blue)}
+  .stfoot .lg .sw-k{background:var(--rule)}
+
+  .quote{margin-top:20px;border-left:3px solid var(--blue);padding:2px 0 3px 16px;
+    font-size:14.5px;font-weight:700;letter-spacing:-.015em;line-height:1.6}
+
+  /* 결과 없음 검색어 — 박스 없이 헤어라인만 */
+  .none{margin-top:2px}
+  .none li{list-style:none;display:flex;align-items:center;gap:14px;padding:12px 0;
+    border-bottom:1px solid var(--rule-soft)}
+  .none li:last-child{border-bottom:1.5px solid var(--ink)}
+  .none .t{font-size:14px;font-weight:700;letter-spacing:-.01em}
+  .none .n{margin-left:auto;font-size:13.5px;font-weight:600}
+  .none .btn{flex:none;padding:7px 12px;font-size:12px}
+
+  .basis{margin-top:14px;padding-top:12px;border-top:1px solid var(--rule-soft);
+    font-size:11.5px;color:var(--muted);line-height:1.7}
+  .canvas .foot{margin-top:26px}
+</style>
+</head>
+<body>
+<div class="gov-band"></div>
+<a class="skip" href="#main">본문 바로가기</a>
+
+<div class="shell">
+
+  <!-- ══ 좌측 레일 ══ -->
+  <aside class="rail" style="display:flex;flex-direction:column">
+    <div class="brand">
+      <span class="l1">관리자 센터</span>
+      <span class="l2">부산광역시교육청</span>
+      <span class="l3">BOE-AIP / ADMIN</span>
+    </div>
+
+    <section>
+      <div class="lab-kr">관리 메뉴</div>
+      <ul class="facet">
+        <li><span>스킬 관리</span><span class="c">40</span></li>
+        <li><span>회원 관리</span><span class="c">3,180</span></li>
+        <li><span>통계 리포트</span><span class="c">06</span></li>
+        <li class="on"><span>검색어 분석</span><span class="c">08</span></li>
+        <li><span>공지·배너 관리</span><span class="c">3</span></li>
+        <li class="out"><span>로그아웃</span></li>
+      </ul>
+      <button class="btn btn--line newskill" type="button">＋ 새 스킬 등록</button>
+    </section>
+
+    <div class="foothint note">
+      검색어 로그는 매일 03:00 집계됩니다.<br>
+      검색어는 개인 식별 정보를 제거한 뒤 저장되며
+      결과 없음 검색어는 신규 스킬 제작 우선순위에 반영됩니다.
+      <div class="num" style="text-align:left;font-size:10px;margin-top:8px">최종 집계 2026.06.01 03:00</div>
+    </div>
+  </aside>
+
+  <!-- ══ 캔버스 ══ -->
+  <main class="canvas">
+
+    <header class="topbar">
+      <div class="sys">AI 스킬 포털 관리 시스템<em>검색어 분석</em></div>
+      <div class="rt">
+        <button class="btn btn--line" type="button">엑셀 내려받기</button>
+        <div class="who"><b>관리자</b> · 부산광역시교육청 디지털미래교육과</div>
+      </div>
+    </header>
+
+    <div class="body" id="main">
+
+      <div class="phead">
+        <div>
+          <div class="lab">SEARCH KEYWORD ANALYSIS</div>
+          <h2>검색어 분석</h2>
+        </div>
+        <div class="per">
+          <div class="k">집계 기간</div>
+          <div class="v">2026.05.01 ~ 2026.05.31</div>
+        </div>
+      </div>
+
+      <!-- KPI 4 -->
+      <section class="kpi">
+        <div>
+          <div class="k">전체 검색</div>
+          <div class="v"><span class="big">12,480</span><s>회</s>
+            <span class="delta"><i>+9.4%</i></span></div>
+          <div class="m">직전 달(11,410회) 대비 증가</div>
+        </div>
+        <div>
+          <div class="k">상위 8개 검색어</div>
+          <div class="v"><span class="big">5,880</span><s>회</s></div>
+          <div class="m">전체 검색의 47.1% 차지</div>
+        </div>
+        <div>
+          <div class="k">자연어 검색 비율</div>
+          <div class="v"><span class="big">62</span><s>%</s></div>
+          <div class="m">키워드 검색 38%와 합계 100%</div>
+        </div>
+        <div>
+          <div class="k">결과 없음 검색어</div>
+          <div class="v"><span class="big">35</span><s>건</s></div>
+          <div class="m">상위 3개 검색어 합계 기준</div>
+        </div>
+      </section>
+
+      <!-- 01 인기 검색어 -->
+      <div class="sec">
+        <span class="idx">01</span>
+        <h3>인기 검색어</h3>
+        <div class="rt"><span class="count">2026.05.01 ~ 05.31 집계 · 상위 8종</span></div>
+      </div>
+
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th class="r" style="width:56px">순위</th>
+            <th>검색어</th>
+            <th class="r" style="width:112px">검색 횟수</th>
+            <th style="width:308px">결과 클릭률</th>
+            <th style="width:104px">추이</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num lead mid">1</td>
+            <td class="mid"><span class="q">수행평가 문항 생성</span></td>
+            <td class="num mid">1,240회</td>
+            <td class="mid"><div class="rate"><span class="track"><i style="width:88%"></i></span><span class="num pct">88%</span></div></td>
+            <td class="mid"><span class="trend"><i>↑</i>상승</span></td>
+          </tr>
+          <tr>
+            <td class="num mid">2</td>
+            <td class="mid"><span class="q">가정통신문 자동 작성</span></td>
+            <td class="num mid">980회</td>
+            <td class="mid"><div class="rate"><span class="track"><i style="width:82%"></i></span><span class="num pct">82%</span></div></td>
+            <td class="mid"><span class="trend"><i>↑</i>상승</span></td>
+          </tr>
+          <tr>
+            <td class="num mid">3</td>
+            <td class="mid"><span class="q">생활기록부 세특 초안</span></td>
+            <td class="num mid">850회</td>
+            <td class="mid"><div class="rate"><span class="track"><i style="width:75%"></i></span><span class="num pct">75%</span></div></td>
+            <td class="mid"><span class="trend flat"><i>−</i>보합</span></td>
+          </tr>
+          <tr>
+            <td class="num mid">4</td>
+            <td class="mid"><span class="q">학부모 상담 시나리오</span></td>
+            <td class="num mid">720회</td>
+            <td class="mid"><div class="rate"><span class="track"><i style="width:70%"></i></span><span class="num pct">70%</span></div></td>
+            <td class="mid"><span class="trend"><i>↓</i>하락</span></td>
+          </tr>
+          <tr>
+            <td class="num mid">5</td>
+            <td class="mid"><span class="q">과학 실험 안전 가이드</span></td>
+            <td class="num mid">650회</td>
+            <td class="mid"><div class="rate"><span class="track"><i style="width:68%"></i></span><span class="num pct">68%</span></div></td>
+            <td class="mid"><span class="trend"><i>↑</i>상승</span></td>
+          </tr>
+          <tr>
+            <td class="num mid">6</td>
+            <td class="mid"><span class="q">학급 회의록 요약 도구</span></td>
+            <td class="num mid">540회</td>
+            <td class="mid"><div class="rate"><span class="track"><i style="width:65%"></i></span><span class="num pct">65%</span></div></td>
+            <td class="mid"><span class="trend flat"><i>−</i>보합</span></td>
+          </tr>
+          <tr>
+            <td class="num mid">7</td>
+            <td class="mid"><span class="q">기초학력 진단 문항</span></td>
+            <td class="num mid">480회</td>
+            <td class="mid"><div class="rate"><span class="track"><i style="width:60%"></i></span><span class="num pct">60%</span></div></td>
+            <td class="mid"><span class="trend"><i>↑</i>상승</span></td>
+          </tr>
+          <tr>
+            <td class="num mid">8</td>
+            <td class="mid"><span class="q">영어 독해 지문 변형</span></td>
+            <td class="num mid">420회</td>
+            <td class="mid"><div class="rate"><span class="track"><i style="width:58%"></i></span><span class="num pct">58%</span></div></td>
+            <td class="mid"><span class="trend"><i>↓</i>하락</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="tfoot">
+        <span class="count">전체 검색어 1,860종 중 상위 8종 표시</span>
+        <a class="more" href="#">전체 순위 보기 (1-100)</a>
+      </div>
+
+      <p class="basis">결과 클릭률은 해당 검색어로 노출된 스킬을 한 건 이상 열람한 비율이며,
+        추이는 직전 달 순위 대비 변동을 상승·보합·하락 세 단계로 표기합니다.</p>
+
+      <!-- 02 · 03 -->
+      <div class="duo">
+        <div>
+          <div class="sec">
+            <span class="idx">02</span>
+            <h3>검색 유형 비율</h3>
+            <div class="rt"><span class="count">전체 검색 12,480회 기준</span></div>
+          </div>
+
+          <div class="ratio">
+            <div class="lgs">
+              <div class="em">
+                <span class="k">자연어 검색</span>
+                <span class="v">62%</span>
+              </div>
+              <div class="qt">
+                <span class="k">키워드 검색</span>
+                <span class="v">38%</span>
+              </div>
+            </div>
+            <div class="stack">
+              <span class="nl" style="width:62%"></span>
+              <span class="kw" style="width:38%"></span>
+            </div>
+            <div class="stfoot">
+              <div class="lg">
+                <span><b class="sw-n"></b>자연어 검색 7,738회</span>
+                <span><b class="sw-k"></b>키워드 검색 4,742회</span>
+              </div>
+              <span class="count">합계 100%</span>
+            </div>
+          </div>
+
+          <blockquote class="quote">문장형(자연어) 검색이 지난달 대비 12% 증가하였습니다.</blockquote>
+
+          <p class="basis">자연어 검색은 두 어절 이상의 문장형 질의, 키워드 검색은 단일 낱말 질의로 분류합니다.</p>
+        </div>
+
+        <div class="rgt">
+          <div class="sec">
+            <span class="idx">03</span>
+            <h3>결과 없음 검색어</h3>
+            <div class="rt"><span class="count">총 3종 · 35건</span></div>
+          </div>
+          <ul class="none">
+            <li>
+              <span class="t">특수학급 IEP 초안</span>
+              <span class="num n">15건</span>
+              <button class="btn btn--line" type="button">스킬 제작 후보 등록</button>
+            </li>
+            <li>
+              <span class="t">방과후 수강 신청 안내문</span>
+              <span class="num n">12건</span>
+              <button class="btn btn--line" type="button">스킬 제작 후보 등록</button>
+            </li>
+            <li>
+              <span class="t">학교폭력 사안 보고 양식</span>
+              <span class="num n">8건</span>
+              <button class="btn btn--line" type="button">스킬 제작 후보 등록</button>
+            </li>
+          </ul>
+          <p class="basis">검색 결과가 0건이었던 질의입니다. 후보로 등록하면 신규 스킬 제작 검토 목록에 추가됩니다.</p>
+        </div>
+      </div>
+
+      <footer class="foot">
+        <div class="in">
+          <div>
+            <b>부산광역시교육청 디지털미래교육과</b><br>
+            AI 스킬 포털 관리 시스템
+          </div>
+          <div class="num" style="text-align:right;font-size:11px">AIP-2026-05 / REV.02</div>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+</div>
+</body>
+</html>

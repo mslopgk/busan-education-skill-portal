@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>가정통신문 작성 도우미 - 부산광역시교육청 교육용 AI 스킬 포털</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1E3A5F",
+                        "primary-deep": "#16324F",
+                        accent: "#17876D",
+                        surface: "#FFFFFF",
+                        page: "#F5F7FA",
+                        border: "#E2E8F0",
+                        muted: "#64748B",
+                        "warn-text": "#B45309",
+                        "warn-bg": "#FEF3C7"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["'Public Sans'", "sans-serif"],
+                        display: ["'Public Sans'", "sans-serif"],
+                        body: ["'Public Sans'", "sans-serif"],
+                        label: ["'Public Sans'", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; background-color: #F5F7FA; color: #1E3A5F; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0; vertical-align: middle; }
+    </style>
+</head>
+<body>
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-white shadow-sm border-b border-[#E2E8F0]">
+<div class="flex justify-between items-center px-6 h-16 max-w-[1280px] mx-auto">
+<div class="text-xl font-bold text-[#1E3A5F]">부산교육청 AI 스킬 포털</div>
+<nav class="hidden md:flex space-x-6">
+<a class="font-headline text-[15px] font-medium text-[#1E3A5F] hover:text-[#17876D]" href="#">AI 스킬 탐색</a>
+<a class="font-headline text-[15px] font-medium text-[#1E3A5F] hover:text-[#17876D]" href="#">학교급별</a>
+<a class="font-headline text-[15px] font-medium text-[#1E3A5F] hover:text-[#17876D]" href="#">교과별</a>
+<a class="font-headline text-[15px] font-medium text-[#17876D] font-bold border-b-2 border-[#17876D] pb-1" href="#">업무유형별</a>
+<a class="font-headline text-[15px] font-medium text-[#1E3A5F] hover:text-[#17876D]" href="#">활용가이드</a>
+</nav>
+<div class="flex items-center space-x-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2 top-1.5 text-muted text-sm">search</span>
+<input class="pl-8 pr-2 py-1 border border-border rounded text-sm w-32 focus:outline-none focus:border-accent" placeholder="검색" type="text"/>
+</div>
+<button class="border border-primary text-primary px-3 py-1.5 rounded font-medium text-sm hover:bg-page transition-colors">로그인</button>
+</div>
+</div>
+</header>
+<main class="mt-16 max-w-[1280px] mx-auto px-6 py-12">
+<!-- Breadcrumb -->
+<div class="text-sm text-muted mb-6">
+<span>홈</span> <span class="mx-1">&gt;</span> <span>학급경영</span> <span class="mx-1">&gt;</span> <span class="text-primary font-medium">가정통신문 작성 도우미</span>
+</div>
+<div class="flex flex-col lg:flex-row gap-12">
+<!-- Left Content (70%) -->
+<div class="lg:w-[70%]">
+<!-- Title Area -->
+<div class="mb-8">
+<div class="flex space-x-2 mb-3">
+<span class="px-2.5 py-1 bg-page border border-border rounded-full text-xs font-medium text-primary">초등</span>
+<span class="px-2.5 py-1 bg-page border border-border rounded-full text-xs font-medium text-primary">학급경영</span>
+</div>
+<h1 class="text-3xl font-bold text-primary mb-4">가정통신문 작성 도우미</h1>
+<div class="flex items-center space-x-4 text-sm text-muted">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-accent mr-1 text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-primary mr-1">4.8</span>
+<span>(리뷰 21개)</span>
+</div>
+<div class="flex items-center">
+<span class="material-symbols-outlined mr-1 text-[18px]">visibility</span>
+<span>1,248회 조회</span>
+</div>
+</div>
+</div>
+<!-- Tabs -->
+<div class="border-b border-border mb-8 flex space-x-8">
+<button class="pb-3 text-accent font-bold border-b-2 border-accent px-1">설명</button>
+<button class="pb-3 text-muted hover:text-primary font-medium px-1">후기 21</button>
+<button class="pb-3 text-muted hover:text-primary font-medium px-1">개정 이력</button>
+</div>
+<!-- Tab Content: Description -->
+<div class="space-y-10">
+<!-- Purpose -->
+<section>
+<h2 class="text-lg font-bold text-primary mb-3">활용 목적</h2>
+<p class="text-primary leading-relaxed">학부모 대상 가정통신문 초안을 빠르게 작성하여 교사의 업무 부담을 줄이고 정확한 정보를 전달합니다.</p>
+</section>
+<!-- Process -->
+<section>
+<h2 class="text-lg font-bold text-primary mb-4">사용 절차</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="bg-surface border border-border rounded p-4 relative">
+<div class="absolute -top-3 left-4 bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">1</div>
+<h3 class="font-bold text-primary mt-2 mb-2 text-sm">핵심 정보 입력</h3>
+<p class="text-xs text-muted">행사명, 대상 등 입력</p>
+</div>
+<div class="bg-surface border border-border rounded p-4 relative">
+<div class="absolute -top-3 left-4 bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">2</div>
+<h3 class="font-bold text-primary mt-2 mb-2 text-sm">어조 선택</h3>
+<p class="text-xs text-muted">정중함, 친근함 등 선택</p>
+</div>
+<div class="bg-surface border border-border rounded p-4 relative">
+<div class="absolute -top-3 left-4 bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">3</div>
+<h3 class="font-bold text-primary mt-2 mb-2 text-sm">초안 생성</h3>
+<p class="text-xs text-muted">AI 기반 자동 초안 생성</p>
+</div>
+<div class="bg-surface border border-border rounded p-4 relative">
+<div class="absolute -top-3 left-4 bg-accent text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">4</div>
+<h3 class="font-bold text-primary mt-2 mb-2 text-sm">최종 출력 및 배부</h3>
+<p class="text-xs text-muted">내용 확인 후 활용</p>
+</div>
+</div>
+</section>
+<!-- Prompt Example -->
+<section>
+<h2 class="text-lg font-bold text-primary mb-4">입력 예시 (Prompt)</h2>
+<div class="bg-primary-deep rounded-lg p-5 relative group">
+<button class="absolute top-4 right-4 flex items-center space-x-1 text-white/70 hover:text-white transition-colors bg-white/10 px-2 py-1 rounded text-xs border border-white/20">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span>복사</span>
+</button>
+<p class="text-white font-mono text-sm leading-relaxed pr-16">
+                                "2026학년도 1학기 학부모 상담주간 안내 가정통신문을 작성해 주세요.<br/>
+                                대상: 초등 3학년 학부모 / 어조: 정중하고 간결하게 / 포함 내용: 기간, 신청 방법, 문의처"
+                            </p>
+</div>
+</section>
+</div>
+</div>
+<!-- Right Sidebar (30%) -->
+<div class="lg:w-[30%] space-y-6">
+<!-- Action Card -->
+<div class="bg-surface border border-border rounded-lg p-6 shadow-sm">
+<button class="w-full bg-primary text-white font-bold py-3 px-4 rounded mb-3 hover:bg-opacity-90 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined mr-2">download</span>
+                        파일 내려받기 (.zip)
+                    </button>
+<button class="w-full border border-primary text-primary font-bold py-3 px-4 rounded mb-5 hover:bg-page transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined mr-2">description</span>
+                        README 미리보기
+                    </button>
+<div class="bg-page text-muted p-3 rounded text-xs leading-relaxed border border-border">
+                        본 스킬은 부산광역시교육청 소속 교직원 전용 콘텐츠입니다. 비영리 교육 목적으로만 활용 가능합니다.
+                    </div>
+</div>
+<!-- Stats Card -->
+<div class="bg-surface border border-border rounded-lg p-6 shadow-sm">
+<h3 class="font-bold text-primary mb-4 text-sm">콘텐츠 통계</h3>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<div class="text-xs text-muted mb-1">총 활용</div>
+<div class="font-bold text-primary">3.2k</div>
+</div>
+<div>
+<div class="text-xs text-muted mb-1">인기 순위</div>
+<div class="font-bold text-primary">Top 5</div>
+</div>
+<div>
+<div class="text-xs text-muted mb-1">최근 개정</div>
+<div class="font-bold text-primary">2026.05.10</div>
+</div>
+<div>
+<div class="text-xs text-muted mb-1">개정 횟수</div>
+<div class="font-bold text-primary">3회</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section -->
+<div class="mt-16 border-t border-border pt-12">
+<h2 class="text-xl font-bold text-primary mb-6">함께 많이 찾은 스킬</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface border border-border rounded-lg p-5 hover:shadow-md transition-shadow cursor-pointer">
+<div class="mb-3"><span class="px-2 py-1 bg-page border border-border rounded-full text-[11px] font-medium text-primary">행정</span></div>
+<h3 class="font-bold text-primary text-lg mb-2">공문 요약 알리미</h3>
+<p class="text-sm text-muted mb-4 line-clamp-2">긴 공문서의 핵심 내용을 3줄 요약해 드립니다.</p>
+<div class="flex items-center text-sm">
+<span class="material-symbols-outlined text-accent text-[16px] mr-1" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-primary">4.6</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-[#F5F7FA] border-t border-[#E2E8F0] mt-12 py-8">
+<div class="max-w-[1280px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="text-sm font-bold text-[#1E3A5F]">부산광역시교육청 교육용 AI 스킬 포털</div>
+<div class="flex space-x-6 font-body text-sm text-[#64748B]">
+<a class="hover:text-[#1E3A5F] hover:underline" href="#">이용약관</a>
+<a class="text-[#1E3A5F] font-bold hover:underline" href="#">개인정보처리방침</a>
+<a class="hover:text-[#1E3A5F] hover:underline" href="#">이메일무단수집거부</a>
+<a class="hover:text-[#1E3A5F] hover:underline" href="#">찾아오시는길</a>
+</div>
+<div class="text-sm text-[#64748B] text-center md:text-right">
+                © 2026 Busan Metropolitan City Office of Education. All rights reserved.
+            </div>
+</div>
+</footer>
+</body></html>

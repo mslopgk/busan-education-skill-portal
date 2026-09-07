@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>부산교육청 AI 스킬 포털 — AI 자연어 검색 결과</title>
+<link rel="stylesheet" href="site/_base.css">
+<style>
+/* ── 이 화면 전용 배치만. 토큰·색·컴포넌트 재정의 없음 ── */
+
+/* 머리: 전역 메뉴 + 로그인 사용자 (s-b-main 과 동일) */
+.mast .rt{display:flex;align-items:flex-end;gap:22px}
+.mast .who{font-size:12.5px;color:var(--muted);letter-spacing:-.01em;white-space:nowrap}
+.mast .who b{color:var(--ink);font-weight:700}
+.mast .who .bar{display:inline-block;width:1px;height:10px;background:var(--rule);
+  margin-inline:9px;vertical-align:-1px}
+
+/* 머리 줄 */
+.phead{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;
+  padding-block:28px 16px}
+.phead h2{margin-top:7px}
+.phead .rt{text-align:right;flex:none}
+.phead .rt .k{font-size:10.5px;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+.phead .rt .v{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;
+  letter-spacing:-.01em;margin-top:2px}
+
+/* 질의 줄 */
+.qrow{display:flex;align-items:center;gap:14px;padding-block:13px;
+  border-block:1px solid var(--rule)}
+.qrow label{flex:none}
+.qrow .search{max-width:none;flex:1}
+.qrow .search input{font-size:14.5px;font-weight:500}
+.qrow .btn{flex:none}
+.tagrow{display:flex;align-items:center;gap:10px;padding-block:11px 0}
+.tagrow .lab-kr{flex:none;margin-right:2px}
+.tagrow .count{margin-left:auto}
+
+/* 3단 — 좌측 분류 레일 · 결과 · 우측 보조 */
+.shell{align-items:stretch;grid-template-columns:220px minmax(0,1fr) 200px;
+  column-gap:34px;padding-top:4px}
+.rail{padding:24px 20px 26px 0}
+.rail section:last-of-type{margin-bottom:20px}
+.canvas{min-width:0;padding-top:24px}
+.aside{border-left:1px solid var(--rule);padding:24px 0 26px 26px}
+.aside section{margin-bottom:22px}
+
+/* 조건 목록(분석 결과) */
+.cond{list-style:none;margin-top:8px}
+.cond li{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  padding-block:5px;border-bottom:1px solid var(--rule-soft)}
+.cond li:last-child{border-bottom:0}
+.cond li span{font-size:12px;color:var(--muted)}
+.cond li b{font-size:12.5px;font-weight:700;text-align:right}
+
+/* 섹션 리듬 */
+.blk{margin-top:28px}
+.blk:first-child{margin-top:0}
+.sec .rt{margin-left:auto;font-size:11.5px;color:var(--muted);font-weight:500}
+.tbl tbody td.mid{vertical-align:middle}
+.tbl .why{font-size:12px;color:var(--muted);margin-top:4px}
+.tbl .hit{font-size:12.5px;color:var(--muted);white-space:nowrap}
+.tbl .pct{font-family:var(--mono);font-size:16px;font-weight:600;
+  font-variant-numeric:tabular-nums;letter-spacing:-.02em;text-align:right;white-space:nowrap}
+.basis{margin-top:13px;padding-top:11px;border-top:1px solid var(--rule-soft);
+  font-size:11.5px;color:var(--muted);line-height:1.7}
+
+/* 안내 문구만 두는 블록 — 버튼 없음 */
+.ask{margin-top:26px;padding-top:13px;border-top:1px solid var(--rule);
+  font-size:12.5px;color:var(--muted);line-height:1.7}
+.ask b{color:var(--ink);font-weight:700}
+
+/* 우측 보조 */
+.qsug{list-style:none;margin-top:6px}
+.qsug li{padding-block:9px;border-bottom:1px solid var(--rule-soft);
+  font-size:12.5px;line-height:1.55;letter-spacing:-.01em}
+.qsug li:last-child{border-bottom:1px solid var(--rule)}
+.tagcloud{margin-top:8px;display:flex;flex-wrap:wrap;gap:5px}
+.tagcloud .bdg{margin-right:0}
+.aside .note{font-size:11px;color:var(--muted);line-height:1.6;
+  border-top:1px solid var(--rule-soft);padding-top:12px}
+</style>
+</head>
+<body>
+
+<div class="gov-band"></div>
+
+<div class="parent">
+  <div class="wrap wrap--wide in">
+    <a class="skip" href="#main">본문 바로가기</a>
+    <span></span>
+    <span>부산광역시교육청 디지털미래교육과 · AI 스킬 포털</span>
+  </div>
+</div>
+
+<header class="mast">
+  <div class="wrap wrap--wide in">
+    <div class="mark">
+      <b>부산교육청 AI 스킬 포털</b>
+      <span class="code">BOE-AIP</span>
+    </div>
+    <div class="rt">
+      <nav class="gnb">
+        <a class="on" href="#main">AI 스킬 탐색</a>
+        <a href="#">컬렉션</a>
+        <a href="#">공지</a>
+      </nav>
+      <span class="who"><b>박 교사님</b><span class="bar"></span>로그아웃</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap wrap--wide" id="main">
+
+  <div class="phead">
+    <div>
+      <div class="lab">AI SEARCH RESULT</div>
+      <h2>AI 자연어 검색 결과</h2>
+    </div>
+    <div class="rt">
+      <div class="k">게시 스킬</div>
+      <div class="v">40종 · 추천 3종 · 키워드 일치 3종</div>
+    </div>
+  </div>
+
+  <!-- 질의 문장 — 입력된 상태 -->
+  <div class="qrow">
+    <label class="lab-kr" for="q">질의 문장</label>
+    <div class="search">
+      <input id="q" type="text" value="중학교 2학년 과학 수행평가 문항을 만들고 싶다">
+    </div>
+    <button type="button" class="btn btn--fill">분석 및 검색</button>
+  </div>
+
+  <div class="tagrow">
+    <span class="lab-kr">연관 태그</span>
+    <span class="bdg">중학교 2학년</span>
+    <span class="bdg">과학</span>
+    <span class="bdg">수행평가</span>
+    <span class="count">문장을 학교급 · 교과 · 업무유형으로 나누어 분석했습니다</span>
+  </div>
+
+  <div class="shell">
+
+    <!-- ══ 좌측 레일 — 업무유형 축 ══ -->
+    <aside class="rail">
+      <section>
+        <div class="lab-kr">업무유형</div>
+        <ul class="facet">
+          <li><span>수업</span><span class="c">10</span></li>
+          <li class="on"><span>평가</span><span class="c">9</span></li>
+          <li><span>학급경영</span><span class="c">6</span></li>
+          <li><span>행정</span><span class="c">7</span></li>
+          <li><span>특수 · 상담</span><span class="c">4</span></li>
+          <li><span>학교 실무</span><span class="c">4</span></li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="lab-kr">분석된 조건</div>
+        <ul class="cond">
+          <li><span>학교급</span><b>중학교 2학년</b></li>
+          <li><span>교과</span><b>과학</b></li>
+          <li><span>업무유형</span><b>평가</b></li>
+        </ul>
+      </section>
+
+      <div class="note">
+        업무유형 6개 구분의 합은 게시 스킬 총 40종과 같습니다.
+        질의 문장에서 분석된 업무유형이 먼저 선택됩니다.
+        <div class="num" style="text-align:left;font-size:10px;margin-top:8px">최종 갱신 2026.11.10</div>
+      </div>
+    </aside>
+
+    <!-- ══ 결과 ══ -->
+    <div class="canvas">
+
+      <section class="blk">
+        <div class="sec">
+          <span class="idx">01</span><h2>AI 추천 결과</h2>
+          <span class="rt">분석된 의도와의 일치도 순으로 제시합니다</span>
+        </div>
+
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th class="r" style="width:74px">일치율</th>
+              <th>스킬</th>
+              <th class="r" style="width:74px">조회</th>
+              <th class="r" style="width:74px">사용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="pct lead mid">96%</td>
+              <td>
+                <div class="t">수행평가 문항 초안 생성</div>
+                <div class="why">AI 추천 이유: 중등 과학 · 평가 유형 일치</div>
+              </td>
+              <td class="num mid">1,200</td>
+              <td class="num num--dl mid">842</td>
+            </tr>
+            <tr>
+              <td class="pct lead mid">89%</td>
+              <td>
+                <div class="t">과학 실험 보고서 평가 루브릭</div>
+                <div class="why">AI 추천 이유: 중등 과학 · 평가 유형 일치</div>
+              </td>
+              <td class="num mid">850</td>
+              <td class="num num--dl mid">521</td>
+            </tr>
+            <tr>
+              <td class="pct lead mid">84%</td>
+              <td>
+                <div class="t">서술형 채점 기준표 생성</div>
+                <div class="why">AI 추천 이유: 중등 과학 · 평가 유형 일치</div>
+              </td>
+              <td class="num mid">620</td>
+              <td class="num num--dl mid">355</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="basis">일치율은 질의 문장에서 분석된 학교급 · 교과 · 업무유형이 스킬의 표준 서식 항목과
+          얼마나 겹치는지를 나타냅니다. 조회 · 사용 수치는 게시 이후 누적 기준입니다.</p>
+      </section>
+
+      <section class="blk">
+        <div class="sec">
+          <span class="idx">02</span><h2>키워드 일치 결과</h2>
+          <span class="rt">질의에 포함된 낱말과 직접 일치</span>
+        </div>
+
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>스킬</th>
+              <th style="width:104px">업무유형</th>
+              <th style="width:96px">일치 낱말</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="t">교과 세부능력 및 특기사항 초안</div>
+                  <div class="why">과학 등 교과별 학습 발달상황 기록 문장 초안을 작성합니다</div></td>
+              <td class="mid"><span class="bdg">행정</span></td>
+              <td class="mid hit">과학</td>
+            </tr>
+            <tr>
+              <td><div class="t">과학 실험 안전 지도안</div>
+                  <div class="why">실험 주제별 안전 수칙과 지도 시나리오를 생성합니다</div></td>
+              <td class="mid"><span class="bdg">수업</span></td>
+              <td class="mid hit">과학</td>
+            </tr>
+            <tr>
+              <td><div class="t">수행평가 통계 분석</div>
+                  <div class="why">수행평가 결과를 성취기준별 분포로 정리합니다</div></td>
+              <td class="mid"><span class="bdg">평가</span></td>
+              <td class="mid hit">수행평가</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <p class="ask"><b>찾으시는 결과가 없나요?</b> 검색어는 자동 수집되어 신규 스킬 제작
+        우선순위에 반영됩니다.</p>
+    </div>
+
+    <!-- ══ 우측 보조 ══ -->
+    <aside class="aside">
+      <section>
+        <div class="lab-kr">이런 질문은 어때요?</div>
+        <ul class="qsug">
+          <li>중학교 과학 실험 안전 수칙을 정리하고 싶다</li>
+          <li>서술형 답안 채점 기준을 만들고 싶다</li>
+          <li>학기말 수행평가 결과를 표로 정리하고 싶다</li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="lab-kr">인기 분류</div>
+        <div class="tagcloud">
+          <span class="bdg">#2022개정교육과정</span>
+          <span class="bdg">#수행평가</span>
+          <span class="bdg">#서술형평가</span>
+          <span class="bdg">#중등과학</span>
+          <span class="bdg">#생활기록부</span>
+        </div>
+      </section>
+
+      <div class="note">
+        추천은 문장 분석 결과에 따라 달라집니다. 결과를 그대로 사용하기 전
+        담당 교사의 검토가 필요합니다.
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap wrap--wide in">
+    <div>
+      <b>부산교육청 AI 스킬 포털</b><br>
+      부산광역시교육청 디지털미래교육과 · 부산광역시 부산진구 화지로 12
+    </div>
+    <div class="num">AIP-2026-SEARCH / REV.01</div>
+  </div>
+</footer>
+
+</body>
+</html>

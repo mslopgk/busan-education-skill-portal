@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<title>디자인 시안 검토 — 12종</title>
+<link rel="stylesheet" href="site/_base.css">
+<style>
+  body{background:var(--white)}
+  .page{max-width:1280px;margin:0 auto;padding:34px 44px 40px}
+  .head{display:flex;justify-content:space-between;align-items:flex-end;
+        border-bottom:1.5px solid var(--ink);padding-bottom:12px;margin-bottom:6px}
+  .head h1{font-size:27px;letter-spacing:-.03em}
+  .head .meta{font-family:var(--mono);font-size:11px;color:var(--muted);
+        text-align:right;line-height:1.7;font-variant-numeric:tabular-nums}
+  .lede{font-size:13px;color:var(--muted);margin:14px 0 22px;max-width:96ch;line-height:1.75}
+  .lede b{color:var(--ink);font-weight:700}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px 18px}
+  .cell .shot{border:1px solid var(--rule);background:var(--canvas);
+        aspect-ratio:760/950;overflow:hidden;display:block}
+  .cell .shot img{width:100%;display:block}
+  .cell.pick .shot{border:2px solid var(--blue)}
+  .cap{display:flex;align-items:baseline;gap:7px;margin-top:8px}
+  .cap .n{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--blue);
+        font-variant-numeric:tabular-nums}
+  .cap .t{font-size:13px;font-weight:700;letter-spacing:-.01em}
+  .cap .p{font-family:var(--mono);font-size:9.5px;font-weight:600;color:#fff;
+        background:var(--blue);padding:1px 5px;border-radius:2px;margin-left:auto}
+  .d{font-size:11.5px;color:var(--muted);line-height:1.55;margin-top:3px}
+  .r{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:4px;
+        font-variant-numeric:tabular-nums}
+  .note{margin-top:26px;border-top:1px solid var(--rule);padding-top:14px;
+        display:flex;gap:34px;font-size:12px;color:var(--muted);line-height:1.7}
+  .note b{color:var(--ink);font-weight:700}
+  .note>div{flex:1}
+</style></head><body>
+<div class="gov-band"></div>
+<div class="page">
+  <div class="head">
+    <div>
+      <div class="lab" style="margin-bottom:7px">DESIGN REVIEW</div>
+      <h1>화면 디자인 시안 검토 — 12종</h1>
+    </div>
+    <div class="meta">
+      검토 대상 &nbsp;스킬 목록 화면<br>
+      시안 &nbsp;12종 · 채택 &nbsp;3종 융합<br>
+      AIS-2026-DR / REV.01
+    </div>
+  </div>
+
+  <p class="lede">
+    동일한 내용(서비스명·문구·분류 축·스킬 6종·수치·공지 3건)을 고정한 상태에서 <b>디자인 문법만 달리한 12종</b>을 제작해
+    비교 검토하였다. 서체·색·레이아웃 문법이 서로 겹치지 않도록 분리하고, 12종 전부에 대해 내용 준수 검사를 통과시켰다.
+    검토 결과 <b>D7 도구형 앱셸 · D9 표 인덱스 · D12 신관공서</b> 세 방향을 융합한 안을 추진 방향으로 확정하였다 —
+    축소 인쇄에서 판독성이 유지되고, 관내 교원의 반복 업무에 맞는 밀도를 확보하며, 공공기관 화면으로서의 격식을 지킨다.
+  </p>
+
+  <div class="grid">
+    <div class="cell"><a class="shot"><img src="thumb/d01-editorial-serif.png" alt="편집형 인덱스 시안"></a>
+      <div class="cap"><span class="n">D1</span><span class="t">편집형 인덱스</span></div>
+      <div class="d">명조 대형 헤드라인 · 5열 헤어라인 원장 · 카드 0개</div><div class="r">비율 1.90</div></div>
+
+    <div class="cell"><a class="shot"><img src="thumb/d02-dark-precision.png" alt="다크 정밀 시안"></a>
+      <div class="cap"><span class="n">D2</span><span class="t">다크 정밀</span></div>
+      <div class="d">계기 레일 · 숫자 열 수직 구획 · 다운로드 비례 바</div><div class="r">비율 1.15</div></div>
+
+    <div class="cell"><a class="shot"><img src="thumb/d03-brutalist.png" alt="브루탈리스트 시안"></a>
+      <div class="cap"><span class="n">D3</span><span class="t">브루탈리스트</span></div>
+      <div class="d">2px 검정 밴드 · 12칼럼 격자 노출 · 불균일 블록</div><div class="r">비율 1.82</div></div>
+
+    <div class="cell"><a class="shot"><img src="thumb/d04-hangul-poster.png" alt="한글 포스터 시안"></a>
+      <div class="cap"><span class="n">D4</span><span class="t">한글 포스터</span></div>
+      <div class="d">초대형 한글 디스플레이 · 색면 분할 · 기하 도형</div><div class="r">비율 2.31</div></div>
+
+    <div class="cell"><a class="shot"><img src="thumb/d05-quiet-minimal.png" alt="정적 미니멀 시안"></a>
+      <div class="cap"><span class="n">D5</span><span class="t">정적 미니멀</span></div>
+      <div class="d">12칼럼 중 7칼럼만 사용 · 박스 0개 · 극단적 여백</div><div class="r">비율 2.55</div></div>
+
+    <div class="cell"><a class="shot"><img src="thumb/d06-catalog-mono.png" alt="카탈로그 모노 시안"></a>
+      <div class="cap"><span class="n">D6</span><span class="t">카탈로그 모노</span></div>
+      <div class="d">분류 거터 정렬 · 괘선 원장 · 등폭 분류기호</div><div class="r">비율 1.25</div></div>
+
+    <div class="cell pick"><a class="shot"><img src="thumb/d07-app-shell.png" alt="도구형 앱셸 시안"></a>
+      <div class="cap"><span class="n">D7</span><span class="t">도구형 앱셸</span><span class="p">채택</span></div>
+      <div class="d">좌측 패싯 레일 · 컴팩트 툴바 · 단축키 힌트</div><div class="r">비율 0.82</div></div>
+
+    <div class="cell"><a class="shot"><img src="thumb/d08-magazine.png" alt="잡지 비대칭 시안"></a>
+      <div class="cap"><span class="n">D8</span><span class="t">잡지 비대칭</span></div>
+      <div class="d">명조 마스트헤드 · 색면 오버랩 · 2단 비대칭</div><div class="r">비율 1.64</div></div>
+
+    <div class="cell pick"><a class="shot"><img src="thumb/d09-data-table.png" alt="표 인덱스 시안"></a>
+      <div class="cap"><span class="n">D9</span><span class="t">표 인덱스</span><span class="p">채택</span></div>
+      <div class="d">실제 표 · 제브라 · 우측정렬 등폭 수치</div><div class="r">비율 0.95</div></div>
+
+    <div class="cell"><a class="shot"><img src="thumb/d10-warm-grain.png" alt="웜 그레인 시안"></a>
+      <div class="cap"><span class="n">D10</span><span class="t">웜 그레인</span></div>
+      <div class="d">인쇄물 질감 · 손그림 구분선 · 도장형 표기</div><div class="r">비율 2.07</div></div>
+
+    <div class="cell"><a class="shot"><img src="thumb/d11-split.png" alt="분할 캔버스 시안"></a>
+      <div class="cap"><span class="n">D11</span><span class="t">분할 캔버스</span></div>
+      <div class="d">좌 컬러필드 제어판 / 우 목록 · 경계 1회 교차</div><div class="r">비율 0.94</div></div>
+
+    <div class="cell pick"><a class="shot"><img src="thumb/d12-modern-institution.png" alt="신관공서 시안"></a>
+      <div class="cap"><span class="n">D12</span><span class="t">신관공서</span><span class="p">채택</span></div>
+      <div class="d">기관 띠 · 엄정한 12칼럼 · 관리번호 · 건너뛰기 링크</div><div class="r">비율 1.83</div></div>
+  </div>
+
+  <div class="note">
+    <div><b>검토 기준</b><br>
+      축소 인쇄 시 판독성 · 반복 업무에 맞는 정보 밀도 · 공공기관 화면으로서의 격식 ·
+      웹 접근성(KWCAG 2.2) 적용 용이성 · 지면 효율(세로 비율)</div>
+    <div><b>융합 결과</b><br>
+      D7 의 패싯 레일과 컴팩트 툴바, D9 의 표 인덱스와 등폭 수치, D12 의 기관 띠·12칼럼 격자·관리번호를
+      하나의 문법으로 통합해 전 화면에 동일하게 적용하였다.</div>
+  </div>
+</div>
+</body></html>

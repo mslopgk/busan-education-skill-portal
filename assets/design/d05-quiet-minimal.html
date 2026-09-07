@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>부산교육청 교육용 AI 스킬 아카이브</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --paper:#FCFCFA;
+  --ink:#111315;
+  --muted:#7B8286;
+  --forest:#1B4D3E;
+  --rule:rgba(17,19,21,.14);
+  --rule-soft:rgba(17,19,21,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;border-radius:0;}
+html{-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Pretendard',sans-serif;
+  font-weight:400;
+  word-break:keep-all;
+}
+.wrap{width:1280px;margin:0 auto;padding:0 100px;}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:20px;}
+.main{grid-column:1 / 9;}
+.rail{grid-column:10 / 13;}
+.rule{height:1px;background:var(--rule);width:100%;}
+.rule-soft{height:1px;background:var(--rule-soft);width:100%;}
+
+/* ---- micro type ---- */
+.micro{
+  font-size:10.5px;font-weight:600;letter-spacing:.26em;
+  text-transform:none;color:var(--muted);line-height:1;
+}
+.micro.ink{color:var(--ink);}
+.micro.acc{color:var(--forest);}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;}
+
+/* ---- header ---- */
+header{padding-top:64px;}
+.hrow{display:flex;align-items:baseline;justify-content:space-between;padding-bottom:26px;}
+.mark{font-size:13px;letter-spacing:-.005em;line-height:1;}
+.mark b{font-weight:700;}
+.mark span{font-weight:300;color:var(--muted);margin-left:9px;}
+nav{display:flex;gap:38px;}
+nav a{
+  font-size:12.5px;font-weight:400;color:var(--muted);
+  text-decoration:none;letter-spacing:.02em;line-height:1;
+}
+nav a.on{color:var(--ink);font-weight:600;}
+
+/* ---- hero ---- */
+.hero{padding-top:150px;}
+.tick{width:26px;height:1px;background:var(--forest);margin-bottom:22px;}
+.eyebrow{margin-bottom:46px;}
+h1{
+  font-size:82px;font-weight:300;line-height:1.04;letter-spacing:-.048em;
+}
+h1 em{font-style:normal;font-weight:700;}
+.sub{
+  margin-top:54px;max-width:520px;
+  font-size:17px;font-weight:300;line-height:1.78;color:var(--muted);
+  letter-spacing:-.012em;
+}
+.sub .nb{white-space:nowrap;}
+.rail-hero{padding-top:10px;text-align:right;}
+.stat{margin-bottom:44px;}
+.stat .k{display:block;margin-bottom:15px;}
+.stat .v{
+  font-size:24px;font-weight:300;letter-spacing:-.022em;line-height:1;color:var(--ink);
+}
+.stat .v.acc{color:var(--forest);font-weight:500;}
+
+/* ---- search ---- */
+.search{padding-top:158px;}
+.search .lab{margin-bottom:22px;}
+.sfield{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding-bottom:20px;}
+.sfield input{
+  flex:1;border:0;outline:0;background:transparent;
+  font-family:inherit;font-size:24px;font-weight:300;color:var(--ink);
+  letter-spacing:-.024em;line-height:1.2;
+}
+.sfield input::placeholder{color:var(--muted);opacity:1;font-weight:300;}
+.sbtn{font-size:19px;font-weight:300;color:var(--forest);white-space:nowrap;padding-bottom:2px;line-height:1;}
+.search .rule{background:rgba(17,19,21,.4);}
+
+/* ---- filters ---- */
+.filters{padding-top:74px;}
+.fr{display:flex;align-items:baseline;gap:40px;padding:20px 0;}
+.fr .k{width:72px;flex:none;padding-top:2px;letter-spacing:.18em;}
+.opts{display:flex;flex-wrap:wrap;gap:0 34px;}
+.opts a{
+  text-decoration:none;font-size:15px;font-weight:400;color:var(--muted);
+  letter-spacing:-.01em;line-height:1.4;padding-bottom:5px;
+}
+.opts a.on{color:var(--ink);font-weight:700;border-bottom:1px solid var(--forest);}
+
+/* ---- list ---- */
+.listhead{display:flex;align-items:baseline;justify-content:space-between;padding-top:96px;padding-bottom:22px;}
+.lh-l{display:flex;align-items:baseline;gap:18px;}
+.lh-l .c{font-size:11px;font-weight:400;color:var(--muted);letter-spacing:.06em;}
+.sort{display:flex;align-items:baseline;gap:20px;}
+.sort a{text-decoration:none;font-size:12px;color:var(--muted);letter-spacing:.02em;}
+.sort a.on{color:var(--ink);font-weight:700;}
+.sort .dot{width:2px;height:2px;background:var(--rule);display:inline-block;transform:translateY(-4px);}
+
+.row{padding:48px 0 50px;align-items:start;}
+.sep .rule-soft{margin:0;}
+.badges{display:flex;align-items:baseline;gap:18px;margin-bottom:20px;}
+.idx{font-size:10.5px;font-weight:400;color:var(--muted);letter-spacing:.1em;}
+.bd{font-size:10.5px;font-weight:600;letter-spacing:.24em;color:var(--ink);}
+.bd i{font-style:normal;color:var(--muted);font-weight:400;margin:0 7px;}
+.row h3{
+  font-size:27px;font-weight:500;letter-spacing:-.032em;line-height:1.28;
+}
+.row p{
+  margin-top:14px;max-width:470px;
+  font-size:14.5px;font-weight:300;line-height:1.72;color:var(--muted);letter-spacing:-.012em;
+}
+.metrics{text-align:right;padding-top:6px;}
+.metrics div{margin-bottom:20px;}
+.metrics .k{display:block;margin-bottom:10px;font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--muted);}
+.metrics .v{font-size:16px;font-weight:400;letter-spacing:0;color:var(--ink);}
+.more{padding-top:34px;border-top:1px solid var(--rule);}
+.more a{text-decoration:none;font-size:12px;font-weight:600;letter-spacing:.2em;color:var(--forest);}
+
+/* ---- notice ---- */
+.notice{padding-top:132px;}
+.nlist{padding-top:6px;}
+.nitem{display:flex;align-items:baseline;gap:36px;padding:20px 0;}
+.nitem .d{font-size:12.5px;font-weight:400;color:var(--muted);letter-spacing:.03em;flex:none;}
+.nitem .t{font-size:16px;font-weight:400;letter-spacing:-.02em;color:var(--ink);line-height:1.5;}
+
+/* ---- footer ---- */
+footer{margin-top:132px;padding:28px 0 84px;}
+.frow{display:flex;align-items:baseline;justify-content:space-between;}
+.fname{font-size:14px;font-weight:600;letter-spacing:-.01em;}
+.fmeta{font-size:11px;font-weight:300;color:var(--muted);letter-spacing:.04em;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="hrow">
+      <div class="mark"><b>부산교육청</b><span>교육용 AI 스킬 아카이브</span></div>
+      <nav>
+        <a href="#" class="on">스킬 목록</a>
+        <a href="#">이용 안내</a>
+        <a href="#">공지사항</a>
+      </nav>
+    </div>
+    <div class="rule"></div>
+  </header>
+
+  <section class="hero grid">
+    <div class="main">
+      <div class="tick"></div>
+      <div class="micro acc eyebrow">로그인 없이 이용</div>
+      <h1>수업 준비,<br><em>검증된 AI 스킬로</em><br>시작하세요</h1>
+      <p class="sub">수업·평가·학급경영·행정에 바로 쓰는 교육용 AI 스킬 아카이브 —<span class="nb"> 로그인 없이 즉시 이용</span></p>
+    </div>
+    <div class="rail rail-hero">
+      <div class="stat">
+        <span class="k micro">등록 스킬</span>
+        <span class="v num acc">10종</span>
+      </div>
+      <div class="stat">
+        <span class="k micro">최근 갱신</span>
+        <span class="v num">2026.10.12</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="search grid">
+    <div class="main">
+      <div class="lab micro ink">검색</div>
+      <div class="sfield">
+        <input type="text" placeholder="예) 수행평가 문항, 가정통신문, 회의록 요약">
+        <span class="sbtn">→</span>
+      </div>
+      <div class="rule"></div>
+    </div>
+  </section>
+
+  <section class="filters grid">
+    <div class="main">
+      <div class="fr">
+        <div class="k micro">학교급</div>
+        <div class="opts">
+          <a href="#" class="on">전체</a><a href="#">유치원</a><a href="#">초등</a><a href="#">중등</a><a href="#">고등</a><a href="#">특수</a>
+        </div>
+      </div>
+      <div class="rule-soft"></div>
+      <div class="fr">
+        <div class="k micro">업무유형</div>
+        <div class="opts">
+          <a href="#">수업</a><a href="#">평가</a><a href="#">학급경영</a><a href="#">행정</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="list">
+    <div class="listhead">
+      <div class="lh-l">
+        <span class="micro ink">스킬 목록</span>
+        <span class="c num">6 / 10종</span>
+      </div>
+      <div class="sort">
+        <a href="#" class="on">최신순</a>
+        <span class="dot"></span>
+        <a href="#">다운로드순</a>
+      </div>
+    </div>
+    <div class="rule"></div>
+
+    <article class="row grid">
+      <div class="main">
+        <div class="badges"><span class="idx num">01</span><span class="bd">중등<i>·</i>평가</span></div>
+        <h3>수행평가 문항 초안 생성</h3>
+        <p>성취기준에 맞는 서술형 수행평가 문항 초안을 생성합니다</p>
+      </div>
+      <div class="rail metrics">
+        <div><span class="k">조회</span><span class="v num">1,240</span></div>
+        <div><span class="k">다운로드</span><span class="v num">312</span></div>
+      </div>
+    </article>
+
+    <div class="grid sep"><div class="main"><div class="rule-soft"></div></div></div>
+    <article class="row grid">
+      <div class="main">
+        <div class="badges"><span class="idx num">02</span><span class="bd">초등<i>·</i>학급경영</span></div>
+        <h3>가정통신문 작성 도우미</h3>
+        <p>행사·안내 목적에 맞는 가정통신문 초안을 작성합니다</p>
+      </div>
+      <div class="rail metrics">
+        <div><span class="k">조회</span><span class="v num">980</span></div>
+        <div><span class="k">다운로드</span><span class="v num">320</span></div>
+      </div>
+    </article>
+
+    <div class="grid sep"><div class="main"><div class="rule-soft"></div></div></div>
+    <article class="row grid">
+      <div class="main">
+        <div class="badges"><span class="idx num">03</span><span class="bd">공통<i>·</i>행정</span></div>
+        <h3>학급 회의록 요약</h3>
+        <p>회의 기록을 항목별 결정 사항 중심으로 요약합니다</p>
+      </div>
+      <div class="rail metrics">
+        <div><span class="k">조회</span><span class="v num">850</span></div>
+        <div><span class="k">다운로드</span><span class="v num">150</span></div>
+      </div>
+    </article>
+
+    <div class="grid sep"><div class="main"><div class="rule-soft"></div></div></div>
+    <article class="row grid">
+      <div class="main">
+        <div class="badges"><span class="idx num">04</span><span class="bd">중등<i>·</i>수업</span></div>
+        <h3>과학 실험 안전 지도안</h3>
+        <p>실험 주제별 안전 수칙과 지도 시나리오를 생성합니다</p>
+      </div>
+      <div class="rail metrics">
+        <div><span class="k">조회</span><span class="v num">1,100</span></div>
+        <div><span class="k">다운로드</span><span class="v num">560</span></div>
+      </div>
+    </article>
+
+    <div class="grid sep"><div class="main"><div class="rule-soft"></div></div></div>
+    <article class="row grid">
+      <div class="main">
+        <div class="badges"><span class="idx num">05</span><span class="bd">고등<i>·</i>수업</span></div>
+        <h3>영어 독해 지문 변형</h3>
+        <p>수준별 어휘·길이로 독해 지문을 재구성합니다</p>
+      </div>
+      <div class="rail metrics">
+        <div><span class="k">조회</span><span class="v num">2,100</span></div>
+        <div><span class="k">다운로드</span><span class="v num">890</span></div>
+      </div>
+    </article>
+
+    <div class="grid sep"><div class="main"><div class="rule-soft"></div></div></div>
+    <article class="row grid">
+      <div class="main">
+        <div class="badges"><span class="idx num">06</span><span class="bd">공통<i>·</i>학급경영</span></div>
+        <h3>학부모 상담 준비 질문지</h3>
+        <p>상담 목적별 질문지와 안내 문구를 준비합니다</p>
+      </div>
+      <div class="rail metrics">
+        <div><span class="k">조회</span><span class="v num">1,500</span></div>
+        <div><span class="k">다운로드</span><span class="v num">410</span></div>
+      </div>
+    </article>
+
+    <div class="more grid">
+      <div class="main"><a href="#">전체 10종 보기</a></div>
+    </div>
+  </section>
+
+  <section class="notice grid">
+    <div class="main">
+      <div class="micro ink">공지사항</div>
+      <div class="nlist">
+        <div class="nitem"><span class="d num">2026.10.02</span><span class="t">생성형 AI 활용 시 개인정보 보호 유의사항 안내</span></div>
+        <div class="nitem"><span class="d num">2026.10.05</span><span class="t">교육용 AI 스킬 아카이브 정식 개통 안내</span></div>
+        <div class="nitem"><span class="d num">2026.10.12</span><span class="t">10월 신규 스킬 2종 등록 — 평가·행정 영역</span></div>
+      </div>
+    </div>
+    <div class="rail" style="text-align:right;padding-top:2px;">
+      <span class="micro">총 3건</span>
+    </div>
+  </section>
+
+  <footer>
+    <div class="rule"></div>
+    <div class="frow" style="padding-top:26px;">
+      <div class="fname">부산광역시교육청</div>
+      <div class="fmeta">교육용 AI 스킬 아카이브</div>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

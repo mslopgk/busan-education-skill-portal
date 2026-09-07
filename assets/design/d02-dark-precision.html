@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>부산교육청 교육용 AI 스킬 아카이브</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --canvas:#0B0F14;
+  --surface:#121A22;
+  --hair:#1E2A35;
+  --hair-soft:#17222C;
+  --text:#E6EDF3;
+  --muted:#8496A6;
+  --dim:#5E7183;
+  --acc:#35E0C0;
+  --sans:'Pretendard','Pretendard Variable',sans-serif;
+  --mono:'JetBrains Mono','Pretendard','Pretendard Variable',monospace;
+  /* 1px vertical rules that fence off the numeric columns */
+  --colrule:linear-gradient(90deg,
+      transparent calc(100% - 226px), #17222C calc(100% - 226px), #17222C calc(100% - 225px),
+      transparent calc(100% - 225px), transparent calc(100% - 134px),
+      #17222C calc(100% - 134px), #17222C calc(100% - 133px), transparent calc(100% - 133px));
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+body{
+  background:var(--canvas);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:14px;
+  line-height:1.5;
+  letter-spacing:-0.011em;
+}
+/* ── atmosphere: sparse vertical hairlines + one soft accent bloom + grain ── */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(760px 420px at 22% -12%, rgba(53,224,192,.055), transparent 65%),
+    radial-gradient(600px 500px at 108% 8%, rgba(53,224,192,.022), transparent 60%);
+}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.30;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.34'/%3E%3C/svg%3E");
+}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.ml{ /* micro-label */
+  font-family:var(--mono);font-size:9.5px;font-weight:500;
+  letter-spacing:.17em;color:var(--dim);text-transform:uppercase;
+}
+
+/* ══ SHELL ══ */
+.shell{position:relative;z-index:1;display:grid;grid-template-columns:200px 1fr;min-height:100%}
+
+/* ══ LEFT RAIL ══ */
+.rail{
+  position:relative;display:flex;flex-direction:column;padding:0;
+  background:linear-gradient(180deg,rgba(18,26,34,.62),rgba(11,15,20,.2) 62%);
+}
+.rail::after{ /* luminous edge */
+  content:'';position:absolute;top:0;right:0;width:1px;height:100%;
+  background:linear-gradient(180deg,rgba(53,224,192,.34),var(--hair) 16%,var(--hair) 72%,rgba(30,42,53,0));
+}
+.mark{display:flex;gap:10px;align-items:center;height:92px;padding:0 18px}
+.mark svg{flex:none;margin-top:1px}
+.mark .nm{font-size:12.5px;font-weight:700;line-height:1.42;letter-spacing:-.02em}
+.mark .nm span{display:block;color:var(--muted);font-weight:500}
+.mark .id{margin-top:5px;font-size:8.5px;letter-spacing:.15em;color:var(--dim);font-family:var(--mono)}
+
+.railsep{height:1px;background:var(--hair);margin:0 0 0 18px}
+
+.axis{padding:20px 18px 4px}
+.axis-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:11px}
+.axis-hd b{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.16em;color:var(--dim)}
+.axis-hd i{font-style:normal;font-family:var(--mono);font-size:9.5px;color:#3E4E5C;letter-spacing:.08em}
+.axis-nm{font-size:12px;font-weight:600;color:var(--muted);margin:-6px 0 12px;letter-spacing:.01em}
+
+.opt{
+  position:relative;display:flex;align-items:center;justify-content:space-between;
+  height:29px;padding:0 9px 0 10px;border-radius:3px;
+  font-size:13px;color:var(--muted);letter-spacing:-.01em;
+}
+.opt .n{font-family:var(--mono);font-size:10.5px;font-variant-numeric:tabular-nums;color:#4C5D6C}
+.opt.on{
+  color:var(--acc);background:rgba(53,224,192,.045);
+  box-shadow:inset 0 0 22px rgba(53,224,192,.07);
+}
+.opt.on .n{color:var(--acc)}
+.opt.on::before{
+  content:'';position:absolute;left:-18px;top:6px;bottom:6px;width:2px;
+  background:var(--acc);box-shadow:0 0 10px rgba(53,224,192,.75);
+}
+
+.rail-foot{padding:20px 18px 30px}
+.rail-spacer{flex:1;min-height:40px;position:relative;display:flex;align-items:center}
+.vmark{
+  position:relative;z-index:1;margin-left:26px;
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.34em;
+  color:#31404C;white-space:nowrap;
+}
+.rail-spacer::before{ /* faint calibration ruling */
+  content:'';position:absolute;left:18px;right:14px;top:26px;bottom:26px;
+  background-image:repeating-linear-gradient(180deg,rgba(255,255,255,.015) 0 1px,transparent 1px 34px);
+}
+.rail-foot .k{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:#3E4E5C;letter-spacing:.06em;padding:3px 0}
+.rail-foot .k b{color:var(--muted);font-weight:500}
+
+/* ══ CANVAS ══ */
+.canvas{min-width:0;padding:0 46px 0 40px}
+
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  height:92px;border-bottom:1px solid var(--hair);
+}
+.crumb{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:#43535F}
+.crumb b{color:var(--muted);font-weight:500}
+.menu{display:flex;gap:2px}
+.menu a{
+  position:relative;display:block;padding:7px 14px;border-radius:3px;
+  font-size:13.5px;font-weight:500;color:var(--muted);text-decoration:none;letter-spacing:-.012em;
+}
+.menu a.on{color:var(--acc)}
+.menu a.on::after{
+  content:'';position:absolute;left:14px;right:14px;bottom:-1px;height:1px;
+  background:var(--acc);box-shadow:0 0 9px rgba(53,224,192,.8);
+}
+
+/* ── HERO ── */
+.hero{display:grid;grid-template-columns:1fr 306px;gap:46px;padding:48px 0 4px;align-items:start}
+.eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:20px}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--acc);box-shadow:0 0 8px rgba(53,224,192,.9)}
+.eyebrow span{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--muted)}
+h1{
+  font-size:41px;font-weight:700;line-height:1.26;letter-spacing:-.04em;
+  color:#F2F7FA;
+}
+h1 em{font-style:normal;color:var(--text)}
+.sub{margin-top:17px;max-width:520px;font-size:14.5px;line-height:1.72;color:var(--muted);letter-spacing:-.012em}
+
+/* readout panel */
+.panel{
+  position:relative;background:var(--surface);border:1px solid var(--hair);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.028),inset 0 0 40px rgba(53,224,192,.028);
+  padding:17px 18px 15px;
+}
+.tick{position:absolute;width:7px;height:7px;border:1px solid rgba(53,224,192,.55)}
+.tick.tl{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.tick.tr{top:-1px;right:-1px;border-left:0;border-bottom:0}
+.tick.bl{bottom:-1px;left:-1px;border-right:0;border-top:0}
+.tick.br{bottom:-1px;right:-1px;border-left:0;border-top:0}
+.panel .ph{display:flex;justify-content:space-between;align-items:center;padding-bottom:13px;border-bottom:1px solid var(--hair)}
+.stat{display:flex;align-items:baseline;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--hair-soft)}
+.stat:last-of-type{border-bottom:0;padding-bottom:4px}
+.stat .lb{font-size:12px;color:var(--muted);letter-spacing:-.01em}
+.stat .vl{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.stat .vl u{text-decoration:none;font-size:23px;font-weight:600;color:var(--acc)}
+.stat .vl s{text-decoration:none;font-size:23px;font-weight:600;color:var(--text)}
+.stat .vl i{font-style:normal;font-size:11px;color:var(--dim);margin-left:3px;font-family:var(--sans)}
+.spark{display:flex;gap:3px;align-items:flex-end;height:20px;margin-top:11px;padding-top:11px;border-top:1px solid var(--hair)}
+.spark b{flex:1;background:rgba(53,224,192,.22);border-radius:0}
+.spark b.hi{background:var(--acc);box-shadow:0 0 7px rgba(53,224,192,.5)}
+
+/* ── SEARCH ── */
+.search{
+  margin-top:32px;
+  display:flex;align-items:center;gap:0;height:56px;
+  background:var(--surface);border:1px solid var(--hair);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.026),inset 0 0 34px rgba(53,224,192,.025);
+}
+.search .tag{
+  display:flex;align-items:center;height:100%;padding:0 15px;border-right:1px solid var(--hair);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.17em;color:var(--acc);
+}
+.search .ico{display:flex;padding:0 12px 0 15px}
+.search .ph2{flex:1;font-size:14.5px;color:#63768A;letter-spacing:-.012em}
+.caret{display:inline-block;width:1.5px;height:16px;background:var(--acc);vertical-align:-3px;margin-right:9px;box-shadow:0 0 6px rgba(53,224,192,.7)}
+.keycap{
+  margin-right:13px;padding:5px 9px;border:1px solid var(--hair);border-radius:3px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--dim);background:rgba(11,15,20,.6);
+}
+
+/* ── TOOLBAR ── */
+.toolbar{display:flex;align-items:center;justify-content:space-between;padding:26px 0 12px}
+.count{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;color:var(--dim)}
+.count b{color:var(--text);font-weight:600}
+.count u{text-decoration:none;color:var(--acc)}
+.sortwrap{display:flex;align-items:center;gap:11px}
+.seg{display:flex;border:1px solid var(--hair);border-radius:3px;overflow:hidden}
+.seg span{padding:6px 14px;font-size:12px;font-weight:500;color:var(--muted);letter-spacing:-.01em}
+.seg span+span{border-left:1px solid var(--hair)}
+.seg span.on{color:var(--acc);background:rgba(53,224,192,.06);box-shadow:inset 0 0 18px rgba(53,224,192,.09)}
+
+/* ── TABLE ── */
+.thead,.row{display:grid;grid-template-columns:42px 148px 1fr 92px 128px;align-items:center}
+.thead{padding:0 4px 9px;border-bottom:1px solid var(--hair);background:var(--colrule)}
+.thead div{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.17em;color:#5A6E7D}
+.ta-r{text-align:right}
+
+.row{
+  padding:19px 4px;border-top:1px solid transparent;background:var(--colrule);
+  border-image:linear-gradient(90deg,rgba(53,224,192,.30) 0%,rgba(53,224,192,.06) 4%,var(--hair) 14%,var(--hair) 100%) 1;
+}
+.row:first-of-type{border-image:none;border-top:0}
+.idx{font-family:var(--mono);font-size:11px;color:#41525F;letter-spacing:.04em}
+.tags{display:flex;gap:5px}
+.tag2{
+  padding:3.5px 7px;border:1px solid var(--hair);border-radius:2px;background:rgba(18,26,34,.85);
+  font-size:10.5px;font-weight:500;color:var(--muted);letter-spacing:.01em;white-space:nowrap;
+}
+.tag2.lv{color:#B9C8D4;border-color:#26343F}
+.ttl{font-size:15.5px;font-weight:600;letter-spacing:-.022em;color:#EDF3F8}
+.dsc{margin-top:5px;font-size:12.5px;color:var(--muted);letter-spacing:-.008em;line-height:1.5}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13.5px;letter-spacing:-.02em;text-align:right}
+.num.v{color:#A8B8C6;font-weight:400}
+.dl{text-align:right}
+.dl .n2{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13.5px;font-weight:600;color:var(--acc);letter-spacing:-.02em}
+.bar{height:2px;background:rgba(53,224,192,.10);margin-top:7px;margin-left:auto}
+.bar i{display:block;height:100%;background:var(--acc);box-shadow:0 0 6px rgba(53,224,192,.55)}
+
+/* ── BOTTOM ── */
+.grid2{display:grid;grid-template-columns:1.42fr 1fr;gap:38px;padding:42px 0 0}
+.sect-hd{display:flex;align-items:baseline;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--hair)}
+.sect-hd h2{font-size:14px;font-weight:600;letter-spacing:-.02em}
+.sect-hd .ml{color:#43535F}
+.nt{display:grid;grid-template-columns:78px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--hair-soft)}
+.nt .d{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:11px;color:#5D6F7E;letter-spacing:-.01em}
+.nt .t{font-size:13.5px;color:#CBD8E2;letter-spacing:-.014em}
+.nt .nw{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:var(--acc);border:1px solid rgba(53,224,192,.35);padding:2.5px 5px;border-radius:2px}
+
+.metastrip{
+  display:grid;grid-template-columns:repeat(3,1fr);margin-top:24px;
+  border:1px solid var(--hair);background:rgba(18,26,34,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.024),inset 0 0 30px rgba(53,224,192,.022);
+}
+.metastrip div{padding:13px 15px;border-left:1px solid var(--hair)}
+.metastrip div:first-child{border-left:0}
+.metastrip .vv{margin-top:6px;font-family:var(--mono);font-variant-numeric:tabular-nums;
+  font-size:12.5px;font-weight:500;color:#CBD8E2;letter-spacing:-.01em}
+.metastrip .vv.acc{color:var(--acc)}
+
+.step{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--hair-soft);align-items:baseline}
+.step .s{font-family:var(--mono);font-size:11px;color:var(--acc);letter-spacing:.06em}
+.step .h{font-size:13px;font-weight:600;letter-spacing:-.014em}
+.step .p{margin-top:3px;font-size:12px;color:var(--muted);letter-spacing:-.008em}
+
+/* ── FOOTER ── */
+.foot{
+  position:relative;z-index:1;margin-top:36px;border-top:1px solid var(--hair);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 46px 30px 240px;
+}
+.foot .org{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:-.015em}
+.foot .meta{display:flex;gap:22px;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;color:#3E4E5C}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ══════ LEFT RAIL ══════ -->
+  <aside class="rail">
+    <div class="mark">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <rect x="1.5" y="1.5" width="17" height="17" rx="2" stroke="#2C3D4A"/>
+        <rect x="5" y="5" width="4.2" height="4.2" fill="#35E0C0"/>
+        <rect x="10.8" y="5" width="4.2" height="4.2" fill="#2C3D4A"/>
+        <rect x="5" y="10.8" width="4.2" height="4.2" fill="#2C3D4A"/>
+        <rect x="10.8" y="10.8" width="4.2" height="4.2" fill="#44586A"/>
+      </svg>
+      <div>
+        <div class="nm">부산교육청<span>교육용 AI 스킬 아카이브</span></div>
+        <div class="id">BSN-EDU / SKL-ARC</div>
+      </div>
+    </div>
+    <div class="railsep"></div>
+
+    <div class="axis">
+      <div class="axis-hd"><b>AXIS 01</b><i>SINGLE</i></div>
+      <div class="axis-nm">학교급</div>
+      <div class="opt on">전체<span class="n">10</span></div>
+      <div class="opt">유치원<span class="n">01</span></div>
+      <div class="opt">초등<span class="n">02</span></div>
+      <div class="opt">중등<span class="n">03</span></div>
+      <div class="opt">고등<span class="n">02</span></div>
+      <div class="opt">특수<span class="n">02</span></div>
+    </div>
+
+    <div class="axis" style="padding-top:22px">
+      <div class="axis-hd"><b>AXIS 02</b><i>MULTI</i></div>
+      <div class="axis-nm">업무유형</div>
+      <div class="opt">수업<span class="n">03</span></div>
+      <div class="opt">평가<span class="n">02</span></div>
+      <div class="opt">학급경영<span class="n">03</span></div>
+      <div class="opt">행정<span class="n">02</span></div>
+    </div>
+
+    <div class="rail-spacer"><span class="vmark">BUSAN OFFICE OF EDUCATION / SKILL ARCHIVE</span></div>
+    <div class="railsep"></div>
+    <div class="rail-foot">
+      <div class="k"><span>INDEX</span><b>10종</b></div>
+      <div class="k"><span>UPDATED</span><b>2026.10.12</b></div>
+      <div class="k"><span>ACCESS</span><b>OPEN</b></div>
+    </div>
+  </aside>
+
+  <!-- ══════ CONTENT CANVAS ══════ -->
+  <main class="canvas">
+
+    <div class="topbar">
+      <div class="crumb">ARCHIVE&nbsp; /&nbsp; <b>스킬 목록</b></div>
+      <nav class="menu">
+        <a class="on" href="#">스킬 목록</a>
+        <a href="#">이용 안내</a>
+        <a href="#">공지사항</a>
+      </nav>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="eyebrow"><i class="dot"></i><span>공개 스킬 10종 · 로그인 불필요</span></div>
+        <h1>수업 준비,<br><em>검증된 AI 스킬로 시작하세요</em></h1>
+        <p class="sub">수업·평가·학급경영·행정에 바로 쓰는 교육용 AI 스킬 아카이브 — 로그인 없이 즉시 이용</p>
+
+        <!-- SEARCH -->
+        <div class="search">
+          <span class="tag">QUERY</span>
+          <span class="ico">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+              <circle cx="7" cy="7" r="5" stroke="#4E6274" stroke-width="1.3"/>
+              <path d="M11 11l3.2 3.2" stroke="#4E6274" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="ph2"><i class="caret"></i>예) 수행평가 문항, 가정통신문, 회의록 요약</span>
+          <span class="keycap">ENTER</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <i class="tick tl"></i><i class="tick tr"></i><i class="tick bl"></i><i class="tick br"></i>
+        <div class="ph"><span class="ml">ARCHIVE STATUS</span><span class="ml" style="color:#35E0C0">LIVE</span></div>
+        <div class="stat">
+          <span class="lb">공개 스킬</span>
+          <span class="vl"><u>10</u><i>종</i></span>
+        </div>
+        <div class="stat">
+          <span class="lb">누적 조회</span>
+          <span class="vl"><s>7,770</s></span>
+        </div>
+        <div class="stat">
+          <span class="lb">누적 다운로드</span>
+          <span class="vl"><s>2,642</s></span>
+        </div>
+        <div class="spark">
+          <b style="height:36%"></b><b style="height:52%"></b><b style="height:30%"></b>
+          <b style="height:64%"></b><b style="height:45%"></b><b style="height:78%"></b>
+          <b style="height:58%"></b><b class="hi" style="height:100%"></b>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+      <div class="count">RESULT&nbsp; <b>06</b>&nbsp; / &nbsp;<u>10종</u>&nbsp; · &nbsp;학교급 전체</div>
+      <div class="sortwrap">
+        <span class="ml">SORT</span>
+        <div class="seg"><span class="on">최신순</span><span>다운로드순</span></div>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="thead">
+      <div>IDX</div><div>분류</div><div>스킬</div>
+      <div class="ta-r">조회</div><div class="ta-r">다운로드</div>
+    </div>
+
+    <div class="row">
+      <div class="idx">01</div>
+      <div class="tags"><span class="tag2 lv">중등</span><span class="tag2">평가</span></div>
+      <div>
+        <div class="ttl">수행평가 문항 초안 생성</div>
+        <div class="dsc">성취기준에 맞는 서술형 수행평가 문항 초안을 생성합니다</div>
+      </div>
+      <div class="num v">1,240</div>
+      <div class="dl"><span class="n2">312</span><div class="bar" style="width:88px"><i style="width:35%"></i></div></div>
+    </div>
+
+    <div class="row">
+      <div class="idx">02</div>
+      <div class="tags"><span class="tag2 lv">초등</span><span class="tag2">학급경영</span></div>
+      <div>
+        <div class="ttl">가정통신문 작성 도우미</div>
+        <div class="dsc">행사·안내 목적에 맞는 가정통신문 초안을 작성합니다</div>
+      </div>
+      <div class="num v">980</div>
+      <div class="dl"><span class="n2">320</span><div class="bar" style="width:88px"><i style="width:36%"></i></div></div>
+    </div>
+
+    <div class="row">
+      <div class="idx">03</div>
+      <div class="tags"><span class="tag2 lv">공통</span><span class="tag2">행정</span></div>
+      <div>
+        <div class="ttl">학급 회의록 요약</div>
+        <div class="dsc">회의 기록을 항목별 결정 사항 중심으로 요약합니다</div>
+      </div>
+      <div class="num v">850</div>
+      <div class="dl"><span class="n2">150</span><div class="bar" style="width:88px"><i style="width:17%"></i></div></div>
+    </div>
+
+    <div class="row">
+      <div class="idx">04</div>
+      <div class="tags"><span class="tag2 lv">중등</span><span class="tag2">수업</span></div>
+      <div>
+        <div class="ttl">과학 실험 안전 지도안</div>
+        <div class="dsc">실험 주제별 안전 수칙과 지도 시나리오를 생성합니다</div>
+      </div>
+      <div class="num v">1,100</div>
+      <div class="dl"><span class="n2">560</span><div class="bar" style="width:88px"><i style="width:63%"></i></div></div>
+    </div>
+
+    <div class="row">
+      <div class="idx">05</div>
+      <div class="tags"><span class="tag2 lv">고등</span><span class="tag2">수업</span></div>
+      <div>
+        <div class="ttl">영어 독해 지문 변형</div>
+        <div class="dsc">수준별 어휘·길이로 독해 지문을 재구성합니다</div>
+      </div>
+      <div class="num v">2,100</div>
+      <div class="dl"><span class="n2">890</span><div class="bar" style="width:88px"><i style="width:100%"></i></div></div>
+    </div>
+
+    <div class="row">
+      <div class="idx">06</div>
+      <div class="tags"><span class="tag2 lv">공통</span><span class="tag2">학급경영</span></div>
+      <div>
+        <div class="ttl">학부모 상담 준비 질문지</div>
+        <div class="dsc">상담 목적별 질문지와 안내 문구를 준비합니다</div>
+      </div>
+      <div class="num v">1,500</div>
+      <div class="dl"><span class="n2">410</span><div class="bar" style="width:88px"><i style="width:46%"></i></div></div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="grid2">
+      <div>
+        <div class="sect-hd"><h2>공지사항</h2><span class="ml">NOTICE · 3</span></div>
+        <div class="nt"><span class="d">2026.10.12</span><span class="t">10월 신규 스킬 2종 등록 — 평가·행정 영역</span><span class="nw">NEW</span></div>
+        <div class="nt"><span class="d">2026.10.05</span><span class="t">교육용 AI 스킬 아카이브 정식 개통 안내</span><span></span></div>
+        <div class="nt"><span class="d">2026.10.02</span><span class="t">생성형 AI 활용 시 개인정보 보호 유의사항 안내</span><span></span></div>
+        <div class="metastrip">
+          <div><span class="ml">등록 스킬</span><div class="vv acc">10종</div></div>
+          <div><span class="ml">최근 갱신</span><div class="vv">2026.10.12</div></div>
+          <div><span class="ml">이용 조건</span><div class="vv">로그인 불필요</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="sect-hd"><h2>이용 안내</h2><span class="ml">03 STEPS</span></div>
+        <div class="step"><span class="s">01</span><div><div class="h">찾기</div><div class="p">학교급·업무유형 두 축으로 좁힙니다</div></div></div>
+        <div class="step"><span class="s">02</span><div><div class="h">확인</div><div class="p">설명과 사용 예시를 미리 봅니다</div></div></div>
+        <div class="step"><span class="s">03</span><div><div class="h">사용</div><div class="p">로그인 없이 바로 내려받습니다</div></div></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="foot">
+  <div class="org">부산광역시교육청</div>
+  <div class="meta"><span>EDU AI SKILL ARCHIVE</span><span>REV 1.0</span><span>2026.10</span></div>
+</footer>
+
+</body>
+</html>

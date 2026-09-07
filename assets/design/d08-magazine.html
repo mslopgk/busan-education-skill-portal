@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>부산교육청 교육용 AI 스킬 아카이브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Song+Myung&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+  :root{
+    --bone:#EFEBE3;
+    --ink:#191713;
+    --teal:#12574F;
+    --ink62:rgba(25,23,19,.62);
+    --ink45:rgba(25,23,19,.45);
+    --hair:rgba(25,23,19,.24);
+    --hair12:rgba(25,23,19,.12);
+    --serif:'Song Myung',serif;
+    --sans:'Pretendard','Pretendard Variable',sans-serif;
+    --mono:'IBM Plex Mono','Pretendard',monospace;
+    --pad:56px;
+  }
+  *{box-sizing:border-box;border-radius:0}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bone);color:var(--ink);
+    font-family:var(--sans);
+    word-break:keep-all;overflow-wrap:anywhere;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:geometricPrecision;
+  }
+  img,svg{display:block}
+  ::selection{background:var(--teal);color:var(--bone)}
+
+  .page{position:relative;max-width:1280px;margin:0 auto;padding:0 var(--pad);}
+
+  /* ── 좌측 여백의 세로 러닝헤드 ─────────────────────────── */
+  .spine{
+    position:absolute;left:15px;top:700px;height:auto;
+    writing-mode:vertical-rl;transform:rotate(180deg);
+    font-family:var(--mono);font-size:10px;letter-spacing:.34em;line-height:1;
+    color:var(--ink45);white-space:nowrap;
+  }
+
+  /* ── 마스트헤드 ───────────────────────────────────────── */
+  .mast{padding-top:26px}
+  .mast-row{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+  .mark{font-family:var(--serif);font-size:30px;line-height:1;letter-spacing:-.012em}
+  .mark b{font-weight:400}
+  .mark .thin{color:var(--ink62)}
+  .mark .sq{display:inline-block;width:9px;height:9px;background:var(--teal);margin-right:11px;vertical-align:2px}
+  nav{display:flex;align-items:flex-end;gap:0}
+  nav a{
+    font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.02em;
+    color:var(--ink);text-decoration:none;padding:0 18px;border-left:1px solid var(--hair);
+    line-height:1.1;
+  }
+  nav a:first-child{border-left:0}
+  nav a:last-child{padding-right:0}
+  nav a[aria-current]{color:var(--teal);}
+  nav a[aria-current]::before{content:"";display:inline-block;width:5px;height:5px;background:var(--teal);margin-right:7px;vertical-align:2px}
+  nav a:focus-visible{outline:2px solid var(--teal);outline-offset:4px}
+
+  .rule-heavy{height:3px;background:var(--ink);margin-top:20px}
+  .issue{
+    display:flex;gap:0;align-items:stretch;
+    border-bottom:1px solid var(--ink);
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+    color:var(--ink62);
+  }
+  .issue span{padding:9px 16px;border-left:1px solid var(--hair12)}
+  .issue span:first-child{padding-left:0;border-left:0;color:var(--ink)}
+  .issue .push{margin-left:auto;padding-right:0}
+
+  /* ── 표지 ─────────────────────────────────────────────── */
+  .cover{position:relative;padding:44px 0 0}
+  .hairfield{
+    position:absolute;right:0;top:58px;width:414px;height:186px;z-index:0;
+    background:repeating-linear-gradient(to bottom,var(--ink) 0 1px,transparent 1px 10px);
+    opacity:.55;
+  }
+  .kicker{
+    position:relative;z-index:2;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.3em;color:var(--teal);
+    margin-bottom:22px;
+  }
+  h1{
+    position:relative;z-index:2;
+    margin:0;font-family:var(--serif);font-weight:400;
+    font-size:104px;line-height:.98;letter-spacing:-.022em;
+  }
+  h1 .ln{display:block}
+  h1 .ln2{padding-left:112px}
+
+  /* 헤드라인이 올라타는 통짜 색면 — 좌측 판면 밖으로 흘러나감 */
+  .band{
+    position:relative;z-index:3;
+    margin:-5px 0 0 calc(-1 * var(--pad) - 24px);
+    width:calc(100% + var(--pad) + 24px - 268px);
+    background:var(--teal);color:var(--bone);
+    display:flex;align-items:baseline;justify-content:space-between;gap:32px;
+    padding:20px calc(var(--pad) + 24px) 22px;
+  }
+  .band .big{font-family:var(--serif);font-size:104px;line-height:1;letter-spacing:-.022em;display:block}
+  .band .meta{font-family:var(--mono);font-size:11px;letter-spacing:.22em;padding-bottom:14px;white-space:nowrap;opacity:.9}
+
+  .cover-foot{
+    display:grid;grid-template-columns:1fr 414px;gap:56px;align-items:start;
+    padding:30px 0 0;
+  }
+  .lede{
+    margin:0;font-size:16px;line-height:1.82;color:var(--ink62);max-width:44ch;
+    letter-spacing:-.005em;
+  }
+  .lede b{font-weight:600;color:var(--ink)}
+  .facts{display:flex;flex-direction:column;border-top:1px solid var(--ink)}
+  .facts div{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:9px 0;border-bottom:1px solid var(--hair12);
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink62);
+  }
+  .facts div b{font-weight:500;color:var(--ink);letter-spacing:.06em}
+
+  /* ── 검색 — 판면 구분선에 걸치도록 ───────────────────────── */
+  .searchwrap{margin:40px 0 -29px;position:relative;z-index:2}
+  .search{
+    display:flex;align-items:stretch;border:1px solid var(--ink);background:var(--bone);
+    width:calc(100% - 138px);
+  }
+  .search .lab{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;color:var(--ink62);
+    display:flex;align-items:center;padding:0 20px;border-right:1px solid var(--hair);
+    white-space:nowrap;
+  }
+  .search input{
+    flex:1;min-width:0;border:0;background:transparent;
+    font-family:var(--sans);font-size:16.5px;color:var(--ink);
+    padding:19px 18px;letter-spacing:-.005em;
+  }
+  .search input::placeholder{color:var(--ink45)}
+  .search input:focus{outline:0;background:rgba(18,87,79,.05)}
+  .search button{
+    border:0;background:var(--teal);color:var(--bone);cursor:pointer;
+    font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.14em;
+    padding:0 42px;
+  }
+
+  /* ── 본문 2단 (좁은 좌 / 넓은 우) ───────────────────────── */
+  .body{
+    display:grid;grid-template-columns:268px 1fr;gap:0 60px;
+    margin-top:9px;border-top:3px solid var(--ink);padding-top:0;
+  }
+  .side{border-right:1px solid var(--hair);padding:62px 60px 0 0;margin-right:-60px}
+  .side-inner{padding-right:0}
+  .axis{margin-bottom:34px}
+  .axis h3{
+    margin:0 0 2px;font-family:var(--mono);font-size:10.5px;font-weight:500;
+    letter-spacing:.26em;color:var(--teal);
+  }
+  .axis h3::before{content:"";display:inline-block;width:6px;height:6px;background:var(--teal);margin-right:9px;vertical-align:1px}
+  .axis .note{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink45);margin:0 0 10px 15px}
+  .axis ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+  .axis li{border-bottom:1px solid var(--hair12)}
+  .axis li a{
+    display:flex;align-items:baseline;justify-content:space-between;
+    font-family:var(--serif);font-size:18px;color:var(--ink);text-decoration:none;
+    padding:8px 0 9px;letter-spacing:-.01em;
+  }
+  .axis li a .tick{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--ink45)}
+  .axis li a:hover{color:var(--teal)}
+  .axis li a:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .axis li.on a{color:var(--teal)}
+  .axis li.on a::after{content:"";width:7px;height:7px;background:var(--teal);align-self:center}
+  .axis li.on a .tick{display:none}
+
+  .sort{border-top:1px solid var(--ink);padding-top:11px}
+  .sort .h{font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;color:var(--ink62);margin-bottom:10px}
+  .sort .opts{display:flex;gap:16px}
+  .sort .opts span{font-family:var(--sans);font-size:13.5px;color:var(--ink45);padding-bottom:4px}
+  .sort .opts span.on{color:var(--ink);font-weight:600;border-bottom:2px solid var(--teal)}
+
+  .plate{
+    background:var(--teal);color:var(--bone);padding:20px 20px 22px;margin-top:36px;
+  }
+  .plate .n{font-family:var(--mono);font-size:56px;line-height:.9;letter-spacing:-.04em;font-weight:400}
+  .plate .n em{font-style:normal;font-family:var(--sans);font-size:19px;font-weight:600;letter-spacing:0;margin-left:5px}
+  .plate .t{font-family:var(--mono);font-size:10px;letter-spacing:.22em;margin-top:12px;opacity:.82}
+  .plate .d{border-top:1px solid rgba(239,235,227,.35);margin-top:14px;padding-top:11px;font-size:12.5px;line-height:1.6;opacity:.9}
+
+  /* ── 스킬 목록 = 기사 티저 ──────────────────────────────── */
+  .main{padding-top:62px;min-width:0}
+  .main-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px}
+  .main-head h2{margin:0;font-family:var(--serif);font-size:26px;font-weight:400;letter-spacing:-.01em}
+  .main-head .c{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--ink62)}
+
+  .teaser{
+    display:grid;grid-template-columns:62px 1fr 118px;gap:0 20px;
+    border-top:1px solid var(--hair);padding:20px 0 22px;text-decoration:none;color:inherit;
+    align-items:start;
+  }
+  .teaser:first-of-type{border-top:2px solid var(--ink)}
+  .teaser:hover{background:rgba(18,87,79,.045)}
+  .teaser:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+  .idx{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink45);padding-top:6px}
+  .tbadge{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--teal);margin-bottom:9px}
+  .ttl{font-family:var(--serif);font-size:29px;line-height:1.24;letter-spacing:-.018em;margin:0 0 8px}
+  .dsc{margin:0;font-size:14px;line-height:1.7;color:var(--ink62);max-width:52ch}
+  .stat{text-align:right;font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding-top:4px}
+  .stat div{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px solid var(--hair12)}
+  .stat div:last-child{border-bottom:0}
+  .stat i{font-style:normal;color:var(--ink45);letter-spacing:.1em;font-size:9.5px;align-self:center}
+  .stat .dl b{color:var(--teal);font-weight:500}
+
+  /* 특집 — 격자를 깨는 항목 */
+  .teaser.feature{grid-template-columns:62px 1fr 118px;border-top:1px solid var(--ink);position:relative}
+  .teaser.feature .ttl{font-size:40px;line-height:1.14}
+  .teaser.feature .dsc{font-size:15px}
+  .teaser.feature .idx::after{
+    content:"특집";display:block;font-size:9.5px;letter-spacing:.16em;color:var(--teal);
+    margin-top:8px;writing-mode:vertical-rl;
+  }
+  /* 특집 표시 — 괘선의 머리만 단(段)을 넘어 좌측 여백으로 뻗는다 */
+  .teaser.feature::before{
+    content:"";position:absolute;left:-60px;width:196px;top:-1px;height:4px;background:var(--teal);
+  }
+
+  .more{
+    display:flex;align-items:baseline;justify-content:space-between;
+    border-top:1px solid var(--ink);margin-top:2px;padding-top:14px;
+  }
+  .more a{font-family:var(--sans);font-size:13.5px;font-weight:600;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--teal);padding-bottom:2px}
+  .more .m{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--ink45)}
+
+  /* ── 공지 — 판면 밖으로 전출혈 ──────────────────────────── */
+  .notice{background:var(--teal);color:var(--bone);margin-top:74px;padding:36px 0 44px}
+  .notice .in{max-width:1280px;margin:0 auto;padding:0 var(--pad)}
+  .notice .nh{display:flex;align-items:baseline;justify-content:space-between;padding-bottom:22px}
+  .notice .nh h2{margin:0;font-family:var(--serif);font-size:24px;font-weight:400;letter-spacing:.02em}
+  .notice .nh span{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;opacity:.8}
+  .nlist{display:grid;grid-template-columns:repeat(3,1fr);gap:0 40px}
+  .nlist article{border-top:1px solid rgba(239,235,227,.5);padding-top:14px}
+  .nlist time{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;opacity:.78;margin-bottom:9px}
+  .nlist p{margin:0;font-family:var(--serif);font-size:19px;line-height:1.42;letter-spacing:-.005em}
+
+  /* ── 푸터 ─────────────────────────────────────────────── */
+  footer{padding:26px 0 40px}
+  footer .in{max-width:1280px;margin:0 auto;padding:22px var(--pad) 0;border-top:3px solid var(--ink);
+    display:flex;align-items:baseline;justify-content:space-between;gap:24px}
+  footer .who{font-family:var(--serif);font-size:20px;letter-spacing:-.01em}
+  footer .meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--ink62);text-align:right;line-height:1.9}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+  @media (max-width:1000px){
+    :root{--pad:24px}
+    h1,.band .big{font-size:56px}
+    .body{grid-template-columns:1fr;gap:0}
+    .side{border-right:0;margin-right:0;padding-right:0}
+    .cover-foot{grid-template-columns:1fr}
+    .band{width:calc(100% + var(--pad) + 12px);margin-left:calc(-1 * var(--pad) - 12px);padding:12px 20px 16px}
+    .nlist{grid-template-columns:1fr}
+    .teaser{grid-template-columns:38px 1fr}
+    .stat{grid-column:2;text-align:left;margin-top:10px}
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="spine">부산광역시교육청 · 교육용 AI 스킬 아카이브 · 2026.10</div>
+
+  <header class="mast">
+    <div class="mast-row">
+      <div class="mark"><span class="sq"></span><b>부산교육청</b> <span class="thin">교육용 AI 스킬 아카이브</span></div>
+      <nav>
+        <a href="#list" aria-current="page">스킬 목록</a>
+        <a href="#guide">이용 안내</a>
+        <a href="#notice">공지사항</a>
+      </nav>
+    </div>
+    <div class="rule-heavy"></div>
+    <div class="issue">
+      <span>제1호</span>
+      <span>2026.10 · 총 10종</span>
+      <span>수업 · 평가 · 학급경영 · 행정</span>
+      <span class="push">로그인 없이 즉시 이용</span>
+    </div>
+  </header>
+
+  <section class="cover">
+    <div class="hairfield" aria-hidden="true"></div>
+    <div class="kicker">이번 호 특집 · 수록 10종</div>
+    <h1>
+      <span class="ln">수업 준비,</span>
+      <span class="ln ln2">검증된 AI 스킬로</span>
+    </h1>
+    <div class="band">
+      <span class="big">시작하세요</span>
+      <span class="meta">공개 10종 · 갱신 2026.10</span>
+    </div>
+
+    <div class="cover-foot">
+      <p class="lede">수업·평가·학급경영·행정에 바로 쓰는 교육용 AI 스킬 아카이브 — <b>로그인 없이 즉시 이용</b></p>
+      <div class="facts">
+        <div><span>수록 스킬</span><b>10종</b></div>
+        <div><span>분류 축</span><b>학교급 · 업무유형</b></div>
+        <div><span>발행</span><b>부산광역시교육청</b></div>
+      </div>
+    </div>
+
+    <div class="searchwrap">
+      <form class="search" onsubmit="return false">
+        <label class="lab" for="q">스킬 검색</label>
+        <input id="q" type="search" placeholder="예) 수행평가 문항, 가정통신문, 회의록 요약">
+        <button type="submit">검색</button>
+      </form>
+    </div>
+  </section>
+
+  <div class="body">
+    <aside class="side">
+      <div class="side-inner">
+        <div class="axis">
+          <h3>학교급</h3>
+          <ul>
+            <li class="on"><a href="#">전체</a></li>
+            <li><a href="#">유치원</a></li>
+            <li><a href="#">초등</a></li>
+            <li><a href="#">중등</a></li>
+            <li><a href="#">고등</a></li>
+            <li><a href="#">특수</a></li>
+          </ul>
+        </div>
+        <div class="axis">
+          <h3>업무유형</h3>
+          <p class="note">중복 선택 가능</p>
+          <ul>
+            <li><a href="#">수업</a></li>
+            <li><a href="#">평가</a></li>
+            <li><a href="#">학급경영</a></li>
+            <li><a href="#">행정</a></li>
+          </ul>
+        </div>
+        <div class="sort">
+          <div class="h">정렬</div>
+          <div class="opts"><span class="on">최신순</span><span>다운로드순</span></div>
+        </div>
+        <div class="plate">
+          <div class="n">10<em>종</em></div>
+          <div class="t">현재 공개된 스킬</div>
+          <div class="d">모든 스킬은 학교 현장 검토를 거쳐 등록됩니다.</div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main" id="list">
+      <div class="main-head">
+        <h2>스킬 목록</h2>
+        <div class="c">01 — 06 / 총 10종</div>
+      </div>
+
+      <a class="teaser feature" href="#">
+        <div class="idx">01</div>
+        <div>
+          <div class="tbadge">중등 · 평가</div>
+          <h3 class="ttl">수행평가 문항 초안 생성</h3>
+          <p class="dsc">성취기준에 맞는 서술형 수행평가 문항 초안을 생성합니다</p>
+        </div>
+        <div class="stat">
+          <div><i>조회</i><b>1,240</b></div>
+          <div class="dl"><i>다운로드</i><b>312</b></div>
+        </div>
+      </a>
+
+      <a class="teaser" href="#">
+        <div class="idx">02</div>
+        <div>
+          <div class="tbadge">초등 · 학급경영</div>
+          <h3 class="ttl">가정통신문 작성 도우미</h3>
+          <p class="dsc">행사·안내 목적에 맞는 가정통신문 초안을 작성합니다</p>
+        </div>
+        <div class="stat">
+          <div><i>조회</i><b>980</b></div>
+          <div class="dl"><i>다운로드</i><b>320</b></div>
+        </div>
+      </a>
+
+      <a class="teaser" href="#">
+        <div class="idx">03</div>
+        <div>
+          <div class="tbadge">공통 · 행정</div>
+          <h3 class="ttl">학급 회의록 요약</h3>
+          <p class="dsc">회의 기록을 항목별 결정 사항 중심으로 요약합니다</p>
+        </div>
+        <div class="stat">
+          <div><i>조회</i><b>850</b></div>
+          <div class="dl"><i>다운로드</i><b>150</b></div>
+        </div>
+      </a>
+
+      <a class="teaser" href="#">
+        <div class="idx">04</div>
+        <div>
+          <div class="tbadge">중등 · 수업</div>
+          <h3 class="ttl">과학 실험 안전 지도안</h3>
+          <p class="dsc">실험 주제별 안전 수칙과 지도 시나리오를 생성합니다</p>
+        </div>
+        <div class="stat">
+          <div><i>조회</i><b>1,100</b></div>
+          <div class="dl"><i>다운로드</i><b>560</b></div>
+        </div>
+      </a>
+
+      <a class="teaser" href="#">
+        <div class="idx">05</div>
+        <div>
+          <div class="tbadge">고등 · 수업</div>
+          <h3 class="ttl">영어 독해 지문 변형</h3>
+          <p class="dsc">수준별 어휘·길이로 독해 지문을 재구성합니다</p>
+        </div>
+        <div class="stat">
+          <div><i>조회</i><b>2,100</b></div>
+          <div class="dl"><i>다운로드</i><b>890</b></div>
+        </div>
+      </a>
+
+      <a class="teaser" href="#">
+        <div class="idx">06</div>
+        <div>
+          <div class="tbadge">공통 · 학급경영</div>
+          <h3 class="ttl">학부모 상담 준비 질문지</h3>
+          <p class="dsc">상담 목적별 질문지와 안내 문구를 준비합니다</p>
+        </div>
+        <div class="stat">
+          <div><i>조회</i><b>1,500</b></div>
+          <div class="dl"><i>다운로드</i><b>410</b></div>
+        </div>
+      </a>
+
+      <div class="more">
+        <a href="#">스킬 목록 전체 보기</a>
+        <span class="m">총 10종 공개 · 2026.10 기준</span>
+      </div>
+    </main>
+  </div>
+</div>
+
+<section class="notice" id="notice">
+  <div class="in">
+    <div class="nh">
+      <h2>공지사항</h2>
+      <span>2026.10 · 3건</span>
+    </div>
+    <div class="nlist">
+      <article>
+        <time>2026.10.02</time>
+        <p>생성형 AI 활용 시 개인정보 보호 유의사항 안내</p>
+      </article>
+      <article>
+        <time>2026.10.05</time>
+        <p>교육용 AI 스킬 아카이브 정식 개통 안내</p>
+      </article>
+      <article>
+        <time>2026.10.12</time>
+        <p>10월 신규 스킬 2종 등록 — 평가·행정 영역</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<footer id="guide">
+  <div class="in">
+    <div class="who">부산광역시교육청</div>
+    <div class="meta">
+      교육용 AI 스킬 아카이브 · 제1호<br>
+      2026.10 · 총 10종 · 로그인 없이 이용
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

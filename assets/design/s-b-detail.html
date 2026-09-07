@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>가정통신문 작성 도우미 — 부산교육청 AI 스킬 포털</title>
+<link rel="stylesheet" href="site/_base.css">
+<style>
+/* ── 이 화면 전용 배치만. 토큰·색·컴포넌트 재정의 없음 ── */
+
+/* 머리: 전역 메뉴 + 로그인 사용자 (메인과 동일) */
+.mast .rt{display:flex;align-items:flex-end;gap:22px}
+.mast .who{font-size:12.5px;color:var(--muted);letter-spacing:-.01em;white-space:nowrap}
+.mast .who b{color:var(--ink);font-weight:700}
+.mast .who .bar{display:inline-block;width:1px;height:10px;background:var(--rule);
+  margin-inline:9px;vertical-align:-1px}
+
+.crumb{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);
+  padding-block:18px 0}
+.crumb .sep{color:var(--rule)}
+.crumb b{color:var(--ink);font-weight:700}
+
+.head{padding-block:12px 14px}
+.head .bdgs{display:flex;align-items:center;gap:0;margin-bottom:12px}
+.head h1{margin-bottom:12px}
+.meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:16px;
+  font-size:12.5px;color:var(--muted)}
+.meta .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em}
+.meta .bar{width:1px;height:11px;background:var(--rule)}
+.meta .star{color:var(--ink);font-size:13px;line-height:1}
+.meta .rv{color:var(--ink);font-weight:700}
+.meta .rv .num{display:inline;font-size:14px;font-weight:600;margin-right:2px}
+
+/* 탭 3개 */
+.tabs{display:flex;gap:26px;font-size:14px;font-weight:500;color:var(--muted);
+  border-bottom:1px solid var(--rule)}
+.tabs span{padding-bottom:10px}
+.tabs .on{color:var(--ink);font-weight:700;box-shadow:inset 0 -2px 0 var(--blue)}
+.tabs .on i{font-style:normal}
+.tabs .c{font-family:var(--mono);font-size:11.5px;font-variant-numeric:tabular-nums;
+  color:var(--muted);margin-left:4px}
+
+/* 2단 골격: 본문 + 우측 정보단 */
+.two{display:grid;grid-template-columns:1fr 300px;column-gap:56px;
+  align-items:start;padding-top:22px}
+.side{border-left:1px solid var(--rule);padding-left:32px}
+.side .btn{width:100%;margin-bottom:8px}
+.side .blk{margin-top:22px;padding-top:16px;border-top:1px solid var(--rule-soft)}
+.side .blk:first-of-type{border-top:0;padding-top:0}
+.side .fine{font-size:11.5px;color:var(--muted);line-height:1.65}
+.side .tags{display:flex;flex-wrap:wrap;gap:5px 0;margin-top:9px}
+.filelist{list-style:none;font-size:12.5px;color:var(--muted);line-height:1.85}
+.filelist li{display:flex;justify-content:space-between;gap:10px}
+
+/* 회색 보조 톤 고지문 — 경고 박스가 아니다 */
+.hold{margin-top:14px;background:var(--zebra);border-left:3px solid var(--rule);
+  padding:11px 13px;font-size:11.5px;line-height:1.7;color:var(--muted)}
+
+/* 콘텐츠 통계 4칸 */
+.stats4{display:grid;grid-template-columns:1fr 1fr;column-gap:16px;row-gap:14px;
+  margin-top:11px}
+.stats4 dt{font-size:10.5px;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+.stats4 dd{margin-top:3px;font-family:var(--mono);font-size:19px;font-weight:600;
+  font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1.15}
+.stats4 dd.dl{color:var(--blue)}
+.stats4 dd.sm{font-size:15px}
+
+/* 섹션 공통 리듬 — A안 상세와 동일 */
+.blk-sec{margin-top:24px}
+.blk-sec:first-child{margin-top:0}
+.blk-sec .body{padding-top:12px}
+.body p{font-size:14px;line-height:1.8}
+.body p+p{margin-top:7px}
+
+/* 4축 분류 */
+.axis{display:grid;grid-template-columns:96px 1fr;column-gap:16px;row-gap:0}
+.axis dt{font-size:11.5px;font-weight:700;letter-spacing:.14em;color:var(--muted);
+  padding-block:8px;border-bottom:1px solid var(--rule-soft)}
+.axis dd{font-size:13.5px;padding-block:8px;border-bottom:1px solid var(--rule-soft)}
+.axis dd em{font-style:normal;color:var(--muted);font-size:12.5px}
+
+/* 사용 절차 4단계 */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);column-gap:20px}
+.step{border-top:1px solid var(--rule);padding-top:10px}
+.step .n{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--muted);
+  font-variant-numeric:tabular-nums;letter-spacing:.1em}
+.step .t{font-size:13.5px;font-weight:700;letter-spacing:-.01em;margin-top:5px;line-height:1.45}
+.step .d{font-size:12px;color:var(--muted);line-height:1.6;margin-top:5px}
+
+/* 입력 · 출력 예시 한 쌍 */
+.pair{display:grid;grid-template-columns:1fr 1fr;column-gap:56px;align-items:start;
+  margin-top:24px}
+.pre{background:var(--zebra);border-left:3px solid var(--rule);
+  font-family:var(--mono);font-size:11.5px;line-height:1.85;color:var(--ink);
+  padding:12px 14px;white-space:pre-wrap;font-variant-numeric:tabular-nums}
+.cap{font-size:11.5px;color:var(--muted);margin-top:7px;line-height:1.6}
+.outq{background:var(--zebra);border-left:3px solid var(--rule);padding:12px 14px;
+  font-size:13px;line-height:1.7}
+.outq .q{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.1em;
+  display:block;margin-bottom:3px}
+
+/* 함께 많이 찾은 스킬 */
+.also{margin-top:24px}
+main + .foot{margin-top:40px}
+.also .tbl tbody td{padding:12px 12px}
+.also .rate{display:flex;flex-direction:column;align-items:flex-end;gap:1px}
+.also .rate .v{font-family:var(--mono);font-size:14.5px;font-weight:600;
+  font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.also .rate .n{font-size:11px;color:var(--muted);white-space:nowrap}
+.also .tbl tbody td.mid{vertical-align:middle}
+</style>
+</head>
+<body>
+
+<div class="gov-band"></div>
+
+<div class="parent">
+  <div class="wrap wrap--wide in">
+    <a class="skip" href="#main">본문 바로가기</a>
+    <span></span>
+    <span>부산광역시교육청 디지털미래교육과 · AI 스킬 포털</span>
+  </div>
+</div>
+
+<header class="mast">
+  <div class="wrap wrap--wide in">
+    <div class="mark">
+      <b>부산교육청 AI 스킬 포털</b>
+      <span class="code">BOE-AIP</span>
+    </div>
+    <div class="rt">
+      <nav class="gnb">
+        <a href="#">컬렉션</a>
+        <a href="#">공지</a>
+        <a href="#">알림</a>
+      </nav>
+      <span class="who"><b>박선생님</b><span class="bar"></span>로그아웃</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap wrap--wide" id="main">
+
+  <nav class="crumb" aria-label="현재 위치">
+    <a href="#">홈</a><span class="sep">&gt;</span>
+    <a href="#">학급경영</a><span class="sep">&gt;</span>
+    <b>가정통신문 작성 도우미</b>
+  </nav>
+
+  <div class="head">
+    <div class="bdgs">
+      <span class="bdg">초등</span><span class="bdg">학급경영</span>
+    </div>
+    <h1>가정통신문 작성 도우미</h1>
+    <p class="sub">안내 사항과 어조를 입력하면 학부모 대상 가정통신문 초안을 학교 서식에 맞추어 생성하는 스킬입니다.</p>
+    <div class="meta">
+      <span class="k">관리번호 AIP-2026-002</span>
+      <span class="bar"></span>
+      <span class="rv"><span class="star">★</span> <span class="num">4.8</span> (리뷰 21개)</span>
+      <span style="margin-left:-8px">· <span class="num">1,248</span>회 조회</span>
+      <span class="bar"></span>
+      <span>등록 <span class="num">2026.03.04</span></span>
+      <span class="bar"></span>
+      <span class="st"><i></i>즐겨찾기 담음</span>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <span class="on" role="tab" aria-selected="true">설명</span>
+    <span role="tab" aria-selected="false">후기 <span class="c">21</span></span>
+    <span role="tab" aria-selected="false">개정 이력</span>
+  </div>
+
+  <div class="two">
+
+    <!-- ───── 본문 ───── -->
+    <div>
+
+      <section class="blk-sec">
+        <div class="sec"><span class="idx">01</span><h2>활용 목적</h2></div>
+        <div class="body">
+          <p>행사 안내 · 준비물 · 일정 변경 등 전달할 핵심 정보를 입력하면 학부모 대상 가정통신문 초안을 문단 단위로 생성합니다. 학교에서 쓰는 인사말과 맺음말 형식을 유지하므로 담임교사는 문장을 다듬는 작업만 하면 됩니다.</p>
+          <p>같은 내용을 학년별 · 학급별로 다시 쓰는 반복 작업을 줄이는 것이 목적입니다. 배부 전 최종 확인과 승인은 학교 절차를 그대로 따릅니다.</p>
+        </div>
+      </section>
+
+      <section class="blk-sec">
+        <div class="sec"><span class="idx">02</span><h2>분류</h2></div>
+        <div class="body">
+          <dl class="axis">
+            <dt>학교급</dt>
+            <dd>초등 <em>— 중등 학급경영 업무에도 그대로 적용 가능</em></dd>
+            <dt>교과</dt>
+            <dd>공통 · 비교과 <em>— 교과 구분 없이 담임 업무 전반</em></dd>
+            <dt>업무유형</dt>
+            <dd>학급경영 <em>— 학부모 안내 문서 작성</em></dd>
+            <dt>활용 도구</dt>
+            <dd>문서 작성 <em>— 한글(.hwp) 서식 붙여넣기 기준</em></dd>
+          </dl>
+          <p class="cap">포털은 학교급 · 교과 · 업무유형 · 활용 도구 4개 축으로 분류합니다.</p>
+        </div>
+      </section>
+
+      <section class="blk-sec">
+        <div class="sec"><span class="idx">03</span><h2>사용 절차</h2></div>
+        <div class="body">
+          <div class="steps">
+            <div class="step">
+              <span class="n">STEP 01</span>
+              <div class="t">핵심 정보 입력</div>
+              <p class="d">행사명 · 일시 · 장소 · 준비물 등 전달 사항을 항목으로 적습니다.</p>
+            </div>
+            <div class="step">
+              <span class="n">STEP 02</span>
+              <div class="t">어조 선택</div>
+              <p class="d">정중한 안내 · 간결한 공지 중 학교 관행에 맞는 어조를 고릅니다.</p>
+            </div>
+            <div class="step">
+              <span class="n">STEP 03</span>
+              <div class="t">초안 생성</div>
+              <p class="d">인사말 · 본문 · 맺음말 · 회신란 순서로 초안을 생성합니다.</p>
+            </div>
+            <div class="step">
+              <span class="n">STEP 04</span>
+              <div class="t">최종 출력 및 배부</div>
+              <p class="d">학교 서식에 붙여 넣고 내부 승인을 거쳐 배부합니다.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ───── 우측 정보단 ───── -->
+    <aside class="side">
+      <div class="blk">
+        <button class="btn btn--fill" type="button">파일 내려받기(.zip)</button>
+        <button class="btn btn--line" type="button">README 미리보기</button>
+        <p class="hold">본 스킬은 부산광역시교육청 소속 교직원 전용 콘텐츠입니다.
+          비영리 교육 목적으로만 활용 가능합니다.</p>
+      </div>
+
+      <div class="blk">
+        <span class="lab-kr">콘텐츠 통계</span>
+        <dl class="stats4">
+          <div><dt>총 활용</dt><dd class="dl">3.2k</dd></div>
+          <div><dt>인기 순위</dt><dd class="sm">Top 5</dd></div>
+          <div><dt>최근 개정</dt><dd class="sm">2026.05.10</dd></div>
+          <div><dt>개정 횟수</dt><dd>3회</dd></div>
+        </dl>
+      </div>
+
+      <div class="blk">
+        <span class="lab-kr">포함 파일</span>
+        <ul class="filelist">
+          <li><span>프롬프트 원문.md</span><span class="num">4KB</span></li>
+          <li><span>입력·출력 예시.md</span><span class="num">9KB</span></li>
+          <li><span>가정통신문 서식.hwp</span><span class="num">86KB</span></li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <span class="lab-kr">관련 태그</span>
+        <div class="tags">
+          <span class="bdg">#가정통신문</span><span class="bdg">#학급경영</span><span class="bdg">#초등교육</span>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ───── 예시 한 쌍 ───── -->
+  <div class="pair">
+    <section>
+      <div class="sec"><span class="idx">04</span><h2>입력 예시</h2></div>
+      <div class="body">
+<pre class="pre">[역할] 당신은 초등학교 담임교사입니다.
+[문서] 2026학년도 2학기 현장체험학습 가정통신문
+[핵심 정보] 1) 일시 2026.11.20(금) 09:00 ~ 15:00
+           2) 장소 부산과학체험관
+           3) 준비물 도시락 · 물 · 우비
+           4) 회신 기한 2026.11.13(금)
+[어조] 정중한 안내
+[조건] 학생 이름 · 연락처 등 식별 정보 미포함
+[출력 형식] 인사말 → 본문 → 맺음말 → 회신란</pre>
+        <p class="cap">Prompt — 대괄호 항목의 값만 담당 학급 사정에 맞게 바꾸어 사용합니다.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec"><span class="idx">05</span><h2>출력 예시</h2></div>
+      <div class="body">
+        <div class="outq">
+          <span class="q">DRAFT · 인사말 · 본문</span>
+          학부모님께 인사드립니다. 가을을 맞아 우리 반 학생들의 배움을 넓히기 위해 아래와 같이
+          현장체험학습을 실시하고자 안내드립니다.
+        </div>
+        <table class="tbl" style="margin-top:12px">
+          <thead>
+            <tr><th style="width:72px">문단</th><th>생성 내용</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="t" style="font-size:12.5px">본문</td><td style="font-size:12.5px;padding-block:9px">일시 · 장소 · 준비물을 항목으로 정리하여 제시</td></tr>
+            <tr><td class="t" style="font-size:12.5px">맺음말</td><td style="font-size:12.5px;padding-block:9px">협조 요청과 담임 연락 방법을 안내</td></tr>
+            <tr><td class="t" style="font-size:12.5px">회신란</td><td style="font-size:12.5px;padding-block:9px">참가 여부 · 학부모 서명란을 표로 생성</td></tr>
+          </tbody>
+        </table>
+        <p class="cap">생성 결과는 초안이므로 배부 전 담임교사와 관리자가 확인해야 합니다.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ───── 함께 많이 찾은 스킬 ───── -->
+  <section class="also">
+    <div class="sec"><span class="idx">06</span><h2>함께 많이 찾은 스킬</h2></div>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th style="width:104px">관리번호</th>
+          <th>스킬명</th>
+          <th class="r" style="width:92px">평점</th>
+          <th class="r" style="width:88px">다운로드</th>
+          <th class="r" style="width:92px">최근 개정</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="id lead mid">AIP-2026-011</td>
+          <td><div class="t">공문 요약 알리미</div>
+              <div class="d"><span class="bdg">공통</span><span class="bdg">행정</span><span class="bdg">대화형 보조</span></div></td>
+          <td class="mid"><div class="rate"><span class="v">4.5</span><span class="n">리뷰 13</span></div></td>
+          <td class="num num--dl mid">274</td>
+          <td class="num mid">2026.04.22</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap wrap--wide in">
+    <div>
+      <b>부산교육청 AI 스킬 포털</b><br>
+      부산광역시교육청 디지털미래교육과 · 부산광역시 부산진구 화지로 12
+    </div>
+    <div class="num">AIP-2026-002 / REV.03</div>
+  </div>
+</footer>
+
+</body>
+</html>

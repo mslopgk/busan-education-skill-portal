@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>AI 스킬 포털 관리 시스템 — 통계 리포트 대시보드</title>
+<link rel="stylesheet" href="site/_base.css">
+<style>
+  /* ── 페이지 전용 레이아웃(토큰·컴포넌트 재정의 없음) ── */
+  body{width:1280px}
+  .shell{min-height:100vh;align-items:stretch}
+
+  /* 레일 머리 — s-a-admin 과 동일 구조 */
+  .rail .brand{padding-bottom:16px;border-bottom:1px solid var(--rule-soft);margin-bottom:20px}
+  .rail .brand .l1{display:block;font-size:10.5px;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+  .rail .brand .l2{display:block;margin-top:3px;font-size:14px;font-weight:800;letter-spacing:-.025em}
+  .rail .brand .l3{display:block;margin-top:5px;font-family:var(--mono);font-size:10px;
+    letter-spacing:.08em;color:var(--muted)}
+  .rail .facet li.out{margin-top:14px;padding-top:12px;border-top:1px solid var(--rule-soft);
+    color:var(--muted);border-radius:0}
+  .rail .foothint{margin-top:auto}
+
+  /* 캔버스 */
+  .canvas{min-width:0;display:flex;flex-direction:column}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:24px;
+    height:54px;padding:0 32px;border-bottom:1px solid var(--rule)}
+  .topbar .sys{font-size:15px;font-weight:800;letter-spacing:-.025em;display:flex;
+    align-items:baseline;gap:13px}
+  .topbar .sys em{font-style:normal;font-size:13px;font-weight:700;color:var(--muted);
+    padding-left:13px;border-left:1px solid var(--rule)}
+  .topbar .rt{display:flex;align-items:center;gap:18px;flex:none}
+  .topbar .who{font-size:12.5px;color:var(--muted);letter-spacing:-.01em}
+  .topbar .who b{color:var(--ink);font-weight:700}
+  .topbar .btn{padding:7px 14px;font-size:12.5px}
+  .body{padding:24px 32px 0}
+
+  /* 머리 줄 */
+  .phead{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;padding-bottom:18px}
+  .phead h2{margin-top:7px}
+  .phead .per{text-align:right;flex:none}
+  .phead .per .k{font-size:10.5px;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+  .phead .per .v{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;
+    letter-spacing:-.01em;margin-top:2px}
+
+  /* KPI 4열 — 헤어라인과 여백만 */
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);
+    border-top:1.5px solid var(--ink);border-bottom:1px solid var(--rule-soft)}
+  .kpi > div{padding:16px 0 18px}
+  .kpi > div + div{border-left:1px solid var(--rule-soft);padding-left:24px}
+  .kpi .k{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--muted)}
+  .kpi .v{display:flex;align-items:baseline;gap:6px;margin-top:8px}
+  .kpi .v s{text-decoration:none;font-family:var(--kr);font-size:14px;font-weight:700;color:var(--muted)}
+  .kpi .v .of{font-family:var(--mono);font-size:15px;color:var(--muted);
+    font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+  .kpi .dl{color:var(--blue);font-weight:600}
+  .kpi .delta{font-size:12px;font-weight:700;letter-spacing:-.01em;margin-left:2px}
+  .kpi .delta i{font-style:normal;font-family:var(--mono);font-variant-numeric:tabular-nums}
+  .kpi .m{margin-top:5px;font-size:11.5px;color:var(--muted)}
+
+  /* 구역 머리 */
+  .sec{margin-top:26px}
+  .sec .rt{margin-left:auto;display:flex;align-items:baseline;gap:16px}
+  .sec .basisline{font-size:11.5px;color:var(--muted);font-weight:400;letter-spacing:0}
+  .legend{display:flex;gap:16px;font-size:12px;color:var(--muted);white-space:nowrap}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend b{display:block;width:13px;height:8px;border-radius:1px}
+  .legend .sw-v{background:var(--rule)}
+  .legend .sw-d{background:var(--blue)}
+
+  /* 막대 차트 — 컨테이너 높이를 px 로 고정(%는 쓰지 않음) */
+  .chsub{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding-top:10px}
+  .chsub .bs{font-size:12.5px;color:var(--muted)}
+  .chart{padding-top:6px}
+  .plot{height:192px;display:grid;grid-template-columns:repeat(4,1fr);
+    align-items:end;border-bottom:1px solid var(--rule)}
+  .grp{display:flex;align-items:flex-end;justify-content:center;gap:14px;height:192px}
+  .bar{width:52px;display:flex;flex-direction:column;justify-content:flex-end;height:192px}
+  .bar .lbl{font-family:var(--mono);font-size:10.5px;font-variant-numeric:tabular-nums;
+    text-align:right;color:var(--muted);padding-bottom:5px;line-height:1}
+  .bar .lbl.d{color:var(--blue);font-weight:600}
+  .bar i{display:block;width:100%;border-radius:1px 1px 0 0}
+  .bar i.v{background:var(--rule)}
+  .bar i.d{background:var(--blue)}
+  .xaxis{display:grid;grid-template-columns:repeat(4,1fr);padding-top:9px}
+  .xaxis span{text-align:center;font-size:12.5px;font-weight:700;letter-spacing:-.01em}
+  .xaxis span em{display:block;font-style:normal;font-family:var(--mono);font-size:10px;
+    font-weight:400;color:var(--muted);letter-spacing:.04em;margin-top:2px}
+
+  /* 아래 2열 */
+  .duo{display:grid;grid-template-columns:1fr 340px;gap:0}
+  .duo > .rgt{border-left:1px solid var(--rule-soft);padding-left:28px;margin-left:28px}
+  .tbl .act{display:flex;gap:12px;font-size:12.5px;color:var(--muted);white-space:nowrap}
+  .tbl .act a{box-shadow:inset 0 -1px 0 var(--rule)}
+  .tbl tbody td.mid{vertical-align:middle}
+
+  /* 처리 대기 목록 — 박스 없이 헤어라인만 */
+  .queue{margin-top:2px}
+  .queue li{list-style:none;padding:14px 0 15px;border-bottom:1px solid var(--rule-soft)}
+  .queue li:last-child{border-bottom:1.5px solid var(--ink)}
+  .queue .hd{display:flex;align-items:baseline;gap:10px}
+  .queue .hd .t{font-size:14px;font-weight:700;letter-spacing:-.01em}
+  .queue .hd .n{margin-left:auto;font-family:var(--mono);font-size:14px;font-weight:600;
+    font-variant-numeric:tabular-nums;text-align:right}
+  .queue .d{font-size:12.5px;color:var(--muted);margin-top:4px}
+  .queue .act{display:flex;gap:12px;font-size:12.5px;color:var(--muted);margin-top:7px}
+  .queue .act a{box-shadow:inset 0 -1px 0 var(--rule)}
+
+  .basis{margin-top:14px;padding-top:12px;border-top:1px solid var(--rule-soft);
+    font-size:11.5px;color:var(--muted);line-height:1.7}
+  .canvas .foot{margin-top:26px}
+</style>
+</head>
+<body>
+<div class="gov-band"></div>
+<a class="skip" href="#main">본문 바로가기</a>
+
+<div class="shell">
+
+  <!-- ══ 좌측 레일 ══ -->
+  <aside class="rail" style="display:flex;flex-direction:column">
+    <div class="brand">
+      <span class="l1">관리자 센터</span>
+      <span class="l2">부산광역시교육청</span>
+      <span class="l3">BOE-AIP / ADMIN</span>
+    </div>
+
+    <section>
+      <div class="lab-kr">관리 메뉴</div>
+      <ul class="facet">
+        <li><span>스킬 관리</span><span class="c">25</span></li>
+        <li><span>회원 관리</span><span class="c">2,340</span></li>
+        <li><span>후기 관리</span><span class="c">486</span></li>
+        <li class="on"><span>통계 리포트</span><span class="c">04</span></li>
+        <li><span>공지·배너</span><span class="c">3</span></li>
+        <li class="out"><span>로그아웃</span></li>
+      </ul>
+    </section>
+
+    <div class="foothint note">
+      통계 리포트는 매일 03:00 집계됩니다.<br>
+      회원 지표는 탈퇴 회원을 제외한 활성 계정 기준이며
+      비로그인 열람 건수는 조회수에만 반영됩니다.
+      <div class="num" style="text-align:left;font-size:10px;margin-top:8px">최종 집계 2026.04.29 03:00</div>
+    </div>
+  </aside>
+
+  <!-- ══ 캔버스 ══ -->
+  <main class="canvas">
+
+    <header class="topbar">
+      <div class="sys">AI 스킬 포털 관리 시스템<em>통계 리포트 대시보드</em></div>
+      <div class="rt">
+        <button class="btn btn--line" type="button">엑셀 내려받기</button>
+        <div class="who"><b>관리자</b> · 부산광역시교육청 디지털미래교육과</div>
+      </div>
+    </header>
+
+    <div class="body" id="main">
+
+      <div class="phead">
+        <div>
+          <div class="lab">STATISTICS REPORT</div>
+          <h2>통계 리포트 대시보드</h2>
+        </div>
+        <div class="per">
+          <div class="k">집계 기간</div>
+          <div class="v">2026.04.01 ~ 2026.04.28</div>
+        </div>
+      </div>
+
+      <!-- KPI 4 -->
+      <section class="kpi">
+        <div>
+          <div class="k">전체 회원</div>
+          <div class="v"><span class="big">2,340</span><s>명</s>
+            <span class="delta"><i>+12.5%</i></span></div>
+          <div class="m">직전 4주(2,080명) 대비 증가</div>
+        </div>
+        <div>
+          <div class="k">게시 스킬</div>
+          <div class="v"><span class="big">25</span><s>종</s></div>
+          <div class="m">전체 등록 28종 중 검토 3종 제외</div>
+        </div>
+        <div>
+          <div class="k">주간 다운로드</div>
+          <div class="v"><span class="big dl">1,120</span><s>건</s>
+            <span class="delta"><i>+4.2%</i></span></div>
+          <div class="m">4월 4주 기준, 직전 주 대비</div>
+        </div>
+        <div>
+          <div class="k">평균 평점</div>
+          <div class="v"><span class="big">4.4</span><span class="of">/ 5.0</span></div>
+          <div class="m">후기 486건의 가중 평균</div>
+        </div>
+      </section>
+
+      <!-- 막대 차트 -->
+      <div class="sec">
+        <span class="idx">01</span>
+        <h3>최근 4주 조회·다운로드 추이</h3>
+        <div class="rt"><span class="count">4주 합계 조회 5,030 · 다운로드 3,540</span></div>
+      </div>
+
+      <div class="chsub">
+        <span class="bs">2026년 4월 1일 ~ 2026년 4월 28일 기준</span>
+        <div class="legend">
+          <span><b class="sw-v"></b>조회수</span>
+          <span><b class="sw-d"></b>다운로드</span>
+        </div>
+      </div>
+
+      <div class="chart">
+        <div class="plot">
+          <div class="grp">
+            <div class="bar"><span class="lbl">880</span><i class="v" style="height:88px"></i></div>
+            <div class="bar"><span class="lbl d">560</span><i class="d" style="height:56px"></i></div>
+          </div>
+          <div class="grp">
+            <div class="bar"><span class="lbl">1,100</span><i class="v" style="height:110px"></i></div>
+            <div class="bar"><span class="lbl d">780</span><i class="d" style="height:78px"></i></div>
+          </div>
+          <div class="grp">
+            <div class="bar"><span class="lbl">1,300</span><i class="v" style="height:130px"></i></div>
+            <div class="bar"><span class="lbl d">1,000</span><i class="d" style="height:100px"></i></div>
+          </div>
+          <div class="grp">
+            <div class="bar"><span class="lbl">1,750</span><i class="v" style="height:175px"></i></div>
+            <div class="bar"><span class="lbl d">1,200</span><i class="d" style="height:120px"></i></div>
+          </div>
+        </div>
+        <div class="xaxis">
+          <span>4월 1주<em>04.01 ~ 04.07</em></span>
+          <span>4월 2주<em>04.08 ~ 04.14</em></span>
+          <span>4월 3주<em>04.15 ~ 04.21</em></span>
+          <span>4월 4주<em>04.22 ~ 04.28</em></span>
+        </div>
+      </div>
+
+      <!-- 아래 2열 -->
+      <div class="duo">
+        <div>
+          <div class="sec">
+            <span class="idx">02</span>
+            <h3>평점 상위 스킬</h3>
+            <div class="rt"><span class="count">전체 25종 중 3종 표시</span></div>
+          </div>
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th style="width:112px">관리번호</th>
+                <th>스킬명</th>
+                <th class="r" style="width:76px">평점</th>
+                <th class="r" style="width:84px">후기</th>
+                <th style="width:96px">동작</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="id lead">AIP-2026-001</td>
+                <td><div class="t">수행평가 문항 초안 생성기</div>
+                    <div class="d"><span class="bdg">중등</span><span class="bdg">평가</span></div></td>
+                <td class="num">4.9</td>
+                <td class="num">248건</td>
+                <td class="mid"><div class="act"><a href="#">상세</a><a href="#">후기</a></div></td>
+              </tr>
+              <tr>
+                <td class="id">AIP-2026-007</td>
+                <td><div class="t">학급 회의록 자동 요약 도우미</div>
+                    <div class="d"><span class="bdg">공통</span><span class="bdg">행정</span></div></td>
+                <td class="num">4.8</td>
+                <td class="num">182건</td>
+                <td class="mid"><div class="act"><a href="#">상세</a><a href="#">후기</a></div></td>
+              </tr>
+              <tr>
+                <td class="id">AIP-2026-012</td>
+                <td><div class="t">과학 실험 안전 지도안 가이드</div>
+                    <div class="d"><span class="bdg">중등</span><span class="bdg">수업</span></div></td>
+                <td class="num">4.7</td>
+                <td class="num">156건</td>
+                <td class="mid"><div class="act"><a href="#">상세</a><a href="#">후기</a></div></td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="basis">평점은 회원 후기의 5단계 평가를 단순 평균한 값이며 후기 3건 미만인 스킬은 순위에서 제외됩니다.</p>
+        </div>
+
+        <div class="rgt">
+          <div class="sec">
+            <span class="idx">03</span>
+            <h3>처리 대기</h3>
+            <div class="rt"><span class="count">총 3건</span></div>
+          </div>
+          <ul class="queue">
+            <li>
+              <div class="hd"><span class="t">신고된 후기</span><span class="n">2건</span></div>
+              <div class="d">부적절한 단어 사용 포함</div>
+              <div class="act"><a href="#">후기 확인</a><a href="#">숨기기</a></div>
+            </li>
+            <li>
+              <div class="hd"><span class="t">신규 스킬 승인 대기</span><span class="n">1건</span></div>
+              <div class="d">교과 연계 스킬 최종 검토 필요</div>
+              <div class="act"><a href="#">검토 시작</a><a href="#">담당자 지정</a></div>
+            </li>
+          </ul>
+          <p class="basis">처리 대기 건은 접수 시각 순으로 정렬되며 3일 이상 미처리 시 담당 부서로 알림이 전송됩니다.</p>
+        </div>
+      </div>
+
+      <footer class="foot">
+        <div class="in">
+          <div>
+            <b>부산광역시교육청 디지털미래교육과</b><br>
+            AI 스킬 포털 관리 시스템
+          </div>
+          <div class="num" style="text-align:right;font-size:11px">AIP-2026-04 / REV.02</div>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+</div>
+</body>
+</html>

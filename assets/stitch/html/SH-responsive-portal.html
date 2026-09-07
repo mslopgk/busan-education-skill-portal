@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>모바일 반응형 쇼케이스 - 부산광역시교육청 AI 스킬 포털</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;800&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E3A5F',
+                        'primary-dark': '#16324F',
+                        accent: '#17876D',
+                        surface: '#FFFFFF',
+                        page: '#F5F7FA',
+                        border: '#E2E8F0',
+                        muted: '#64748B',
+                        warning: {
+                            text: '#B45309',
+                            bg: '#FEF3C7'
+                        }
+                    },
+                    fontFamily: {
+                        headline: ["Noto Sans KR", "sans-serif"],
+                        display: ["Noto Sans KR", "sans-serif"],
+                        body: ["Noto Sans KR", "sans-serif"],
+                        label: ["Noto Sans KR", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .phone-mockup {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="bg-page text-[#1E3A5F] min-h-screen flex flex-col items-center justify-center p-8">
+<!-- Header -->
+<header class="text-center mb-16">
+<h1 class="text-3xl md:text-4xl font-bold tracking-tight text-primary">모바일·태블릿 반응형 대응</h1>
+</header>
+<!-- Mockups Container -->
+<div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center justify-center max-w-[1280px] w-full mx-auto mb-16">
+<!-- Mockup 1: 목록 -->
+<div class="flex flex-col items-center gap-4">
+<h2 class="text-lg font-bold text-muted">목록</h2>
+<div class="phone-mockup relative w-[320px] h-[640px] bg-surface rounded-[2.5rem] border-[8px] border-[#1a1a1a] overflow-hidden flex flex-col bg-page">
+<!-- Status Bar Spacer (Simulated) -->
+<div class="h-6 bg-primary w-full shrink-0"></div>
+<!-- Mockup App Header -->
+<div class="bg-primary px-4 pb-4 pt-2 shrink-0">
+<h3 class="text-surface font-bold text-[15px] mb-3">AI 스킬 포털</h3>
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-muted text-sm">search</span>
+<input class="w-full bg-surface/10 border border-surface/20 rounded-full py-1.5 pl-9 pr-4 text-sm text-surface placeholder-surface/60 focus:outline-none focus:ring-1 focus:ring-accent" placeholder="스킬 검색" readonly="" type="text"/>
+</div>
+</div>
+<!-- Chips Row -->
+<div class="bg-surface border-b border-border py-2 px-4 shrink-0">
+<div class="flex gap-2 flex-nowrap">
+<span class="px-3 py-1 bg-primary text-surface rounded-full text-xs font-medium">전체</span>
+<span class="px-3 py-1 bg-page border border-border text-muted rounded-full text-xs font-medium">초등</span>
+<span class="px-3 py-1 bg-page border border-border text-muted rounded-full text-xs font-medium">중등</span>
+<span class="px-3 py-1 bg-page border border-border text-muted rounded-full text-xs font-medium">고등</span>
+</div>
+</div>
+<!-- List Content -->
+<div class="p-4 flex-1 overflow-y-auto flex flex-col gap-3">
+<!-- Card 1 -->
+<div class="bg-surface p-4 rounded-lg border border-border shadow-sm flex flex-col gap-2">
+<div class="flex gap-1.5 mb-1">
+<span class="text-[10px] font-medium bg-page border border-border px-1.5 py-0.5 rounded text-muted">초등</span>
+<span class="text-[10px] font-medium bg-page border border-border px-1.5 py-0.5 rounded text-muted">수업설계</span>
+</div>
+<h4 class="font-bold text-[15px] leading-snug line-clamp-2">학년별 수업 지도안 초안 만들기</h4>
+<div class="mt-2 text-xs text-muted">조회 1,240 · 내려받기 312</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface p-4 rounded-lg border border-border shadow-sm flex flex-col gap-2">
+<div class="flex gap-1.5 mb-1">
+<span class="text-[10px] font-medium bg-page border border-border px-1.5 py-0.5 rounded text-muted">중등</span>
+<span class="text-[10px] font-medium bg-page border border-border px-1.5 py-0.5 rounded text-muted">학습평가</span>
+</div>
+<h4 class="font-bold text-[15px] leading-snug line-clamp-2">서술형 문항 채점 기준표 초안 생성</h4>
+<div class="mt-2 text-xs text-muted">조회 892 · 내려받기 210</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface p-4 rounded-lg border border-border shadow-sm flex flex-col gap-2">
+<div class="flex gap-1.5 mb-1">
+<span class="text-[10px] font-medium bg-page border border-border px-1.5 py-0.5 rounded text-muted">고등</span>
+<span class="text-[10px] font-medium bg-page border border-border px-1.5 py-0.5 rounded text-muted">행정업무</span>
+</div>
+<h4 class="font-bold text-[15px] leading-snug line-clamp-2">체험학습 가정통신문 안내문 작성</h4>
+<div class="mt-2 text-xs text-muted">조회 512 · 내려받기 105</div>
+</div>
+</div>
+<!-- Bottom Home Bar Simulator -->
+<div class="h-1 w-1/3 bg-black/20 rounded-full mx-auto mb-2 shrink-0"></div>
+</div>
+</div>
+<!-- Mockup 2: 상세 -->
+<div class="flex flex-col items-center gap-4">
+<h2 class="text-lg font-bold text-muted">상세</h2>
+<div class="phone-mockup relative w-[320px] h-[640px] bg-surface rounded-[2.5rem] border-[8px] border-[#1a1a1a] overflow-hidden flex flex-col">
+<!-- Status Bar Spacer (Simulated) -->
+<div class="h-6 bg-primary w-full shrink-0"></div>
+<!-- Header -->
+<div class="bg-primary h-12 flex items-center px-4 shrink-0">
+<span class="material-symbols-outlined text-surface text-[20px] cursor-pointer">arrow_back</span>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto px-5 pt-4 pb-[124px] bg-surface">
+<div class="flex gap-1.5 mb-2">
+<span class="text-[11px] font-medium bg-page border border-border px-2 py-0.5 rounded text-muted">초등</span>
+<span class="text-[11px] font-medium bg-page border border-border px-2 py-0.5 rounded text-muted">수업설계</span>
+</div>
+<h3 class="text-lg font-bold leading-tight mb-3">학년별 수업 지도안 초안 만들기</h3>
+<div class="flex flex-col gap-2">
+<!-- Expanded Accordion -->
+<div class="border border-border rounded-lg overflow-hidden">
+<div class="bg-page px-4 py-2.5 flex justify-between items-center border-b border-border">
+<span class="font-bold text-[14px]">활용 목적</span>
+<span class="material-symbols-outlined text-muted text-sm">expand_less</span>
+</div>
+<div class="px-4 py-3 text-[12px] text-muted leading-snug">
+                                AI를 활용하여 단원별 성취기준에 부합하는 수업 지도안의 초안을 신속하게 생성합니다. 교사는 이를 바탕으로 세부적인 활동을 추가하여 완성도를 높일 수 있습니다.
+                            </div>
+</div>
+<!-- Collapsed Accordions -->
+<div class="border border-border rounded-lg bg-surface px-4 py-2.5 flex justify-between items-center">
+<span class="font-bold text-[14px]">사용 절차</span>
+<span class="material-symbols-outlined text-muted text-sm">expand_more</span>
+</div>
+<div class="border border-border rounded-lg bg-surface px-4 py-2.5 flex justify-between items-center">
+<span class="font-bold text-[14px]">입력 예시</span>
+<span class="material-symbols-outlined text-muted text-sm">expand_more</span>
+</div>
+<div class="border border-border rounded-lg bg-surface px-4 py-2.5 flex justify-between items-center">
+<span class="font-bold text-[14px]">유의사항</span>
+<span class="material-symbols-outlined text-muted text-sm">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Fixed Bottom Button -->
+<div class="absolute bottom-0 w-full p-4 bg-surface border-t border-border flex flex-col pb-6">
+<button class="w-full bg-accent text-surface font-bold py-3.5 rounded-lg text-sm">파일 내려받기</button>
+<!-- Bottom Home Bar Simulator -->
+<div class="h-1 w-1/3 bg-black/20 rounded-full mx-auto mt-4 shrink-0"></div>
+</div>
+</div>
+</div>
+<!-- Mockup 3: 유의사항 -->
+<div class="flex flex-col items-center gap-4">
+<h2 class="text-lg font-bold text-muted">유의사항</h2>
+<div class="phone-mockup relative w-[320px] h-[640px] bg-surface rounded-[2.5rem] border-[8px] border-[#1a1a1a] overflow-hidden flex flex-col">
+<!-- Status Bar Spacer (Simulated) -->
+<div class="h-6 bg-primary w-full shrink-0"></div>
+<!-- Header -->
+<div class="bg-primary h-12 flex items-center px-4 shrink-0">
+<span class="material-symbols-outlined text-surface text-[20px] cursor-pointer">arrow_back</span>
+<span class="text-surface font-medium text-sm ml-3">유의사항</span>
+</div>
+<!-- Sticky Warning Box -->
+<div class="bg-warning-bg border-b border-warning-text/20 p-4 shrink-0 z-10 shadow-sm relative">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-warning-text text-[18px] mt-0.5">warning</span>
+<div class="text-[13px] text-warning-text font-medium flex flex-col gap-1">
+<p>개인정보를 입력하지 마세요</p>
+<p>생성 결과는 반드시 교사가 검토한 후 사용하세요</p>
+</div>
+</div>
+</div>
+<!-- 유의사항 본문 -->
+<div class="flex-1 px-5 pt-4 overflow-hidden bg-surface">
+<div class="flex flex-col gap-4">
+<div>
+<h4 class="text-[13px] font-bold text-primary mb-1.5">개인정보 보호</h4>
+<ul class="list-disc list-outside ml-4 space-y-1 text-[12px] text-muted leading-relaxed">
+<li>학생 이름·학번·주민등록번호 등 식별 정보를 프롬프트에 입력하지 마십시오.</li>
+<li>상담 기록과 생활기록부 원문을 그대로 붙여넣지 마십시오.</li>
+</ul>
+</div>
+<div>
+<h4 class="text-[13px] font-bold text-primary mb-1.5">저작권 준수</h4>
+<ul class="list-disc list-outside ml-4 space-y-1 text-[12px] text-muted leading-relaxed">
+<li>교과서 지문과 외부 유료 자료의 원문을 그대로 입력하지 마십시오.</li>
+</ul>
+</div>
+<div>
+<h4 class="text-[13px] font-bold text-primary mb-1.5">결과물 검토</h4>
+<ul class="list-disc list-outside ml-4 space-y-1 text-[12px] text-muted leading-relaxed">
+<li>생성 결과는 초안이므로 반드시 교사가 사실관계와 교육과정 부합 여부를 확인한 뒤 사용하십시오.</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Fixed Bottom Button (matching 상세 view) -->
+<div class="absolute bottom-0 w-full p-4 bg-surface border-t border-border flex flex-col pb-6 z-20">
+<button class="w-full bg-accent text-surface font-bold py-3.5 rounded-lg text-sm">파일 내려받기</button>
+<!-- Bottom Home Bar Simulator -->
+<div class="h-1 w-1/3 bg-black/20 rounded-full mx-auto mt-4 shrink-0"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Caption -->
+<div class="text-center max-w-2xl px-4 mt-auto">
+<p class="text-[15px] font-medium text-muted bg-surface py-3 px-6 rounded-full shadow-sm border border-border inline-block">
+            PC · 태블릿 · 모바일 반응형 — 교무실과 교실을 오가는 이용 흐름을 하나의 화면 설계로 지원한다
+        </p>
+</div>
+</body></html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>부산광역시교육청 AI 스킬 포털</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1E3A5F",
+                        "primary-dark": "#16324F",
+                        accent: "#17876D",
+                        surface: "#FFFFFF",
+                        "page-bg": "#F5F7FA",
+                        border: "#E2E8F0",
+                        muted: "#64748B",
+                        "warning-text": "#B45309",
+                        "warning-bg": "#FEF3C7"
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans KR', 'sans-serif'],
+                        headline: ['Noto Sans KR', 'sans-serif'],
+                        body: ['Noto Sans KR', 'sans-serif'],
+                        label: ['Noto Sans KR', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-page-bg text-[#333333] flex flex-col min-h-screen pt-16">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center h-16 px-6 max-w-[1280px] mx-auto left-0 right-0 bg-[#FFFFFF] dark:bg-surface border-b border-[#E2E8F0] shadow-sm">
+<div class="flex items-center gap-8">
+<a class="text-lg font-bold text-[#1E3A5F]" href="#">부산교육청 AI 스킬 포털</a>
+<div class="hidden md:flex gap-6">
+<a class="text-[#17876D] font-bold border-b-2 border-[#17876D] pb-1 font-body text-[15px]" href="#">AI 스킬 탐색</a>
+<a class="text-[#64748B] hover:text-[#1E3A5F] hover:bg-[#F5F7FA] transition-colors cursor-pointer duration-200 font-body text-[15px]" href="#">학교급별</a>
+<a class="text-[#64748B] hover:text-[#1E3A5F] hover:bg-[#F5F7FA] transition-colors cursor-pointer duration-200 font-body text-[15px]" href="#">교과별</a>
+<a class="text-[#64748B] hover:text-[#1E3A5F] hover:bg-[#F5F7FA] transition-colors cursor-pointer duration-200 font-body text-[15px]" href="#">업무유형별</a>
+<a class="text-[#64748B] hover:text-[#1E3A5F] hover:bg-[#F5F7FA] transition-colors cursor-pointer duration-200 font-body text-[15px]" href="#">활용가이드</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[15px] font-medium text-primary hover:bg-[#F5F7FA] px-3 py-1.5 rounded transition-colors duration-200">컬렉션</button>
+<button class="text-muted hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+</button>
+<img alt="박선생님 프로필" class="w-8 h-8 rounded-full object-cover border border-border" data-alt="A small, professional portrait photo of a teacher to serve as a profile avatar. The photo is taken against a clean, neutral background with soft, flattering studio lighting. The teacher is smiling gently, projecting warmth and approachability. High resolution and clear." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZfnxrfM0LA0cSRl-cQaqqDyUaqelQIKlICnVWv8EN9t0AjEsowzPOy3GkXOUYGUPky95ayrHOkLpsKicQFVT_0VmJlngsiIdqUG9WwAuxRz71QuKjaAsXv8XSDSpQxf1Lx8FJYHQLGWXXkyvVZbV9TG4KLfFc8IBIyaOUiD7mYyEVWV2I1ifWC7SXigAzQ6RseAfLDGWZezGm-VjPlBU_UJrd8AHh7mMtgmkx1URFRI7-M2jhCuFbt9-QVWkf6l-vhXl6fYfjNg"/>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="bg-primary w-full py-20 px-6">
+<div class="max-w-[1280px] mx-auto text-center flex flex-col items-center">
+<h1 class="text-surface text-4xl md:text-5xl font-bold mb-10 tracking-tight">오늘은 어떤 수업을 준비하시나요?</h1>
+<div class="relative w-full max-w-3xl flex">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-muted">search</span>
+<input class="w-full pl-12 pr-32 py-4 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-accent border-none shadow-md" placeholder="예) 중학교 과학 수행평가 문항" type="text"/>
+<button class="absolute right-2 top-2 bottom-2 bg-accent text-surface px-6 rounded font-medium hover:bg-opacity-90 transition-colors">
+                        검색
+                    </button>
+</div>
+</div>
+</section>
+<!-- Filter Bar -->
+<div class="w-full bg-surface border-b border-border shadow-sm mb-12">
+<div class="max-w-[1280px] mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex flex-wrap gap-3">
+<div class="relative">
+<select class="appearance-none bg-page-bg border border-border text-[15px] rounded-full px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-accent text-[#333333]">
+<option>학교급</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-muted text-sm pointer-events-none">arrow_drop_down</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-page-bg border border-border text-[15px] rounded-full px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-accent text-[#333333]">
+<option>교과</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-muted text-sm pointer-events-none">arrow_drop_down</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-page-bg border border-border text-[15px] rounded-full px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-accent text-[#333333]">
+<option>업무유형</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-muted text-sm pointer-events-none">arrow_drop_down</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-page-bg border border-border text-[15px] rounded-full px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-accent text-[#333333]">
+<option>활용 도구</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-muted text-sm pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+<div class="flex items-center text-sm gap-2">
+<button class="font-bold text-primary">최신순</button>
+<span class="text-border">·</span>
+<button class="text-muted hover:text-primary transition-colors">평점순</button>
+<span class="text-border">·</span>
+<button class="text-muted hover:text-primary transition-colors">다운로드순</button>
+</div>
+</div>
+</div>
+<div class="max-w-[1280px] mx-auto px-6 pb-20 space-y-16">
+<!-- Section 1: 이번 주 인기 스킬 -->
+<section>
+<div class="flex justify-between items-end mb-6">
+<h2 class="text-2xl font-bold text-primary">이번 주 인기 스킬</h2>
+<a class="text-sm font-medium text-muted hover:text-primary flex items-center transition-colors" href="#">전체보기 <span class="material-symbols-outlined text-[18px]">chevron_right</span></a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface rounded-lg border border-border p-5 hover:shadow-md transition-shadow cursor-pointer relative group">
+<div class="flex justify-between items-start mb-4">
+<span class="bg-page-bg text-muted text-xs font-medium px-2.5 py-1 rounded-full">평가/채점</span>
+<button class="text-border hover:text-accent transition-colors"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">favorite</span></button>
+</div>
+<h3 class="font-bold text-lg text-primary mb-2 leading-snug group-hover:text-accent transition-colors">수행평가 문항 초안 생성</h3>
+<p class="text-sm text-muted mb-4 line-clamp-2 min-h-[40px]">성취기준에 기반한 수행평가 문항 및 루브릭 초안을 빠르게 생성합니다.</p>
+<div class="flex justify-between items-center pt-4 border-t border-border mt-auto">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-accent text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-medium text-[#333333]">4.6</span>
+<span class="text-xs text-muted">(12)</span>
+</div>
+<div class="flex items-center gap-1 text-muted">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span class="text-sm">312</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface rounded-lg border border-border p-5 hover:shadow-md transition-shadow cursor-pointer relative group">
+<div class="flex justify-between items-start mb-4">
+<span class="bg-page-bg text-muted text-xs font-medium px-2.5 py-1 rounded-full">학급운영</span>
+<button class="text-accent transition-colors"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span></button>
+</div>
+<h3 class="font-bold text-lg text-primary mb-2 leading-snug group-hover:text-accent transition-colors">가정통신문 작성 도우미</h3>
+<p class="text-sm text-muted mb-4 line-clamp-2 min-h-[40px]">행사 안내, 안전 교육 등 다양한 주제의 가정통신문 초안을 작성합니다.</p>
+<div class="flex justify-between items-center pt-4 border-t border-border mt-auto">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-accent text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-medium text-[#333333]">4.8</span>
+<span class="text-xs text-muted">(21)</span>
+</div>
+<div class="flex items-center gap-1 text-muted">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span class="text-sm">320</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface rounded-lg border border-border p-5 hover:shadow-md transition-shadow cursor-pointer relative group">
+<div class="flex justify-between items-start mb-4">
+<span class="bg-page-bg text-muted text-xs font-medium px-2.5 py-1 rounded-full">행정업무</span>
+<button class="text-border hover:text-accent transition-colors"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">favorite</span></button>
+</div>
+<h3 class="font-bold text-lg text-primary mb-2 leading-snug group-hover:text-accent transition-colors">학급 회의록 요약</h3>
+<p class="text-sm text-muted mb-4 line-clamp-2 min-h-[40px]">장문의 학의 회의록이나 협의록을 핵심 내용 중심으로 깔끔하게 요약합니다.</p>
+<div class="flex justify-between items-center pt-4 border-t border-border mt-auto">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-accent text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-medium text-[#333333]">4.5</span>
+<span class="text-xs text-muted">(9)</span>
+</div>
+<div class="flex items-center gap-1 text-muted">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span class="text-sm">150</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface rounded-lg border border-border p-5 hover:shadow-md transition-shadow cursor-pointer relative group">
+<div class="flex justify-between items-start mb-4">
+<span class="bg-page-bg text-muted text-xs font-medium px-2.5 py-1 rounded-full">수업준비</span>
+<button class="text-border hover:text-accent transition-colors"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">favorite</span></button>
+</div>
+<h3 class="font-bold text-lg text-primary mb-2 leading-snug group-hover:text-accent transition-colors">영어 독해 지문 변형</h3>
+<p class="text-sm text-muted mb-4 line-clamp-2 min-h-[40px]">기존 영어 지문을 학생 수준에 맞게 단어 난이도와 길이를 조절하여 변형합니다.</p>
+<div class="flex justify-between items-center pt-4 border-t border-border mt-auto">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-accent text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-medium text-[#333333]">4.7</span>
+<span class="text-xs text-muted">(17)</span>
+</div>
+<div class="flex items-center gap-1 text-muted">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span class="text-sm">890</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: 컬렉션 -->
+<section>
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="text-2xl font-bold text-primary mb-1">컬렉션</h2>
+<p class="text-muted text-[15px]">주제별 스킬 묶음</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Collection 1 -->
+<div class="bg-surface border border-border rounded-lg overflow-hidden hover:border-accent transition-colors cursor-pointer group flex flex-col h-full">
+<div class="h-32 bg-page-bg flex items-center justify-center border-b border-border group-hover:bg-[#E8F3F1] transition-colors">
+<span class="material-symbols-outlined text-4xl text-primary opacity-80 group-hover:text-accent group-hover:opacity-100 transition-all transform group-hover:scale-110">edit_document</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-bold text-lg text-primary mb-2">학기말 평가 준비</h3>
+<p class="text-sm text-muted mb-6 flex-grow">수행평가·서술형 채점 등</p>
+<div class="inline-flex items-center gap-1.5 text-xs font-medium text-accent bg-[#E8F3F1] px-3 py-1.5 rounded w-fit">
+<span class="material-symbols-outlined text-[16px]">apps</span> 스킬 6종
+                            </div>
+</div>
+</div>
+<!-- Collection 2 -->
+<div class="bg-surface border border-border rounded-lg overflow-hidden hover:border-accent transition-colors cursor-pointer group flex flex-col h-full">
+<div class="h-32 bg-page-bg flex items-center justify-center border-b border-border group-hover:bg-[#E8F3F1] transition-colors">
+<span class="material-symbols-outlined text-4xl text-primary opacity-80 group-hover:text-accent group-hover:opacity-100 transition-all transform group-hover:scale-110">diversity_3</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-bold text-lg text-primary mb-2">신학기 학급경영</h3>
+<p class="text-sm text-muted mb-6 flex-grow">상담·안내문·규칙 만들기</p>
+<div class="inline-flex items-center gap-1.5 text-xs font-medium text-accent bg-[#E8F3F1] px-3 py-1.5 rounded w-fit">
+<span class="material-symbols-outlined text-[16px]">apps</span> 스킬 6종
+                            </div>
+</div>
+</div>
+<!-- Collection 3 -->
+<div class="bg-surface border border-border rounded-lg overflow-hidden hover:border-accent transition-colors cursor-pointer group flex flex-col h-full">
+<div class="h-32 bg-page-bg flex items-center justify-center border-b border-border group-hover:bg-[#E8F3F1] transition-colors">
+<span class="material-symbols-outlined text-4xl text-primary opacity-80 group-hover:text-accent group-hover:opacity-100 transition-all transform group-hover:scale-110">menu_book</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-bold text-lg text-primary mb-2">생활기록부 작성 지원</h3>
+<p class="text-sm text-muted mb-6 flex-grow">세특·행발 초안</p>
+<div class="inline-flex items-center gap-1.5 text-xs font-medium text-accent bg-[#E8F3F1] px-3 py-1.5 rounded w-fit">
+<span class="material-symbols-outlined text-[16px]">apps</span> 스킬 6종
+                            </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: 공지사항 -->
+<section class="bg-surface border border-border rounded-lg p-6">
+<div class="flex justify-between items-center border-b border-border pb-4 mb-4">
+<h2 class="text-xl font-bold text-primary">공지사항</h2>
+<a class="text-sm font-medium text-muted hover:text-primary transition-colors" href="#">더보기 <span class="material-symbols-outlined text-[14px] align-middle">chevron_right</span></a>
+</div>
+<ul class="space-y-0">
+<li class="flex items-center py-3 border-b border-page-bg last:border-0 hover:bg-page-bg -mx-6 px-6 transition-colors">
+<span class="text-accent text-sm font-bold w-14 flex-shrink-0">[공지]</span>
+<a class="text-[15px] text-[#333333] hover:underline truncate flex-grow mr-4" href="#">AI 스킬 포털 개통 및 회원가입 안내</a>
+<span class="text-sm text-muted flex-shrink-0">2026.11.02</span>
+</li>
+<li class="flex items-center py-3 border-b border-page-bg last:border-0 hover:bg-page-bg -mx-6 px-6 transition-colors">
+<span class="text-accent text-sm font-bold w-14 flex-shrink-0">[공지]</span>
+<a class="text-[15px] text-[#333333] hover:underline truncate flex-grow mr-4" href="#">즐겨찾기한 스킬의 개정 알림 기능 안내</a>
+<span class="text-sm text-muted flex-shrink-0">2026.11.10</span>
+</li>
+</ul>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#F5F7FA] dark:bg-surface-container border-t border-[#E2E8F0] w-full py-8 px-6 mt-auto max-w-[1280px] mx-auto flat no shadows">
+<div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-4">
+<div class="font-bold text-[#1E3A5F]">부산광역시교육청</div>
+<div class="flex flex-wrap justify-center gap-4 text-sm font-body text-[#64748B]">
+<a class="text-[#64748B] hover:text-[#1E3A5F] transition-colors" href="#">이용약관</a>
+<span class="text-border">|</span>
+<a class="text-[#64748B] hover:text-[#1E3A5F] transition-colors" href="#">개인정보처리방침</a>
+<span class="text-border">|</span>
+<a class="text-[#64748B] hover:text-[#1E3A5F] transition-colors" href="#">이메일무단수집거부</a>
+</div>
+</div>
+<div class="mt-6 text-center md:text-left text-sm font-body text-[#64748B]">
+            Copyright © 2026 부산광역시교육청. All Rights Reserved.
+        </div>
+</footer>
+</body></html>

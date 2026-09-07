@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>부산교육청 교육용 AI 스킬 아카이브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canvas:#F2F4F6;
+    --surface:#FFFFFF;
+    --line:#DDE3E8;
+    --line-soft:#E8ECF0;
+    --ink:#151A1F;
+    --muted:#68757F;
+    --accent:#0057D9;
+    --accent-wash:#EDF3FE;
+    --ok:#12A150;
+    --mono:'IBM Plex Mono','SFMono-Regular',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{
+    font-family:'Gothic A1','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    background:var(--canvas);color:var(--ink);
+    font-size:13px;line-height:1.5;
+    font-feature-settings:"tnum" 1;
+  }
+  .mono{font-family:var(--mono);font-feature-settings:"tnum" 1;letter-spacing:-.01em}
+
+  /* ── app shell ─────────────────────────────── */
+  .shell{display:flex;min-height:100vh;width:1280px}
+
+  /* ── left rail ─────────────────────────────── */
+  .rail{
+    width:220px;flex:0 0 220px;background:var(--surface);
+    border-right:1px solid var(--line);
+    display:flex;flex-direction:column;
+  }
+  .mark{
+    height:64px;flex:0 0 64px;display:flex;align-items:center;gap:9px;
+    padding:0 16px;border-bottom:1px solid var(--line);
+  }
+  .mark-glyph{
+    width:26px;height:26px;border-radius:4px;background:var(--ink);
+    flex:0 0 26px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;
+    gap:2px;padding:6px;
+  }
+  .mark-glyph i{display:block;border-radius:1px;background:#5C6870}
+  .mark-glyph i:nth-child(1){background:var(--accent)}
+  .mark-glyph i:nth-child(4){background:#FFFFFF}
+  .mark-txt{display:flex;flex-direction:column;gap:1px}
+  .mark-txt .l1{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.09em}
+  .mark-txt .l2{font-size:13.5px;font-weight:700;letter-spacing:-.025em;color:var(--ink)}
+
+  .rail-body{padding:20px 0 0}
+  .facet + .facet{margin-top:22px}
+  .facet-head{
+    display:flex;align-items:baseline;justify-content:space-between;
+    padding:0 16px 8px;
+  }
+  .facet-head b{font-size:10.5px;font-weight:700;color:var(--muted);letter-spacing:.12em}
+  .facet-head span{font-size:9.5px;color:#98A4AC;letter-spacing:.04em}
+  .facet ul{list-style:none}
+  .facet li a{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 16px 0 14px;height:28px;text-decoration:none;
+    color:#3E4A52;font-size:12.5px;font-weight:500;letter-spacing:-.01em;
+    border-left:2px solid transparent;
+  }
+  .facet li a .c{font-family:var(--mono);font-size:11px;color:#93A0A8;font-weight:400}
+  .facet li a:hover{background:#F6F8F9}
+  .facet li a.on{
+    background:var(--accent-wash);border-left-color:var(--accent);
+    color:var(--accent);font-weight:700;
+  }
+  .facet li a.on .c{color:var(--accent);font-weight:500}
+
+  .steps{margin-top:24px;padding:14px 16px 4px;border-top:1px solid var(--line-soft)}
+  .steps b{display:block;font-size:10.5px;font-weight:700;color:#98A4AC;letter-spacing:.12em;margin-bottom:9px}
+  .steps div{display:flex;align-items:center;gap:8px;height:24px}
+  .steps div i{
+    font-style:normal;font-family:var(--mono);font-size:10px;color:#A3AEB5;
+    width:16px;letter-spacing:0;
+  }
+  .steps div span{font-size:12px;color:#5B686F;letter-spacing:-.015em}
+  .keys{margin-top:16px;padding:14px 16px;border-top:1px solid var(--line-soft)}
+  .keys b{display:block;font-size:10.5px;font-weight:700;color:#98A4AC;letter-spacing:.12em;margin-bottom:8px}
+  .keys div{display:flex;align-items:center;justify-content:space-between;height:20px}
+  .keys div span{font-size:11.5px;color:#7E8B93;letter-spacing:-.01em}
+  .keys div i{
+    font-style:normal;font-family:var(--mono);font-size:10px;color:#8A959C;
+    border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;
+    padding:1px 5px;background:#FAFBFC;
+  }
+  .rail-foot{
+    margin-top:auto;padding:14px 16px 18px;border-top:1px solid var(--line-soft);
+  }
+  .rail-foot p{font-size:11px;line-height:1.65;color:#8A959C;letter-spacing:-.01em}
+  .rail-foot .upd{
+    margin-top:9px;font-family:var(--mono);font-size:10px;color:#A3AEB5;letter-spacing:0;
+  }
+
+  /* ── canvas ────────────────────────────────── */
+  .canvas{flex:1 1 auto;min-width:0;display:flex;flex-direction:column}
+
+  .topbar{
+    height:64px;flex:0 0 64px;background:var(--surface);
+    border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 28px;
+  }
+  .nav{display:flex;align-items:center;gap:2px}
+  .nav a{
+    text-decoration:none;color:var(--muted);font-size:13px;font-weight:500;
+    letter-spacing:-.02em;padding:7px 11px;border-radius:4px;
+  }
+  .nav a:hover{background:#F4F6F8;color:var(--ink)}
+  .nav a.on{color:var(--ink);font-weight:700;background:#EFF2F4}
+  .openflag{
+    display:flex;align-items:center;gap:7px;height:26px;padding:0 10px;
+    border:1px solid var(--line);border-radius:4px;
+    font-size:11.5px;color:var(--muted);font-weight:500;letter-spacing:-.01em;
+  }
+  .openflag em{width:5px;height:5px;border-radius:50%;background:var(--ok);display:block}
+
+  .scroll{padding:28px 28px 0;flex:1 1 auto}
+
+  /* page head */
+  .phead{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;padding:0 2px 20px}
+  .phead h1{font-size:24px;font-weight:800;letter-spacing:-.035em;line-height:1.28}
+  .phead p{margin-top:7px;font-size:13px;color:var(--muted);letter-spacing:-.015em;max-width:660px}
+  .stat{
+    text-align:right;border-left:1px solid var(--line);padding-left:20px;flex:0 0 auto;
+  }
+  .stat .k{font-size:10.5px;font-weight:700;color:var(--muted);letter-spacing:.1em}
+  .stat .v{margin-top:2px;font-family:var(--mono);font-size:27px;font-weight:500;letter-spacing:-.04em;line-height:1.1}
+  .stat .v s{text-decoration:none;font-family:'Gothic A1',sans-serif;font-size:14px;font-weight:600;margin-left:2px;color:var(--muted)}
+
+  /* panel */
+  .panel{
+    background:var(--surface);border:1px solid var(--line);border-radius:4px;
+    box-shadow:0 1px 2px rgba(21,26,31,.045);
+  }
+
+  /* toolbar */
+  .toolbar{
+    display:flex;align-items:center;gap:12px;padding:11px 12px;
+    border-bottom:1px solid var(--line);
+  }
+  .search{
+    flex:0 1 480px;display:flex;align-items:center;gap:9px;height:36px;
+    padding:0 9px 0 11px;background:var(--surface);
+    border:1px solid var(--accent);border-radius:4px;
+    box-shadow:0 0 0 3px rgba(0,87,217,.12);
+  }
+  .search svg{flex:0 0 auto;display:block}
+  .search .ph{flex:1 1 auto;font-size:13px;color:#93A0A8;letter-spacing:-.015em}
+  .search .caret{width:1px;height:15px;background:var(--accent);margin-right:-4px}
+  .kbd{
+    display:flex;align-items:center;gap:1px;height:20px;padding:0 6px;
+    border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;
+    background:#F7F9FA;font-family:var(--mono);font-size:10.5px;font-weight:500;
+    color:#7E8B93;letter-spacing:.02em;
+  }
+  .tsep{width:1px;height:20px;background:var(--line);flex:0 0 auto}
+  .fstate{
+    flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:7px;padding-left:14px;
+    font-size:11.5px;color:#93A0A8;letter-spacing:-.01em;
+  }
+  .fstate b{font-weight:600;color:#5B686F}
+  .fstate u{text-decoration:none;color:#B3BDC4}
+  .sortlab{font-size:11px;font-weight:600;color:#93A0A8;letter-spacing:.06em;flex:0 0 auto}
+  .seg{display:flex;gap:2px;background:#EEF1F4;border-radius:4px;padding:2px;flex:0 0 auto}
+  .seg button{
+    font-family:inherit;font-size:12px;font-weight:600;letter-spacing:-.015em;
+    border:0;background:transparent;color:var(--muted);padding:5px 11px;border-radius:3px;cursor:pointer;
+  }
+  .seg button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 1.5px rgba(21,26,31,.10)}
+  .rescount{flex:0 0 auto;font-size:12px;color:var(--muted);letter-spacing:-.01em;padding-right:4px}
+  .rescount b{font-family:var(--mono);font-weight:600;color:var(--ink);font-size:12.5px}
+
+  /* list */
+  .row{
+    display:grid;
+    grid-template-columns:40px 124px minmax(0,1fr) 86px 88px 96px;
+    align-items:center;padding:0 20px;
+  }
+  .lhead{
+    height:32px;border-bottom:1px solid var(--line);background:#FAFBFC;
+    font-size:10.5px;font-weight:700;color:#8B979E;letter-spacing:.1em;
+  }
+  .lhead .r{text-align:right}
+  .item{
+    min-height:74px;padding-top:14px;padding-bottom:14px;
+    border-bottom:1px solid var(--line-soft);position:relative;
+  }
+  .item:last-child{border-bottom:0}
+  .item.hot{background:#F8FAFC}
+  .item.hot:before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent);
+  }
+  .idx{font-family:var(--mono);font-size:11.5px;color:#AAB5BC;letter-spacing:0}
+  .chips{display:flex;gap:4px}
+  .chip{
+    font-size:11px;font-weight:600;letter-spacing:-.02em;height:21px;line-height:20px;
+    padding:0 7px;border-radius:4px;white-space:nowrap;
+  }
+  .chip.lv{background:#EAEFF3;color:#3E4A52}
+  .chip.tp{border:1px solid var(--line);color:var(--muted);line-height:19px}
+  .ttl{font-size:14.5px;font-weight:700;letter-spacing:-.03em;color:var(--ink)}
+  .item.hot .ttl{color:var(--accent)}
+  .dsc{margin-top:3px;font-size:12px;color:var(--muted);letter-spacing:-.015em;
+       overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:16px}
+  .st{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#5B686F;font-weight:500}
+  .st em{width:5px;height:5px;border-radius:50%;background:var(--ok);display:block;flex:0 0 auto}
+  .num{text-align:right;font-family:var(--mono);font-size:13px;letter-spacing:-.02em;color:var(--muted)}
+  .num.dl{color:var(--ink);font-weight:500}
+  .bar{margin-top:6px;height:3px;background:#ECEFF2;border-radius:2px;margin-left:auto;width:52px}
+  .bar i{display:block;height:3px;background:#9DAAB2;border-radius:2px}
+
+  .lfoot{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:11px 20px;border-top:1px solid var(--line);background:#FAFBFC;
+    font-size:11.5px;color:#8B979E;letter-spacing:-.01em;
+  }
+  .lfoot .mono{font-size:11px}
+  .pager{display:flex;gap:4px}
+  .pager span{
+    display:block;min-width:22px;height:22px;line-height:21px;text-align:center;
+    border:1px solid var(--line);border-radius:4px;background:var(--surface);
+    font-family:var(--mono);font-size:11px;color:var(--muted);
+  }
+  .pager span.on{background:var(--ink);border-color:var(--ink);color:#fff}
+
+  /* notices */
+  .grid2{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin-top:16px}
+  .pnl-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 20px;border-bottom:1px solid var(--line);
+  }
+  .pnl-head h2{font-size:13px;font-weight:700;letter-spacing:-.02em}
+  .pnl-head h2 sup{
+    font-family:var(--mono);font-size:10.5px;color:#93A0A8;margin-left:7px;
+    font-weight:500;top:0;position:relative;letter-spacing:-.02em;
+  }
+  .pnl-head a{font-size:11.5px;color:var(--muted);text-decoration:none;letter-spacing:-.01em}
+  .nrow{
+    display:grid;grid-template-columns:96px minmax(0,1fr) 60px;align-items:center;gap:0;
+    padding:0 20px;height:44px;border-bottom:1px solid var(--line-soft);
+  }
+  .nrow:last-child{border-bottom:0}
+  .nrow .d{font-family:var(--mono);font-size:11.5px;color:#98A4AC;letter-spacing:-.02em}
+  .nrow .t{font-size:13px;letter-spacing:-.02em;color:#242C33;
+           overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:16px}
+  .nrow .g{text-align:right;font-size:10.5px;font-weight:600;letter-spacing:.04em;color:#A3AEB5}
+  .nrow .g.new{color:var(--accent)}
+
+  /* footer */
+  .foot{
+    margin-top:28px;border-top:1px solid var(--line);
+    padding:18px 2px 26px;display:flex;align-items:center;justify-content:space-between;
+  }
+  .foot .org{font-size:12.5px;font-weight:700;letter-spacing:-.02em;color:#414C54}
+  .foot .note{font-size:11.5px;color:#8B979E;letter-spacing:-.01em}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- ══ rail ══ -->
+  <aside class="rail">
+    <div class="mark">
+      <div class="mark-glyph"><i></i><i></i><i></i><i></i></div>
+      <div class="mark-txt">
+        <span class="l1">부산교육청</span>
+        <span class="l2">교육용 AI 스킬 아카이브</span>
+      </div>
+    </div>
+
+    <div class="rail-body">
+      <div class="facet">
+        <div class="facet-head"><b>학교급</b><span>단일 선택</span></div>
+        <ul>
+          <li><a class="on" href="#">전체<span class="c">10</span></a></li>
+          <li><a href="#">유치원<span class="c">1</span></a></li>
+          <li><a href="#">초등<span class="c">2</span></a></li>
+          <li><a href="#">중등<span class="c">3</span></a></li>
+          <li><a href="#">고등<span class="c">2</span></a></li>
+          <li><a href="#">특수<span class="c">2</span></a></li>
+        </ul>
+      </div>
+
+      <div class="facet">
+        <div class="facet-head"><b>업무유형</b><span>중복 선택</span></div>
+        <ul>
+          <li><a href="#">수업<span class="c">3</span></a></li>
+          <li><a href="#">평가<span class="c">2</span></a></li>
+          <li><a href="#">학급경영<span class="c">3</span></a></li>
+          <li><a href="#">행정<span class="c">2</span></a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="steps">
+      <b>이용 절차</b>
+      <div><i>01</i><span>스킬 검색</span></div>
+      <div><i>02</i><span>상세 내용 확인</span></div>
+      <div><i>03</i><span>파일 다운로드</span></div>
+    </div>
+
+    <div class="keys">
+      <b>단축키</b>
+      <div><span>스킬 검색</span><i>⌘ K</i></div>
+      <div><span>목록 이동</span><i>↑ ↓</i></div>
+    </div>
+
+    <div class="rail-foot">
+      <p>게시된 스킬은 부산광역시교육청<br>검수 절차를 거쳐 공개됩니다.</p>
+      <div class="upd">최종 갱신 2026.10.12</div>
+    </div>
+  </aside>
+
+  <!-- ══ canvas ══ -->
+  <main class="canvas">
+    <header class="topbar">
+      <nav class="nav">
+        <a class="on" href="#">스킬 목록</a>
+        <a href="#">이용 안내</a>
+        <a href="#">공지사항</a>
+      </nav>
+      <div class="openflag"><em></em>로그인 없이 이용 가능</div>
+    </header>
+
+    <div class="scroll">
+
+      <div class="phead">
+        <div>
+          <h1>수업 준비, 검증된 AI 스킬로 시작하세요</h1>
+          <p>수업·평가·학급경영·행정에 바로 쓰는 교육용 AI 스킬 아카이브 — 로그인 없이 즉시 이용</p>
+        </div>
+        <div class="stat">
+          <div class="k">게시 스킬</div>
+          <div class="v">10<s>종</s></div>
+        </div>
+      </div>
+
+      <section class="panel">
+        <div class="toolbar">
+          <div class="search">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <circle cx="6.2" cy="6.2" r="4.4" stroke="#0057D9" stroke-width="1.5"/>
+              <path d="M9.6 9.6L12.4 12.4" stroke="#0057D9" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span class="ph">예) 수행평가 문항, 가정통신문, 회의록 요약</span>
+            <span class="caret"></span>
+            <span class="kbd">⌘&nbsp;K</span>
+          </div>
+          <div class="fstate">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+              <path d="M1 2h9L6.4 6.1v3.4L4.6 8.3V6.1L1 2z" stroke="#AEB9C0" stroke-width="1.1" stroke-linejoin="round"/>
+            </svg>
+            학교급 <b>전체</b><u>·</u>업무유형 <b>전체</b>
+          </div>
+          <div class="tsep"></div>
+          <span class="sortlab">정렬</span>
+          <div class="seg">
+            <button class="on">최신순</button>
+            <button>다운로드순</button>
+          </div>
+          <div class="tsep"></div>
+          <div class="rescount"><b>6</b> / 10종</div>
+        </div>
+
+        <div class="row lhead">
+          <div>#</div>
+          <div>분류</div>
+          <div>스킬</div>
+          <div>게시 상태</div>
+          <div class="r">조회</div>
+          <div class="r">다운로드</div>
+        </div>
+
+        <div class="row item hot">
+          <div class="idx">01</div>
+          <div class="chips"><span class="chip lv">중등</span><span class="chip tp">평가</span></div>
+          <div>
+            <div class="ttl">수행평가 문항 초안 생성</div>
+            <div class="dsc">성취기준에 맞는 서술형 수행평가 문항 초안을 생성합니다</div>
+          </div>
+          <div class="st"><em></em>게시중</div>
+          <div class="num">1,240</div>
+          <div class="num dl">312<div class="bar"><i style="width:35%"></i></div></div>
+        </div>
+
+        <div class="row item">
+          <div class="idx">02</div>
+          <div class="chips"><span class="chip lv">초등</span><span class="chip tp">학급경영</span></div>
+          <div>
+            <div class="ttl">가정통신문 작성 도우미</div>
+            <div class="dsc">행사·안내 목적에 맞는 가정통신문 초안을 작성합니다</div>
+          </div>
+          <div class="st"><em></em>게시중</div>
+          <div class="num">980</div>
+          <div class="num dl">320<div class="bar"><i style="width:36%"></i></div></div>
+        </div>
+
+        <div class="row item">
+          <div class="idx">03</div>
+          <div class="chips"><span class="chip lv">공통</span><span class="chip tp">행정</span></div>
+          <div>
+            <div class="ttl">학급 회의록 요약</div>
+            <div class="dsc">회의 기록을 항목별 결정 사항 중심으로 요약합니다</div>
+          </div>
+          <div class="st"><em></em>게시중</div>
+          <div class="num">850</div>
+          <div class="num dl">150<div class="bar"><i style="width:17%"></i></div></div>
+        </div>
+
+        <div class="row item">
+          <div class="idx">04</div>
+          <div class="chips"><span class="chip lv">중등</span><span class="chip tp">수업</span></div>
+          <div>
+            <div class="ttl">과학 실험 안전 지도안</div>
+            <div class="dsc">실험 주제별 안전 수칙과 지도 시나리오를 생성합니다</div>
+          </div>
+          <div class="st"><em></em>게시중</div>
+          <div class="num">1,100</div>
+          <div class="num dl">560<div class="bar"><i style="width:63%"></i></div></div>
+        </div>
+
+        <div class="row item">
+          <div class="idx">05</div>
+          <div class="chips"><span class="chip lv">고등</span><span class="chip tp">수업</span></div>
+          <div>
+            <div class="ttl">영어 독해 지문 변형</div>
+            <div class="dsc">수준별 어휘·길이로 독해 지문을 재구성합니다</div>
+          </div>
+          <div class="st"><em></em>게시중</div>
+          <div class="num">2,100</div>
+          <div class="num dl">890<div class="bar"><i style="width:100%"></i></div></div>
+        </div>
+
+        <div class="row item">
+          <div class="idx">06</div>
+          <div class="chips"><span class="chip lv">공통</span><span class="chip tp">학급경영</span></div>
+          <div>
+            <div class="ttl">학부모 상담 준비 질문지</div>
+            <div class="dsc">상담 목적별 질문지와 안내 문구를 준비합니다</div>
+          </div>
+          <div class="st"><em></em>게시중</div>
+          <div class="num">1,500</div>
+          <div class="num dl">410<div class="bar"><i style="width:46%"></i></div></div>
+        </div>
+
+        <div class="lfoot">
+          <span>전체 <span class="mono">10</span>종 중 <span class="mono">1–6</span> 표시</span>
+          <div class="pager"><span class="on">1</span><span>2</span></div>
+        </div>
+      </section>
+
+      <div class="grid2">
+        <section class="panel">
+          <div class="pnl-head">
+            <h2>공지사항<sup>3건</sup></h2>
+            <a href="#">전체 보기</a>
+          </div>
+          <div class="nrow">
+            <div class="d">2026.10.12</div>
+            <div class="t">10월 신규 스킬 2종 등록 — 평가·행정 영역</div>
+            <div class="g new">신규</div>
+          </div>
+          <div class="nrow">
+            <div class="d">2026.10.05</div>
+            <div class="t">교육용 AI 스킬 아카이브 정식 개통 안내</div>
+            <div class="g"></div>
+          </div>
+          <div class="nrow">
+            <div class="d">2026.10.02</div>
+            <div class="t">생성형 AI 활용 시 개인정보 보호 유의사항 안내</div>
+            <div class="g"></div>
+          </div>
+        </section>
+      </div>
+
+      <footer class="foot">
+        <span class="org">부산광역시교육청</span>
+        <span class="note">교육용 AI 스킬 아카이브 · 회원가입 없이 모든 스킬을 열람·내려받을 수 있습니다</span>
+      </footer>
+
+    </div>
+  </main>
+</div>
+</body>
+</html>

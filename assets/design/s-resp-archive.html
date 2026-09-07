@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>부산교육청 교육용 AI 스킬 아카이브 — 반응형 화면</title>
+<link rel="stylesheet" href="site/_base.css">
+<style>
+/* ── 이 화면 전용 배치만. 토큰·색·컴포넌트 재정의 없음 ── */
+
+body{width:1280px}
+.mast .meta{text-align:right;flex:none;font-size:12px;color:var(--muted);line-height:1.55}
+.mast .meta .num{text-align:right;font-size:11px;margin-top:2px}
+
+/* 머리 */
+.hero{padding-block:28px 20px}
+.hero h1{margin-top:9px;font-size:38px}
+.hero .sub{margin-top:12px;max-width:64ch}
+
+/* 3열 기기 프레임 */
+.frames{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:20px}
+.fr{min-width:0}
+.fr figcaption{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--muted);
+  padding-bottom:9px}
+.fr figcaption s{text-decoration:none;font-family:var(--mono);font-size:10px;
+  letter-spacing:.06em;margin-left:8px}
+
+.ph{border:1px solid var(--rule);border-radius:2px;background:var(--white);
+  height:520px;display:flex;flex-direction:column;overflow:hidden}
+.ph .band{height:6px;background:var(--blue);flex:none}
+.ph .bar{display:flex;align-items:center;gap:10px;height:42px;padding:0 14px;flex:none;
+  border-bottom:1px solid var(--rule)}
+.ph .bar .nm{font-size:12.5px;font-weight:800;letter-spacing:-.03em}
+.ph .bar .ic{font-family:var(--mono);font-size:13px;line-height:1;flex:none}
+.ph .bar .burg{margin-left:auto;width:15px;flex:none}
+.ph .bar .burg i{display:block;height:1.5px;background:var(--ink);margin-top:3.5px}
+.ph .bar .burg i:first-child{margin-top:0}
+.ph .bar .rt{margin-left:auto}
+
+/* 검색 · 칩 */
+.ph .search{flex:none;max-width:none;margin:12px 14px 10px;padding:6px 9px}
+.ph .search input{font-size:12px}
+.ph .chips{display:flex;gap:6px;padding:0 14px 11px}
+.ph .chip{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap;
+  border:1px solid var(--rule);border-radius:2px;padding:3px 9px}
+.ph .chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+
+/* 목록 카드 — 박스 없이 헤어라인만 */
+.ph .cards{list-style:none;border-top:1px solid var(--rule-soft)}
+.ph .cards li{padding:10px 14px 11px;border-bottom:1px solid var(--rule-soft)}
+.ph .cards li:last-child{border-bottom:1.5px solid var(--ink)}
+.ph .cid{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.04em}
+.ph .ct{font-size:13px;font-weight:700;letter-spacing:-.02em;margin-top:2px}
+.ph .cm{margin-top:5px;font-size:11px;color:var(--muted)}
+.ph .cm .num{font-size:11px}
+
+/* 상세 */
+.ph .dhead{padding:13px 14px 12px;border-bottom:1.5px solid var(--ink)}
+.ph .dhead h3{font-size:15px;margin-top:3px}
+.ph .acc{list-style:none}
+.ph .acc > li{border-bottom:1px solid var(--rule-soft)}
+.ph .acc .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:10px 14px;font-size:12.5px;font-weight:700;letter-spacing:-.015em}
+.ph .acc .hd .cv{font-family:var(--mono);font-size:10px;color:var(--muted);flex:none}
+.ph .acc > li.on .hd .cv{color:var(--blue)}
+.ph .acc .bd{margin:0 14px 12px 26px;padding-left:12px;border-left:2px solid var(--rule-soft);
+  font-size:11.5px;color:var(--muted);line-height:1.75}
+.ph .dfoot{margin-top:auto;padding:12px 14px 14px;border-top:1px solid var(--rule-soft)}
+.ph .dfoot .btn{width:100%;padding:8px 12px;font-size:12.5px}
+
+/* 유의사항 */
+.ph .warn{margin:13px 14px 4px;padding:10px 12px;font-size:11.5px;line-height:1.65}
+.ph .nt{list-style:none;padding:0 14px}
+.ph .nt > li{margin-top:13px}
+.ph .nt .h{display:flex;align-items:baseline;gap:9px;padding-bottom:6px;
+  border-bottom:1px solid var(--rule-soft)}
+.ph .nt .h .i{font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--blue)}
+.ph .nt .h b{font-size:12.5px;font-weight:800;letter-spacing:-.025em}
+.ph .nt ul{list-style:none;margin-top:6px}
+.ph .nt ul li{position:relative;padding-left:11px;margin-top:5px;
+  font-size:11.5px;color:var(--muted);line-height:1.7}
+.ph .nt ul li::before{content:"·";position:absolute;left:2px;color:var(--muted)}
+
+/* 바닥 설명 */
+.cap{margin-top:24px;padding-top:13px;border-top:1px solid var(--rule-soft);
+  font-size:13px;color:var(--muted);letter-spacing:-.01em}
+.foot{margin-top:30px}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">본문 바로가기</a>
+
+<div class="gov-band"></div>
+
+<div class="parent">
+  <div class="wrap wrap--wide in">
+    <span></span>
+    <span>부산광역시교육청 디지털미래교육과 · 교육용 AI 스킬 아카이브</span>
+  </div>
+</div>
+
+<header class="mast">
+  <div class="wrap wrap--wide in">
+    <div class="mark">
+      <b>부산교육청 교육용 AI 스킬 아카이브</b>
+      <span class="code">BOE-AIS</span>
+    </div>
+    <div class="meta">
+      반응형 화면 설계
+      <div class="num">PC / TABLET / MOBILE</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap wrap--wide">
+
+  <section class="hero">
+    <div class="lab">RESPONSIVE SCREEN SET</div>
+    <h1>모바일 · 태블릿 반응형 대응</h1>
+    <p class="sub">목록 · 상세 · 유의사항 세 화면을 같은 분류 체계와 같은 표기 규칙으로 좁은 폭에 옮깁니다.
+      기능을 덜어내지 않고 배치만 한 열로 바꿉니다.</p>
+  </section>
+
+  <main id="main">
+
+    <div class="sec"><span class="idx">01</span><h2>모바일 화면 3종</h2></div>
+
+    <div class="frames">
+
+      <!-- ══ 목록 ══ -->
+      <figure class="fr">
+        <figcaption>목록<s>MOBILE 360px</s></figcaption>
+        <div class="ph">
+          <div class="band"></div>
+          <div class="bar">
+            <span class="nm">부산교육청 교육용 AI 스킬 아카이브</span>
+            <span class="burg"><i></i><i></i><i></i></span>
+          </div>
+
+          <div class="search">
+            <span class="ic">⌕</span>
+            <input type="text" placeholder="스킬 검색" aria-label="스킬 검색">
+          </div>
+
+          <div class="chips">
+            <span class="chip on">전체</span>
+            <span class="chip">초등</span>
+            <span class="chip">중등</span>
+            <span class="chip">고등</span>
+          </div>
+
+          <ul class="cards">
+            <li>
+              <div class="cid">AIS-2026-042</div>
+              <div class="ct">가정통신문 초안 작성</div>
+              <div class="cm">조회 <span class="num">1,240</span> · 내려받기 <span class="num num--dl">312</span></div>
+            </li>
+            <li>
+              <div class="cid">AIS-2026-018</div>
+              <div class="ct">수행평가 채점 기준표 만들기</div>
+              <div class="cm">조회 <span class="num">980</span> · 내려받기 <span class="num num--dl">245</span></div>
+            </li>
+            <li>
+              <div class="cid">AIS-2026-077</div>
+              <div class="ct">학급 상담 기록 요약</div>
+              <div class="cm">조회 <span class="num">754</span> · 내려받기 <span class="num num--dl">198</span></div>
+            </li>
+          </ul>
+        </div>
+      </figure>
+
+      <!-- ══ 상세 ══ -->
+      <figure class="fr">
+        <figcaption>상세<s>MOBILE 360px</s></figcaption>
+        <div class="ph">
+          <div class="band"></div>
+          <div class="bar">
+            <span class="ic">←</span>
+            <span class="nm">부산교육청 교육용 AI 스킬 아카이브</span>
+          </div>
+
+          <div class="dhead">
+            <div class="cid">AIS-2026-042</div>
+            <h3>가정통신문 초안 작성</h3>
+            <div class="cm">조회 <span class="num">1,240</span> · 내려받기 <span class="num num--dl">312</span></div>
+          </div>
+
+          <ul class="acc">
+            <li class="on">
+              <div class="hd">활용 목적<span class="cv">▴</span></div>
+              <p class="bd">학교 행사나 주요 안내 사항을 학부모에게 전달하기 위한
+                공식적이고 정중한 어조의 가정통신문 초안을 빠르게 생성합니다.</p>
+            </li>
+            <li><div class="hd">사용 절차<span class="cv">▾</span></div></li>
+            <li><div class="hd">입력 예시<span class="cv">▾</span></div></li>
+            <li><div class="hd">유의사항<span class="cv">▾</span></div></li>
+          </ul>
+
+          <div class="dfoot">
+            <button class="btn btn--fill" type="button">파일 내려받기</button>
+          </div>
+        </div>
+      </figure>
+
+      <!-- ══ 유의사항 ══ -->
+      <figure class="fr">
+        <figcaption>유의사항<s>MOBILE 360px</s></figcaption>
+        <div class="ph">
+          <div class="band"></div>
+          <div class="bar">
+            <span class="ic">✕</span>
+            <span class="nm">유의사항 상세</span>
+          </div>
+
+          <p class="warn"><b>개인정보를 입력하지 마세요 · 생성 결과는 반드시 교사가 검토한 후 사용하세요</b></p>
+
+          <ul class="nt">
+            <li>
+              <div class="h"><span class="i">01</span><b>개인정보 보호</b></div>
+              <ul>
+                <li>학생 이름 · 학번 · 주민등록번호 등 식별 정보를 프롬프트에 입력하지 마십시오</li>
+                <li>상담 기록과 생활기록부 원문을 그대로 붙여넣지 마십시오</li>
+              </ul>
+            </li>
+            <li>
+              <div class="h"><span class="i">02</span><b>저작권 준수</b></div>
+              <ul>
+                <li>교과서 지문과 외부 유료 자료의 원문을 그대로 입력하지 마십시오</li>
+              </ul>
+            </li>
+            <li>
+              <div class="h"><span class="i">03</span><b>결과물 검토</b></div>
+              <ul>
+                <li>생성 결과는 초안이므로 반드시 교사가 사실관계와 교육과정 부합 여부를 확인한 뒤 사용하십시오</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </figure>
+
+    </div>
+
+    <p class="cap">PC · 태블릿 · 모바일 반응형 — 교무실과 교실을 오가는 이용 흐름을 하나의 화면 설계로 지원한다</p>
+
+  </main>
+</div>
+
+<footer class="foot">
+  <div class="wrap wrap--wide in">
+    <div>
+      <b>부산광역시교육청 교육용 AI 스킬 아카이브</b><br>
+      부산광역시교육청 디지털미래교육과 · 부산광역시 부산진구 화지로 12
+    </div>
+    <div class="num" style="text-align:right;font-size:11px">AIS-2026-RESP / REV.02</div>
+  </div>
+</footer>
+
+</body>
+</html>

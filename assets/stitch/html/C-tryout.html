@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>수행평가 문항 초안 생성 — 체험하기</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary": "#1E3A5F",
+            "primary-deep": "#16324F",
+            "accent": "#17876D",
+            "surface": "#FFFFFF",
+            "page": "#F5F7FA",
+            "border": "#E2E8F0",
+            "muted": "#64748B",
+            "warning-bg": "#FEF3C7",
+            "warning-text": "#B45309"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Public Sans", "sans-serif"],
+            "display": ["Public Sans", "sans-serif"],
+            "body": ["Public Sans", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-page text-primary font-body min-h-screen flex flex-col antialiased">
+<!-- TopNavBar (Generated from JSON) -->
+<header class="fixed top-0 left-0 w-full z-50 bg-white flex justify-center items-center px-6 h-16 bg-white border-b border-[#E2E8F0]">
+<div class="w-full max-w-[1280px] flex items-center justify-between h-full">
+<!-- Brand Logo -->
+<a class="text-xl font-bold text-[#1E3A5F]" href="#">부산교육청 AI 스킬 포털</a>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-8 h-full">
+<a class="font-headline text-[15px] font-medium text-[#64748B] hover:text-[#1E3A5F] h-full flex items-center hover:bg-[#F5F7FA] transition-colors px-4" href="#">AI 스킬 탐색</a>
+<a class="font-headline text-[15px] font-medium text-[#64748B] hover:text-[#1E3A5F] h-full flex items-center hover:bg-[#F5F7FA] transition-colors px-4" href="#">학교급별</a>
+<a class="font-headline text-[15px] font-medium text-[#64748B] hover:text-[#1E3A5F] h-full flex items-center hover:bg-[#F5F7FA] transition-colors px-4" href="#">교과별</a>
+<a class="font-headline text-[15px] font-medium text-[#17876D] font-bold border-b-2 border-[#17876D] pb-1 h-full flex items-center hover:bg-[#F5F7FA] transition-colors px-4" href="#">업무유형별</a>
+<a class="font-headline text-[15px] font-medium text-[#64748B] hover:text-[#1E3A5F] h-full flex items-center hover:bg-[#F5F7FA] transition-colors px-4" href="#">활용도구</a>
+</nav>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<span class="font-headline text-[15px] font-medium text-[#1E3A5F]">박 교사님</span>
+<button class="text-[#1E3A5F] hover:bg-[#F5F7FA] transition-colors p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[#17876D]">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-[1280px] mx-auto px-6 pt-[112px] pb-16 flex flex-col gap-8">
+<!-- Breadcrumb -->
+<nav aria-label="Breadcrumb" class="text-[15px] text-muted flex items-center gap-2">
+<a class="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-accent rounded-sm" href="#">AI 스킬 탐색</a>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+<a class="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-accent rounded-sm" href="#">업무유형별</a>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+<span aria-current="page" class="text-primary font-medium">평가</span>
+</nav>
+<!-- Page Header -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="text-3xl font-bold text-primary mb-2 font-headline">수행평가 문항 초안 생성 — 체험하기</h1>
+<p class="text-[16px] text-muted">성취기준을 기반으로 서술형 및 논술형 수행평가 문항의 초안을 빠르게 생성합니다</p>
+</div>
+<div class="inline-flex items-center gap-2 px-4 py-2 border border-accent rounded-full text-accent font-medium text-[15px] bg-white">
+<span class="material-symbols-outlined text-[18px]">timer</span>
+<span>오늘 남은 체험 횟수 3회 / 일 3회</span>
+</div>
+</section>
+<!-- Warning Box -->
+<div class="bg-warning-bg border border-warning-text/20 rounded-[8px] p-4 flex items-start gap-3 shadow-sm">
+<span class="material-symbols-outlined text-warning-text mt-0.5">warning</span>
+<p class="text-warning-text text-[15px] font-medium leading-relaxed">
+        안전한 사용을 위해 학생 이름, 주민등록번호 등 개인정보를 입력하지 마세요. 입력값은 전송 전 개인정보 패턴이 자동 필터링됩니다. 생성 결과는 AI 모델에 의해 작성되므로 사실과 다를 수 있습니다.
+      </p>
+</div>
+<!-- 2 Column Layout -->
+<div class="flex flex-col lg:flex-row gap-8 items-start">
+<!-- Left Panel: Input -->
+<section class="w-full lg:w-[40%] bg-surface rounded-[8px] border border-border p-6 shadow-sm flex flex-col gap-6">
+<h2 class="text-lg font-bold text-primary font-headline">문항 생성 조건 입력</h2>
+<div class="flex flex-col gap-2">
+<label class="text-[15px] font-medium text-primary" for="school-level">학교급</label>
+<div class="relative">
+<select class="w-full appearance-none bg-white border border-border rounded-[8px] px-4 py-3 text-[15px] text-primary focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" id="school-level">
+<option value="초등학교">초등학교</option>
+<option selected="" value="중학교">중학교</option>
+<option value="고등학교">고등학교</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-muted">arrow_drop_down</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[15px] font-medium text-primary" for="subject">교과</label>
+<div class="relative">
+<select class="w-full appearance-none bg-white border border-border rounded-[8px] px-4 py-3 text-[15px] text-primary focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent" id="subject">
+<option value="국어">국어</option>
+<option value="수학">수학</option>
+<option selected="" value="과학">과학</option>
+<option value="사회">사회</option>
+<option value="영어">영어</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-muted">arrow_drop_down</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<label class="text-[15px] font-medium text-primary" for="standards">단원 및 성취기준</label>
+<span class="text-[13px] text-muted">32/500자</span>
+</div>
+<textarea class="w-full bg-white border border-border rounded-[8px] px-4 py-3 text-[15px] text-primary focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent resize-none" id="standards" placeholder="예) 2학년 생물의 구성 단계 - 세포의 구조와 기능을 설명할 수 있다" rows="5">생물의 구성 단계 - 세포의 구조와 기능을 설명할 수 있다</textarea>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[15px] font-medium text-primary">문항 수</label>
+<div class="grid grid-cols-3 gap-2">
+<button class="py-2.5 border border-border rounded-[8px] text-[15px] font-medium text-muted hover:bg-page transition-colors focus:outline-none focus:ring-2 focus:ring-accent" type="button">1개</button>
+<button class="py-2.5 bg-primary border-primary rounded-[8px] text-[15px] font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2" type="button">2개</button>
+<button class="py-2.5 border border-border rounded-[8px] text-[15px] font-medium text-muted hover:bg-page transition-colors focus:outline-none focus:ring-2 focus:ring-accent" type="button">3개</button>
+</div>
+</div>
+<button class="w-full bg-primary text-white font-bold text-[16px] py-4 rounded-[8px] mt-2 shadow-sm hover:bg-primary-deep transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2" type="button">
+          생성하기
+        </button>
+</section>
+<!-- Right Panel: Output -->
+<section class="w-full lg:w-[60%] flex flex-col gap-6">
+<div class="flex items-center">
+<h2 class="text-xl font-bold text-primary font-headline">생성 결과</h2>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Card 1 -->
+<article class="bg-surface border border-border rounded-[8px] p-6 shadow-sm hover:shadow-md transition-shadow relative group">
+<div class="absolute top-6 right-6">
+<button aria-label="결과 복사하기" class="text-muted hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-accent rounded-sm p-1">
+<span class="material-symbols-outlined text-[20px]">content_copy</span>
+</button>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="bg-primary/10 text-primary text-[13px] font-bold px-2 py-1 rounded-sm tracking-wider">ITEM 01</span>
+<h3 class="font-bold text-primary text-[16px]">[서술형] 세포의 구조와 기능</h3>
+</div>
+<div class="bg-page rounded-md p-4 mb-4">
+<p class="text-[15px] text-primary leading-relaxed">
+<strong class="font-medium block mb-2">[문항]</strong>
+                식물 세포와 동물 세포를 현미경으로 관찰한 그림을 보고 두 세포에서 공통으로 발견되는 구조와 식물 세포에서만 발견되는 구조를 각각 쓰고, 그 기능을 서술하시오.
+              </p>
+</div>
+<div class="border-t border-border pt-4">
+<p class="text-[14px] text-muted leading-relaxed">
+<strong class="text-primary font-medium">채점 핵심 요소:</strong> 세포막·핵·세포질 공통 구조 제시 / 세포벽·엽록체 언급 / 각 구조의 기능 서술 정확성
+              </p>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="bg-surface border border-border rounded-[8px] p-6 shadow-sm hover:shadow-md transition-shadow relative group">
+<div class="absolute top-6 right-6">
+<button aria-label="결과 복사하기" class="text-muted hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-accent rounded-sm p-1">
+<span class="material-symbols-outlined text-[20px]">content_copy</span>
+</button>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="bg-primary/10 text-primary text-[13px] font-bold px-2 py-1 rounded-sm tracking-wider">ITEM 02</span>
+<h3 class="font-bold text-primary text-[16px]">[서술형] 세포 분열과 생물의 구성 단계</h3>
+</div>
+<div class="bg-page rounded-md p-4 mb-4">
+<p class="text-[15px] text-primary leading-relaxed">
+<strong class="font-medium block mb-2">[문항]</strong>
+                세포에서 개체에 이르는 생물의 구성 단계를 순서대로 나열하고, 각 단계에서 세포가 어떻게 조직을 이루는지 예를 들어 서술하시오.
+              </p>
+</div>
+<div class="border-t border-border pt-4">
+<p class="text-[14px] text-muted leading-relaxed">
+<strong class="text-primary font-medium">채점 핵심 요소:</strong> 구성 단계 순서 정확성 / 조직·기관·기관계 개념 이해 / 구체적 사례 제시
+              </p>
+</div>
+</article>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer (Generated from JSON) -->
+<footer class="w-full py-8 mt-auto flex flex-col items-center justify-center gap-4 bg-[#F5F7FA] border-t border-[#E2E8F0]">
+<div class="text-sm font-bold text-[#1E3A5F]">부산교육청 AI 스킬 포털</div>
+<div class="flex items-center gap-6">
+<a class="font-body text-sm text-[#64748B] hover:text-[#1E3A5F] transition-colors focus:outline-none focus:ring-2 focus:ring-accent rounded-sm" href="#">이용약관</a>
+<a class="font-body text-sm text-[#64748B] hover:text-[#1E3A5F] transition-colors focus:outline-none focus:ring-2 focus:ring-accent rounded-sm" href="#">개인정보처리방침</a>
+<a class="font-body text-sm text-[#64748B] hover:text-[#1E3A5F] transition-colors focus:outline-none focus:ring-2 focus:ring-accent rounded-sm" href="#">고객지원</a>
+</div>
+<div class="font-body text-sm text-[#64748B]">
+      © 2026 부산광역시교육청. 모든 권리 보유.
+    </div>
+</footer>
+</body></html>
